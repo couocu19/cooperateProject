@@ -1,5 +1,8 @@
 package com.xiyou.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Content {
     private Integer id;
 

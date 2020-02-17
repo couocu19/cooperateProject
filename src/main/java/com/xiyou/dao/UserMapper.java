@@ -1,7 +1,10 @@
 package com.xiyou.dao;
 
 import com.xiyou.pojo.User;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
