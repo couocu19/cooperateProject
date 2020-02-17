@@ -1,3 +1,11 @@
+var xuehao = '04181019'
+
+window.onload =function (xuehao) {
+	const xhr = new XMLHttpRequest();
+	xhr.onreadystatechange
+}
+
+
 
 var message = {
 	id : 1,

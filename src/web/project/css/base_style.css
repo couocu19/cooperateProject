@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	border: 0;
 }
 
 html {
@@ -11,4 +12,18 @@ html {
 
 a {
 	text-decoration: none;
+}
+
+button {
+	outline: none;
+}
+
+input {
+	outline: none;
+}
+
+
+textarea {
+	resize: none;
+	outline: none;
 }
