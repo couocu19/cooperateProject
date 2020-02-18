@@ -1,6 +1,8 @@
 package com.xiyou.dao;
 
 import com.xiyou.pojo.Content;
+import org.mybatis.spring.annotation.MapperScan;
+
 
 public interface ContentMapper {
     int deleteByPrimaryKey(Integer id);

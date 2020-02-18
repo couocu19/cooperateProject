@@ -1,6 +1,8 @@
 package com.xiyou.dao;
 
 import com.xiyou.pojo.Reply;
+import org.mybatis.spring.annotation.MapperScan;
+
 
 public interface ReplyMapper {
     int deleteByPrimaryKey(Integer id);

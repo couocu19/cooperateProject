@@ -1,10 +1,9 @@
 package com.xiyou.dao;
 
 import com.xiyou.pojo.User;
-import org.springframework.stereotype.Component;
+import org.mybatis.spring.annotation.MapperScan;
 
 
-@Component
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,4 +16,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    int selectByStudentId(String studentId);
 }

@@ -2,7 +2,7 @@ package com.xiyou.pojo;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class User {
     private Integer id;
 
@@ -20,7 +20,9 @@ public class User {
 
     private Integer readCount;
 
-    public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount) {
+    private String studentId;
+
+    public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId) {
         this.id = id;
         this.username = username;
         this.headSculpture = headSculpture;
@@ -29,6 +31,7 @@ public class User {
         this.fans = fans;
         this.concern = concern;
         this.readCount = readCount;
+        this.studentId = studentId;
     }
 
     public User() {
@@ -97,5 +100,13 @@ public class User {
 
     public void setReadCount(Integer readCount) {
         this.readCount = readCount;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId == null ? null : studentId.trim();
     }
 }

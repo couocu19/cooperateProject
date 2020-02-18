@@ -1,6 +1,8 @@
 package com.xiyou.dao;
 
 import com.xiyou.pojo.Message;
+import org.mybatis.spring.annotation.MapperScan;
+
 
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer id);
