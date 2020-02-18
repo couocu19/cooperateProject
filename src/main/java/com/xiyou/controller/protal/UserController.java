@@ -23,7 +23,7 @@ public class UserController {
     @RequestMapping("register.do")
     public ServletResponse<User> register(String studentId, HttpServletRequest request){
         //为了设置默认头像的绝对路径
-        String strPrefix = "http://localhost:8080"+request.getContextPath();
+        String strPrefix = "http://localhost:8080"+request.getContextPath()+"/";
         return iUserService.register(studentId,strPrefix);
 
     }

@@ -143,8 +143,7 @@
   </update>
 
   <select id="selectByStudentId" parameterType="string" resultType="int">
-     select count (1)
-     form xiyou_user
-     where student_id = #{studentId,jdbcType=VARCHAR}
+     select count(1) from xiyou_user
+     where student_id = #{studentId}
   </select>
 </mapper>
