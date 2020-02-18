@@ -1,0 +1,12 @@
+
+
+
+class Obj {
+	constructor() {
+		
+	}
+	init() {
+		
+	}
+
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>编辑发送动态页面</title>
+	<!-- <link rel="icon" href="./pic/favicon.ioc"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, 
+	minimum-scale=1.0, maximum-scale=1.0">
+	<!-- 禁止缩放 -->
+	<meta name="view" content="user-scalable=no, minimal-ui">
+	<!-- 禁止横屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<link rel="stylesheet" type="text/css" href="./css/compile_page.css">
+	<link rel="stylesheet" type="text/css" href="./css/base_style.css">
+</head>
+<body>
+
+	<div id="app" class="container_max">
+		<div class="main-wrapper">
+			<!-- 头部盒子 -->
+			<header class="head_message">
+				<div id="return_btn">取消</div>
+				<div id="user_head_portrait">
+					<div></div>
+				</div>
+				<div id="send_btn">发送</div>
+			</header>
+
+			<!-- 内容区域 -->
+			<main>
+				
+				<div class="main_content_box">
+					
+					<div class="main_context">
+						<!-- 文字部分 -->
+						<span>
+							<textarea placeholder="what are U thinking about...." style="height: 10rem;"></textarea>
+						</span>
+					</div>
+					<div id="photos_show"><div class="photo_item">
+							<img style="width: 100%;" src="img/xxj.png">
+						</div><div class="photo_item">
+							<img style="width: 100%;" src="img/xxj.png">
+						</div><div class="photo_item">
+							<img style="width: 100%;" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjc5ODIzLWM1MWRkN2IyNTFjZGRkZWMucG5n?x-oss-process=image/format,png">
+						</div></div>
+				</div>
+			</main>
+			<!-- 页脚部分 -->
+			<footer id="footer_wrapper">
+				<!-- 选择可见 -->
+				<div id="choose_open"><div class="text_style choose_open_tag">所有人</div><div class="text_style choose_open_tag">好友</div><div class="text_style choose_open_tag">仅自己</div>
+				</div>
+				
+
+
+				<!-- 选择照片和表情 -->
+			
+				<div id="add_photo_mem_wrapper">
+					<!-- 选择图片 -->
+					<div id="add_photo_wrapper">
+						<label for="selectphoto">
+							<input id="upload_imgs" type="file" accept="image*/" multiple="multiple" capture="">
+							<img class="add_imgs" src="img/xxj.png">
+						</label>
+					</div>
+
+					<div id="add_mem_wrapper">
+						<img src="img/smlie.png" alt="" class="add_imgs">
+					</div>
+					
+					<!-- 选择表情 -->
+					
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/compile_page.js"></script>
+</body>	
+</html>
