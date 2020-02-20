@@ -16,27 +16,26 @@ class App {
 		}, false);
 		
 		this.upload_imgs.addEventListener('click', () => {
-			document.addEventListener('plusready', () => {
-				this.galleryImgs();
-			}, false);
+			// 调用安卓注入的方法
+			window.android.getphoto();
 		}, false);
 	}
 
-	galleryImgs() {
-		console.log('从相册中选取多张照片');
-		plus.grallery.pick(function (e) {
-			// 成功的回调函数
-			for(var i in e.files) {
-				console.log(e.files[i]);
-			}
-		}, function(e) {
-			// 失败的回调函数
-			console.log('取消选择图片');
-		}, {
-			filter: "image",
-			multiple: true
-		});
-	}
+	// galleryImgs() {
+	// 	console.log('从相册中选取多张照片');
+	// 	plus.grallery.pick(function (e) {
+	// 		// 成功的回调函数
+	// 		for(var i in e.files) {
+	// 			console.log(e.files[i]);
+	// 		}
+	// 	}, function(e) {
+	// 		// 失败的回调函数
+	// 		console.log('取消选择图片');
+	// 	}, {
+	// 		filter: "image",
+	// 		multiple: true
+	// 	});
+	// }
 	handle_choose_Click(e) {
 		let target = e.target;
 

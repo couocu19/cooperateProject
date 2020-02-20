@@ -1,29 +1,3 @@
-var xuehao = '04181019';
-
-getFromAndroid = function(userid) {
-	window.userid = userid;
-}
-window.onload =function () {
-	const xhr = new XMLHttpRequest();
-	xhr.onreadystatechange
-}
-
-
-var res = {
-	status: 0,
-	msg: '注册成功',
-	data: {
-		id : null,
-		username : "04182077",
-		headSculpture : null,
-		messageCount : null,
-		fans : null,
-		concern : null,
-		readCount : null,
-		studentId : "04182077"
-	}
-} 
-
 
 class Obj{
 	constructor(nav_item) {
@@ -37,7 +11,7 @@ class Obj{
 	}
 	// 渲染页面函数
 	render(data) {
-
+		
 	}
 
 
@@ -55,7 +29,20 @@ class Obj{
 
 		target.classList.add('cur');
 		//执行渲染函数
-		this.render();
+		this.sendAjax();
+	}
+
+	sendAjax() {
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = () => {
+			if(xhr.readystate == 4) {
+				if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
+					// 正确的处理
+					let json = JSON.prase(xhr.responseText);
+
+				}	
+			}
+		}
 	}
 }
 
