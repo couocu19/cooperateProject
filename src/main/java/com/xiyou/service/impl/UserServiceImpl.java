@@ -26,7 +26,6 @@ public class UserServiceImpl implements IUserService {
         if(rowCount>0){
             return ServletResponse.createByErrorMessage("该学号已存在!");
         }
-
         User user = new User();
         user.setStudentId(studentId);
         user.setUsername(studentId);
@@ -44,6 +43,20 @@ public class UserServiceImpl implements IUserService {
 
     }
 
+
+    public ServletResponse<String> login(String studentId){
+        if(StringUtils.isBlank(studentId)){
+            return ServletResponse.createByErrorMessage("无效参数!");
+        }
+
+        int rowCount = userMapper.selectByStudentId(studentId);
+        if(rowCount>0){
+            return ServletResponse.createBySuccess("登陆成功~");
+        }
+
+        return ServletResponse.createByErrorMessage("该学号不存在~ 登录失败");
+
+    }
 
 
 

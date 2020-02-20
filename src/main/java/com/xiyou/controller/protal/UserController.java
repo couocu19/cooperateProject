@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user/")
@@ -27,6 +28,22 @@ public class UserController {
         return iUserService.register(studentId,strPrefix);
 
     }
+
+    @ResponseBody
+    @RequestMapping("login.do")
+    public ServletResponse<String> login(String studentId){
+        return iUserService.login(studentId);
+
+    }
+
+//    public ServletResponse<String> updateInformation(String studentId, HttpSession session){
+//
+//
+//
+//
+//    }
+
+
 
 
 

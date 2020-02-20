@@ -7,4 +7,6 @@ public interface IUserService {
 
     ServletResponse<User> register(String studentId,String preStr);
 
+    ServletResponse<String> login(String studentId);
+
 }
