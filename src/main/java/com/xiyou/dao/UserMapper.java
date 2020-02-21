@@ -13,9 +13,13 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
+    User checkLogin(String studyId);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
 
     int selectByStudentId(String studentId);
+
+
 }
