@@ -78,7 +78,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     public ServletResponse<List<Message>> getUserALLMessage(Integer id){
-        List<Message> list = messageMapper.
+        List<Message> list = messageMapper.getUserAllMessage(id);
+        if(list.size() == 0){
+            return ServletResponse.createBySuccessMessage("这里空空如也~");
+        }
+
+        return ServletResponse.createBySuccess(list);
 
 
 

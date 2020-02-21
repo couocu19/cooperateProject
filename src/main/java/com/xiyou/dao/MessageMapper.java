@@ -3,6 +3,8 @@ package com.xiyou.dao;
 import com.xiyou.pojo.Message;
 import org.mybatis.spring.annotation.MapperScan;
 
+import java.util.List;
+
 
 public interface MessageMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface MessageMapper {
     int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
+
+    List<Message> getUserAllMessage(Integer userId);
 }

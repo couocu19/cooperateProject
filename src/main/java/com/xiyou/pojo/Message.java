@@ -20,6 +20,25 @@ public class Message {
 
     private Boolean isDeleted;
 
+    //导入一对一的对象类型
+    private Content content;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Content getContent() {
+        return content;
+    }
+
+    public void setContent(Content content) {
+        this.content = content;
+    }
+
     public Message(Integer id, Integer userId, Integer pageviews, Integer praisePoints, Integer commentCount, Date time, Boolean isDeleted) {
         this.id = id;
         this.userId = userId;

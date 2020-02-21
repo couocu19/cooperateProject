@@ -78,19 +78,17 @@ public class UserController {
 
     }
 
+    //只是获取这个用户的所有动态
+    @ResponseBody
+    @RequestMapping("get_user_message.do")
     public ServletResponse<List<Message>> getUserAllMessage(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
             return ServletResponse.createByErrorMessage("当前会话已超时~,请重新登录以查看~");
         }
-
-
+        Integer id = currentUSer.getId();
+        return iUserService.getUserALLMessage(id);
 
     }
-
-
-
-
-
-
+    
 }
