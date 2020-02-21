@@ -1,7 +1,8 @@
 
 class App {
-	constructor(el, choose_btn, photos_show, upload_imgs) {
+	constructor(el, return_btn, choose_btn, photos_show, upload_imgs) {
 		this.el = el;
+		this.return_btn = return_btn;
 		this.choose_btn = choose_btn;
 		this.photos_show = photos_show;
 		this.upload_imgs = upload_imgs;
@@ -10,7 +11,6 @@ class App {
 	}
 
 	init() {
-		
 		this.choose_btn.addEventListener('click', (e) => {
 			this.handle_choose_Click(e);
 		}, false);
@@ -18,6 +18,9 @@ class App {
 		this.upload_imgs.addEventListener('click', () => {
 			// 调用安卓注入的方法
 			window.android.getphoto();
+		}, false);
+		this.return_btn.addEventListener('click', () => {
+			window.history.back();
 		}, false);
 	}
 
@@ -35,7 +38,7 @@ class App {
 	// 		filter: "image",
 	// 		multiple: true
 	// 	});
-	// }
+	// }s
 	handle_choose_Click(e) {
 		let target = e.target;
 
@@ -71,7 +74,9 @@ class App {
 	}
 }
 
-var app = new App(document.getElementById('app'), document.getElementById('choose_open'),
+var app = new App(document.getElementById('app'), 
+				 document.getElementById('return_btn'),
+				 document.getElementById('choose_open'),
 				 document.getElementById('photos_show'),
 				 document.getElementById('upload_imgs'));
 app.init();

@@ -1,12 +1,22 @@
 
 class Obj{
-	constructor(nav_item) {
+	constructor(user_btn, message_btn, write_btn, nav_item ) {
+		this.user_btn = user_btn;
+		this.message_btn = message_btn;
+		this.write_btn = write_btn;
 		this.nav_item = nav_item;
 	}
 
 	init() {
 		this.nav_item.addEventListener('click', (e) => {
 			this.handleNavClick(e);
+		}, false);
+		this.user_btn.addEventListener('click', () => {
+			console.log('ok');
+			window.location.href = 'personal_page.html';
+		}, false);
+		this.write_btn.addEventListener('click', () => {
+			window.location.href = 'compile_page.html';
 		}, false);
 	}
 	// 渲染页面函数
@@ -48,5 +58,8 @@ class Obj{
 
 
 
-var obj = new Obj(document.getElementsByClassName('nav_item')[0]);
+var obj = new Obj(  document.getElementById('user_mess'),
+					document.getElementById('user_message'),
+					document.getElementById('write'),
+					document.getElementsByClassName('nav_item')[0]);
 obj.init();
