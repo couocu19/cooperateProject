@@ -1,11 +1,12 @@
 
 class App {
-	constructor(el, return_btn, choose_btn, photos_show, upload_imgs) {
+	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
 		this.return_btn = return_btn;
 		this.choose_btn = choose_btn;
 		this.photos_show = photos_show;
 		this.upload_imgs = upload_imgs;
+		this.send_btn = send_btn;
 		this.photo_display = false;
 
 	}
@@ -22,7 +23,12 @@ class App {
 		this.return_btn.addEventListener('click', () => {
 			window.history.back();
 		}, false);
+		this.send_btn.addEventListener('click', () => {
+			let dt_message = this.getDtMessage();
+			
+		}, false);
 	}
+
 
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
@@ -78,6 +84,7 @@ var app = new App(document.getElementById('app'),
 				 document.getElementById('return_btn'),
 				 document.getElementById('choose_open'),
 				 document.getElementById('photos_show'),
-				 document.getElementById('upload_imgs'));
+				 document.getElementById('upload_imgs'),
+				 document,getElementById('send_btn'));
 app.init();
 
