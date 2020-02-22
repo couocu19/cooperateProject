@@ -16,4 +16,6 @@ public interface IUserService {
 
     ServletResponse<List<Message>> getUserALLMessage(Integer id);
 
+    ServletResponse<User> getUserInfoAndMessages(String studyId);
+
 }

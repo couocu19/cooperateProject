@@ -13,11 +13,40 @@
       <arg column="read_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="student_id" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
+
+    <collection property="messages" ofType="com.xiyou.pojo.Message">
+      <id column="id" property="id"/>
+      <result column="user_id" property="userId"></result>
+      <result column="pageviews" property="pageviews"></result>
+      <result column="praise_points" property="praisePoints"></result>
+      <result column="comment_count" property="commentCount"></result>
+      <result column="time" property="time"></result>
+      <result column="is_deleted" property="isDeleted"></result>
+      <result column="content" property="content"></result>
+
+    </collection>
+
+
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, head_sculpture, signature, message_count, fans, concern, read_count, 
     student_id
   </sql>
+
+  <sql id="Base_Column_List1">
+    u.username, u.head_sculpture, u.signature,u. message_count,u. fans, u.concern, u.read_count
+  </sql>
+
+  <sql id="Base_Column_List2" >
+    m.pageviews,m.praise_points, m.comment_count, m.time
+  </sql>
+
+  <sql id="Base_Column_List3" >
+    <if test="c.content_text!=null">c.content_text,</if>
+    <if test="c.content_images!=null">c.content_images,</if>
+    <if test="c.content_videos!=null">c.content_videos</if>
+  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -153,5 +182,22 @@
      form xiyou_user
      where
      student_id = #{studengId}
-  </select>>
+  </select>
+
+  <!--  todo:这里很可能会报错  -->
+  <select id="selectAllInfoByStudyId" parameterType="string" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List1"/>,
+    <include refid="Base_Column_List2"/>,
+    <include refid="Base_Column_List3"/>
+    from xiyou_user u
+    left join
+    user_message m
+    inner join
+    message_content c
+    on u.id = m.user_id
+    and m.id = c.message_id
+    where
+    u.student_id = #{studyId}
+  </select>
 </mapper>

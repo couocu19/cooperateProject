@@ -85,8 +85,17 @@ public class UserServiceImpl implements IUserService {
 
         return ServletResponse.createBySuccess(list);
 
-
-
     }
+
+    public ServletResponse<User> getUserInfoAndMessages(String studyId){
+        User user = userMapper.selectAllInfoByStudyId(studyId);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("该用户不存在!");
+        }
+
+        return ServletResponse.createBySuccess(user);
+    }
+
+
 
 }

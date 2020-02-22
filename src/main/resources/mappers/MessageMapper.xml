@@ -12,7 +12,7 @@
       <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
                   <!--    一对一配置文件   -->
-    <association property="content" column="id" javaType="com.xiyou.pojo.Content">
+    <association property="content" javaType="com.xiyou.pojo.Content">
       <id column="id" property="id"></id>
       <result column="messageId" property="messageId"></result>
       <result column="contentText" property="contentText"></result>

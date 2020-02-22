@@ -2,6 +2,8 @@ package com.xiyou.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 public class User {
     private Integer id;
@@ -21,6 +23,16 @@ public class User {
     private Integer readCount;
 
     private String studentId;
+
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId) {
         this.id = id;

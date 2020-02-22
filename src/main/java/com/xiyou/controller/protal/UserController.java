@@ -7,6 +7,7 @@ import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
 import com.xiyou.service.IUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,17 +79,41 @@ public class UserController {
 
     }
 
-    //只是获取这个用户的所有动态
+    //只是获取当前用户的所有动态
     @ResponseBody
-    @RequestMapping("get_user_message.do")
-    public ServletResponse<List<Message>> getUserAllMessage(HttpSession session){
+    @RequestMapping("get_currentUser_message.do")
+    public ServletResponse<List<Message>> getCurrentUserAllMessage(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
             return ServletResponse.createByErrorMessage("当前会话已超时~,请重新登录以查看~");
         }
         Integer id = currentUSer.getId();
         return iUserService.getUserALLMessage(id);
-
     }
-    
+
+    //获取某个用户的所有动态
+    @ResponseBody
+    @RequestMapping("get_user_message.do")
+    public ServletResponse<List<Message>> getUserAllMessage(Integer id){
+
+        return iUserService.getUserALLMessage(id);
+    }
+
+    //获取某个用户的信息以及所有动态
+    @ResponseBody
+    @RequestMapping("get_info_and_message.do")
+    public ServletResponse<User> getUserInfoAndMessages(String studyId){
+        if(StringUtils.isBlank(studyId)){
+            return ServletResponse.createByErrorMessage("无效参数");
+        }
+
+        //todo:测试啊!!!测试!!!
+        return iUserService.getUserInfoAndMessages(studyId);
+    }
+
+//    //查看某个用户的所有粉丝或者关注者
+//    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
+
+
+
 }

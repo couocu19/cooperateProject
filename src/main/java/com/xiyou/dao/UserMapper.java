@@ -21,6 +21,8 @@ public interface UserMapper {
 
     int selectByStudentId(String studentId);
 
+    User selectAllInfoByStudyId(String studyId);
+
 
 
 }
