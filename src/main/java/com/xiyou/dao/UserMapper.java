@@ -13,7 +13,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer id);
 
-    User checkLogin(String studyId);
+    User checkLogin(String studentId);
 
     int updateByPrimaryKeySelective(User record);
 
@@ -21,7 +21,7 @@ public interface UserMapper {
 
     int selectByStudentId(String studentId);
 
-    User selectAllInfoByStudyId(String studyId);
+//    User selectAllInfoByStudyId(String studyId);
 
 
 

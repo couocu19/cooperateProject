@@ -28,7 +28,7 @@ public class UserController {
     @RequestMapping("register.do")
     public ServletResponse<User> register(String studentId, HttpServletRequest request){
         //为了设置默认头像的绝对路径
-        String strPrefix = "http://localhost:8080"+request.getContextPath()+"/";
+        String strPrefix = "http://118.31.12.175:8080"+request.getContextPath()+"/";
         return iUserService.register(studentId,strPrefix);
 
     }
@@ -55,7 +55,7 @@ public class UserController {
         //todo:换另一种写法
         currentUSer.setUsername(user.getUsername());
         currentUSer.setSignature(user.getSignature());
-        currentUSer.setHeadSculpture(user.getHeadSculpture());
+//        currentUSer.setHeadSculpture(user.getHeadSculpture());
         ServletResponse response =  iUserService.updateInformation(currentUSer);
 
         //如果更新信息成功同时也要更新session域中的信息
@@ -100,16 +100,16 @@ public class UserController {
     }
 
     //获取某个用户的信息以及所有动态
-    @ResponseBody
-    @RequestMapping("get_info_and_message.do")
-    public ServletResponse<User> getUserInfoAndMessages(String studyId){
-        if(StringUtils.isBlank(studyId)){
-            return ServletResponse.createByErrorMessage("无效参数");
-        }
-
-        //todo:测试啊!!!测试!!!
-        return iUserService.getUserInfoAndMessages(studyId);
-    }
+//    @ResponseBody
+//    @RequestMapping("get_info_and_message.do")
+//    public ServletResponse<User> getUserInfoAndMessages(String studyId){
+//        if(StringUtils.isBlank(studyId)){
+//            return ServletResponse.createByErrorMessage("无效参数");
+//        }
+//
+//        //todo:测试啊!!!测试!!!
+//        return iUserService.getUserInfoAndMessages(studyId);
+//    }
 
 //    //查看某个用户的所有粉丝或者关注者
 //    public ServletResponse<List<User>> getFansOrConcern(String studyId,)

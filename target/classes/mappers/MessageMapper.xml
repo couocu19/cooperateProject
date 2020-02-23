@@ -11,6 +11,15 @@
       <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
+                  <!--    一对一配置文件   -->
+    <association property="content" javaType="com.xiyou.pojo.Content">
+      <id column="id" property="id"></id>
+      <result column="messageId" property="messageId"></result>
+      <result column="contentText" property="contentText"></result>
+      <result column="contentImage" property="contentText"></result>
+      <result column="contentVideo" property="contentText"></result>
+    </association>
+
   </resultMap>
   <sql id="Base_Column_List" >
     id, user_id, pageviews, praise_points, comment_count, time, is_deleted
@@ -116,4 +125,22 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+<!--todo:记得先在数据库中测试正确性-->
+  <select id="getUserAllMessage" resultType="map" resultMap="BaseResultMap">
+    select
+    m.pageviews,m.praisePoints,m.commentCount,m.time,
+    <if test="c.contentText != null">
+      c.cntentText,
+    </if>
+    <if test="c.contentImages != null">
+      c.contentImages,
+    </if>
+    <if test="c.contentVideos != null">
+      c.contentVideos
+    </if>
+    from user_message m inner join message_content c
+    on m.id = c.message_id
+    where m.user_id = #{userId}
+  </select>
 </mapper>
