@@ -8,7 +8,7 @@ class App {
 		this.upload_imgs = upload_imgs;
 		this.send_btn = send_btn;
 		this.photo_display = false;
-
+		this.Dt_message = {};  // 存放动态信息的对象
 	}
 
 	init() {
@@ -24,11 +24,22 @@ class App {
 			window.history.back();
 		}, false);
 		this.send_btn.addEventListener('click', () => {
-			let dt_message = this.getDtMessage();
-			
+			// 直接将属性添加到对象的 动态信息属性上
+			this.getDtMessage();
+			this.
 		}, false);
 	}
 
+	send_message () {
+		if(this.check())
+	}
+
+	getDtMessage() {
+		this.Dt_message.content = this.document.getElementsByTagName('textarea');
+		this.Dt_message.photos = [];
+		this.send_time = new Date();
+
+	}
 
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
@@ -85,6 +96,6 @@ var app = new App(document.getElementById('app'),
 				 document.getElementById('choose_open'),
 				 document.getElementById('photos_show'),
 				 document.getElementById('upload_imgs'),
-				 document,getElementById('send_btn'));
+				 document.getElementById('send_btn'));
 app.init();
 
