@@ -1,0 +1,48 @@
+
+
+html {
+	font: inherit;
+	font-size: 100%;
+	vertical-align: baseline;
+	font-weight: 600;
+}
+
+.text_size {
+	font-size: 1rem;
+}
+
+#app {
+	position: relative;
+}
+
+#main_place {
+	width: 100%;
+	height: 2rem;
+	border-bottom: 1px solid gray;
+	position: absolute; 
+}
+
+.nav_item {
+	display: flex;
+	justify-content: center;
+}
+
+
+.item_gc {
+	margin-right: 1rem;
+	color: 	#B8B8B8;
+}
+
+.item_gz {
+	margin-left: 1rem;
+	color: 	#B8B8B8;
+}
+
+
+
+
+.cur {
+	color: #000;
+	padding-bottom: .2rem;
+	border-bottom: 1px solid gray;
+}
