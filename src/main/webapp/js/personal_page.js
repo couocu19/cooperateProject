@@ -1,4 +1,4 @@
-
+import Ajax from Ajax.js
 window.useId = '04192077';
 // 立即执行函数，请求用户信息
 (function () {

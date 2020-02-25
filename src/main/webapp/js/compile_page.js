@@ -26,21 +26,34 @@ class App {
 		this.send_btn.addEventListener('click', () => {
 			// 直接将属性添加到对象的 动态信息属性上
 			this.getDtMessage();
-			this.
+			this.send_message();
 		}, false);
 	}
 
 	send_message () {
-		if(this.check())
+		// 判断格式是否正确
+		if(!this.check()) {
+			return;
+		} 
+		console.log(this.Dt_message);
 	}
+
+
+	//判断格式是否正确
+	check() {
+		if(this.Dt_message.content == '' && this.Dt_message.photos.length == 0) {
+			console.log('照片和文字不能同时为空');
+			return false;
+		}
+		return true;
+	}	
 
 	getDtMessage() {
-		this.Dt_message.content = this.document.getElementsByTagName('textarea');
+		this.Dt_message.send_uer_student_num = window.student_num;
+		this.Dt_message.content = document.getElementsByTagName('textarea')[0].value;
 		this.Dt_message.photos = [];
-		this.send_time = new Date();
-
-	}
-
+		this.Dt_message.send_time = new Date();
+	}	
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
 	// 	plus.grallery.pick(function (e) {
