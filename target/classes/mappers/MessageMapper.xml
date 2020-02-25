@@ -14,16 +14,26 @@
                   <!--    一对一配置文件   -->
     <association property="content" javaType="com.xiyou.pojo.Content">
       <id column="id" property="id"></id>
-      <result column="messageId" property="messageId"></result>
-      <result column="contentText" property="contentText"></result>
-      <result column="contentImage" property="contentText"></result>
-      <result column="contentVideo" property="contentText"></result>
+      <result column="message_id" property="messageId"></result>
+      <result column="content_text" property="contentText"></result>
+      <result column="content_images" property="contentImages"></result>
+      <result column="content_videos" property="contentVideos"></result>
     </association>
 
   </resultMap>
   <sql id="Base_Column_List" >
     id, user_id, pageviews, praise_points, comment_count, time, is_deleted
   </sql>
+
+  <sql id="Base_Column_List1" >
+    m.id,m.pageviews,m.praise_points,m.comment_count,m.time,
+  </sql>
+
+  <sql id="Base_Column_List2" >
+    c.id,c.message_id,c.content_text,c.content_images,c.content_videos
+  </sql>
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -129,18 +139,14 @@
 <!--todo:记得先在数据库中测试正确性-->
   <select id="getUserAllMessage" resultType="map" resultMap="BaseResultMap">
     select
-    m.pageviews,m.praisePoints,m.commentCount,m.time,
-    <if test="c.contentText != null">
-      c.cntentText,
-    </if>
-    <if test="c.contentImages != null">
-      c.contentImages,
-    </if>
-    <if test="c.contentVideos != null">
-      c.contentVideos
-    </if>
-    from user_message m inner join message_content c
+--     m.pageviews,m.praise_points,m.comment_count,m.time,
+--     c.content_text,c.content_images,c.content_videos
+    <include refid="Base_Column_List1"/>
+    <include refid="Base_Column_List2"/>
+    from  user_message m
+    inner join message_content c
     on m.id = c.message_id
     where m.user_id = #{userId}
+    and m.is_deleted != 0
   </select>
 </mapper>

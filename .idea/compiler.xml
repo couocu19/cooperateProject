@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="day05_mybatis_one2many" />
         <module name="eecommercell" />
         <module name="xiyouProject" />
       </profile>

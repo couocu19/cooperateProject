@@ -88,6 +88,7 @@ public class UserController {
             return ServletResponse.createByErrorMessage("当前会话已超时~,请重新登录以查看~");
         }
         Integer id = currentUSer.getId();
+        System.out.println(id);
         return iUserService.getUserALLMessage(id);
     }
 
@@ -100,16 +101,16 @@ public class UserController {
     }
 
     //获取某个用户的信息以及所有动态
-//    @ResponseBody
-//    @RequestMapping("get_info_and_message.do")
-//    public ServletResponse<User> getUserInfoAndMessages(String studyId){
-//        if(StringUtils.isBlank(studyId)){
-//            return ServletResponse.createByErrorMessage("无效参数");
-//        }
-//
-//        //todo:测试啊!!!测试!!!
-//        return iUserService.getUserInfoAndMessages(studyId);
-//    }
+    @ResponseBody
+    @RequestMapping("get_info_and_message.do")
+    public ServletResponse<User> getUserInfoAndMessages(String studentId){
+        if(StringUtils.isBlank(studentId)){
+            return ServletResponse.createByErrorMessage("无效参数");
+        }
+
+        //todo:测试啊!!!测试!!!
+        return iUserService.getUserInfoAndMessages(studentId);
+    }
 
 //    //查看某个用户的所有粉丝或者关注者
 //    public ServletResponse<List<User>> getFansOrConcern(String studyId,)

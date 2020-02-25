@@ -13,6 +13,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../ssm-project/eecommercell/pom.xml" />
+        <option value="$PROJECT_DIR$/../ssm/day05_mybatis_one2many/pom.xml" />
       </list>
     </option>
   </component>
