@@ -65,7 +65,7 @@
   {
       "error" : 0,
       "data" : {
-          // 评论的信息...
+           //评论的信息...
       }
   }
   
@@ -174,5 +174,189 @@
   }
   ```
 
+
+
+
+
+
+## 五、已完成接口
+
+##### 项目路径:http://ftpip:8080/xiyouProject_war
+
+- ### 注册接口
+
+  ```json
+  简述:通过学号注册账户,并且账户中的学号不可重复。
+  url:/user/register.do
+  method:post
+  参数:studentId(学号)
+  返回示例:
+  {
+      "status": 0,
+      "msg": "注册成功~",
+      "data":{
+          "id": null,
+          "username": "04182095",
+          "headSculpture":"默认头像的绝对地址",
+          "signature": null,
+          "messageCount": null,
+          "fans": null,
+          "concern": null,
+          "readCount": null,
+          "studentId": "04182095",
+          "messages": null
+      }
+  }
+  {
+      "status": 1,
+      "msg": "该学号已存在!"
+  }
+  ```
+
   
+
+- ### 登录接口
+
+  ```json
+  简述：通过学号登录账户
+  url:/user/login.do
+  method:post
+  参数:studentId(学号)
+  返回示例：
+  {   
+      "status": 0,
+      "msg": "登陆成功~",
+      "data":{
+          "id": 3,
+          "username": "美女1号",
+          "headSculpture": "头像的默认地址",
+          "signature": null,
+          "messageCount": 0,
+          "fans": 0,
+          "concern": 0,
+          "readCount": 0,
+          "studentId": "04182097",
+          "messages": null
+      }
+  }
+  
+  {
+      "status":1,
+      "msg":"该用户不存在!"
+  }
+  ```
+
+- ### 更新用户信息
+
+  ```json
+  简述:更新当前已登录用户的信息(修改头像除外)
+  参数:username(用户名) , signature(个性签名)
+  注意事项:这两个参数不一定全部修改,视情况而定。
+  method:post
+  返回示例:
+  {
+      
+      "status": 0,
+      "msg": "修改信息成功~!",
+      "data":{
+          "id": 3,
+          "username": "美女1号",
+          "headSculpture": "",
+          "signature": "我很美",
+          "messageCount": 0,
+          "fans": 0,
+          "concern": 0,
+          "readCount": 0,
+          "studentId": "04182097",
+          "messages": null
+  }
+  }
+  {
+      "status":1,
+      "msg":"修改信息失败!"
+  }
+  
+  {
+      "status":1,
+      "msg":"用户未登录~请先登录"
+  }
+  ```
+
+
+
+- ### 获取当前登录用户信息
+
+  ```json
+  简述：获取当前已登录用户的信息(发表的动态除外)
+  method:get
+  返回示例:
+  {
+      "status": 0,
+      "data":{
+          "id": 3,
+          "username": "美女1号",
+          "headSculpture": "头像绝对地址",
+          "signature": "我很美",
+          "messageCount": 0,
+          "fans": 0,
+          "concern": 0,
+          "readCount": 0,
+          "studentId": "04182097",
+          "messages": null
+          }
+  }
+  
+  {
+      "status":1,
+      "msg":"当前用户未登录，请先登录!"
+  }
+  ```
+  
+
+
+
+- ### 获取某个用户的所有动态
+
+```json
+简述:根据用户的id获取用户所发表的所有动态
+参数:id
+method:get
+返回示例:
+(用户所发表的动态为0)
+{
+    "status":0,
+    "msg":"这里空空如也~";
+}
+
+{
+    "status":0,
+    "data":{ 
+        "message":{
+            "id":,
+            "userId":,
+            "pageviews":,
+            "praisePoints":,
+            "commentCount":,
+            "time":2020.3.10,
+            "content":{
+          
+            
+        }
+    },
+        "message":{
+            "id":
+            "userId":
+            "pageviews":
+            "praisePoints"
+            "commentCount"
+            "time"
+            "content":{
+           
+        }
+    } 
+}
+}
+```
+
+
 

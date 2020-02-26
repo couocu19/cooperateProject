@@ -30,6 +30,11 @@
     </constructor>
     <!--不同mapper文件中的resultMap可以互相引用-->
     <collection property="messages" ofType="com.xiyou.pojo.Message" resultMap="com.xiyou.dao.MessageMapper.BaseResultMap">
+
+
+
+
+
     </collection>
 
 

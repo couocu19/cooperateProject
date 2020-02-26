@@ -83,6 +83,8 @@ public class UserServiceImpl implements IUserService {
             return ServletResponse.createBySuccessMessage("这里空空如也~");
         }
 
+        //todo:处理动态中文字内容，图片内容，视频内容为空的状况
+
         return ServletResponse.createBySuccess(list);
 
     }

@@ -11,7 +11,7 @@
       <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />
     </constructor>
-                  <!--    一对一配置文件   -->
+    <!--    一对一配置文件   -->
     <association property="content" javaType="com.xiyou.pojo.Content">
       <id column="id" property="id"></id>
       <result column="message_id" property="messageId"></result>
@@ -30,7 +30,7 @@
   </sql>
 
   <sql id="Base_Column_List2" >
-    c.id,c.message_id,c.content_text,c.content_images,c.content_videos
+    c.id,c.message_id, c.content_text,c.content_images,c.content_videos
   </sql>
 
 
@@ -139,8 +139,6 @@
 <!--todo:记得先在数据库中测试正确性-->
   <select id="getUserAllMessage" resultType="map" resultMap="BaseResultMap">
     select
---     m.pageviews,m.praise_points,m.comment_count,m.time,
---     c.content_text,c.content_images,c.content_videos
     <include refid="Base_Column_List1"/>
     <include refid="Base_Column_List2"/>
     from  user_message m
