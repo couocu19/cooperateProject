@@ -10,6 +10,7 @@ import com.xiyou.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user/")
+@CrossOrigin(origins = "*",maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -26,6 +28,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("register.do")
+    @CrossOrigin
     public ServletResponse<User> register(String studentId, HttpServletRequest request){
         //为了设置默认头像的绝对路径
         String strPrefix = "http://118.31.12.175:8080"+request.getContextPath()+"/";
@@ -35,6 +38,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("login.do")
+    @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<User> login(String studentId,HttpSession session){
         ServletResponse<User> selectResult = iUserService.login(studentId);
         if(selectResult.isSuccess()){
@@ -46,6 +50,7 @@ public class UserController {
     //修改用户信息:只能修改昵称,头像或者个性签名
     @ResponseBody
     @RequestMapping("update.do")
+    @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<User> updateInformation(HttpSession session,User user){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
 
@@ -70,6 +75,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("get_user_info.do")
+    @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<User> getUserInformation(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
@@ -82,6 +88,7 @@ public class UserController {
     //只是获取当前用户的所有动态
     @ResponseBody
     @RequestMapping("get_currentUser_message.do")
+    @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<List<Message>> getCurrentUserAllMessage(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
@@ -95,6 +102,7 @@ public class UserController {
     //获取某个用户的所有动态
     @ResponseBody
     @RequestMapping("get_user_message.do")
+    @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<List<Message>> getUserAllMessage(Integer id){
 
         return iUserService.getUserALLMessage(id);
