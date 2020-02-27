@@ -250,6 +250,7 @@
 
   ```json
   简述:更新当前已登录用户的信息(修改头像除外)
+  url:/user/update.do
   参数:username(用户名) , signature(个性签名)
   注意事项:这两个参数不一定全部修改,视情况而定。
   method:post
@@ -288,6 +289,7 @@
 
   ```json
   简述：获取当前已登录用户的信息(发表的动态除外)
+  url:user/get_user_info.do
   method:get
   返回示例:
   {
@@ -319,8 +321,10 @@
 
 ```json
 简述:根据用户的id获取用户所发表的所有动态
+url:/user/get_user_message.do
 参数:id
 method:get
+说明:涉及到动态表和动态内容表的两表联查，其中通过动态的id和动态内容表中的messageId作为关联，即每条动态中内容中的messageId和动态的id对应相同。
 返回示例:
 (用户所发表的动态为0)
 {
@@ -331,32 +335,143 @@ method:get
 {
     "status":0,
     "data":{ 
-        "message":{
-            "id":,
-            "userId":,
-            "pageviews":,
-            "praisePoints":,
-            "commentCount":,
-            "time":2020.3.10,
-            "content":{
-          
-            
-        }
-    },
-        "message":{
-            "id":
-            "userId":
-            "pageviews":
-            "praisePoints"
-            "commentCount"
-            "time"
-            "content":{
-           
-        }
-    } 
-}
+        "messages":{
+            "message":{
+                  "id":1,
+                  "userId":3,
+                  "pageviews":200,
+                  "praisePoints":36,
+                  "commentCount":5,
+                  "time":2020.3.10,
+                  "content":{
+                      "id":1,
+                      "messageId":1,
+                      "contentText":"今日份开心~",
+                      "contentImages":"图片1的绝对地址,图片2的绝对地址……",
+                      "contentVideos":null,
+                  }
+            },
+            "message":{
+                  "id":2,
+                  "userId":3,
+                  "pageviews":430,
+                  "praisePoints":66,
+                  "commentCount":20,
+                  "time":2020.4.6,
+                  "content":{
+                      "id":6,
+                      "messageId":2,
+                      "contentText":"我今天很伤心,没有见到帅哥",
+                      "contentImages":null,
+                      "contentVideos":null,
+                  }
+            },
+            "message":{
+                  "id":3,
+                  "userId":.....,
+                  "pageviews":....,
+                  "praisePoints":....,
+                  "commentCount":.....,
+                  "time":2020.4.10,
+                  "content":{
+                      "id":18,
+                      "messageId":3,
+                      "contentText":"我今天很伤心,没有见到帅哥",
+                      "contentImages":null,
+                      "contentVideos":null,                
+                   }
+            },
+           "message":{.......}
+            ........
+        } 
+    }
 }
 ```
 
+- ### 查看某个用户的信息和动态(用户主页)
 
+  ```json
+  简述:根据用户的id查看用户的主页,主页包括用户的基本信息和发表的动态
+  url:/user/get_info_and_message.do
+  参数:id
+  说明:该接口涉及到用户表，动态表，动态内容表三表联查的功能。其中用户表和动态表通过id和userId进行左外连接联查,动态表和动态内容表用过id和messageId进行左外连接查询。
+  method:get/post
+  返回示例：
+  {
+      "status":1,
+      "msg":"无效参数";
+  }
+  
+  {
+      "status":1,
+      "msg":"该用户不存在~";
+  }
+  
+  {
+      "status":0,
+      "data":{      
+          "id": 3,
+          "username": "美女1号",
+          "headSculpture": "头像绝对地址",
+          "signature": "我很美",
+          "messageCount": 0,
+          "fans": 88,
+          "concern": 56,
+          "readCount": 1500,
+          "studentId": "04182097",
+          "messages":{
+              "message":{
+                    "id":1,
+                    "userId":3,
+                    "pageviews":200,
+                    "praisePoints":36,
+                    "commentCount":5,
+                    "time":2020.3.10,
+                    "content":{
+                        "id":1,
+                        "messageId":1,
+                        "contentText":"今日份开心~",
+                        "contentImages":"图片1的绝对地址,图片2的绝对地址……",
+                        "contentVideos":null,
+                    }
+              },
+              "message":{
+                    "id":2,
+                    "userId":3,
+                    "pageviews":430,
+                    "praisePoints":66,
+                    "commentCount":20,
+                    "time":2020.4.6,
+                    "content":{
+                        "id":6,
+                        "messageId":2,
+                        "contentText":"我今天很伤心,没有见到帅哥",
+                        "contentImages":null,
+                        "contentVideos":null,
+                    }
+              },
+              "message":{
+                    "id":3,
+                    "userId":.....,
+                    "pageviews":....,
+                    "praisePoints":....,
+                    "commentCount":.....,
+                    "time":2020.4.10,
+                    "content":{
+                        "id":18,
+                        "messageId":3,
+                        "contentText":"我今天很伤心,没有见到帅哥",
+                        "contentImages":null,
+                        "contentVideos":null,                
+                     }
+              },
+             "message":{.......}
+              ........
+          } 
+      }
+  }
+  
+  ```
+
+  
 
