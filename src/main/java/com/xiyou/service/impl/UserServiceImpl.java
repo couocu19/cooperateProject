@@ -23,7 +23,6 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private MessageMapper messageMapper;
 
-
     public ServletResponse<User> register(String studentId,String preStr){
         if(StringUtils.isBlank(studentId)){
             return ServletResponse.createByErrorMessage("无效参数!");

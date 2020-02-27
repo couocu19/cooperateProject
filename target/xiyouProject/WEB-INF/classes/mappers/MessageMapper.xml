@@ -26,7 +26,7 @@
   </sql>
 
   <sql id="Base_Column_List1" >
-    m.id,m.pageviews,m.praise_points,m.comment_count,m.time,
+    m.id,m.user_id,m.pageviews,m.praise_points,m.comment_count,m.time,
   </sql>
 
   <sql id="Base_Column_List2" >
@@ -49,10 +49,11 @@
       praise_points, comment_count, time, 
       is_deleted)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{pageviews,jdbcType=INTEGER}, 
-      #{praisePoints,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{praisePoints,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, now(),
       #{isDeleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.xiyou.pojo.Message" >
+<!-- useGeneratedKeys="true" keyProperty="id" 使用该属性可以立即获得刚刚插入生成的主键  -->
+  <insert id="insertSelective" parameterType="com.xiyou.pojo.Message"  useGeneratedKeys="true" keyProperty="id" >
     insert into user_message
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -71,7 +72,7 @@
         comment_count,
       </if>
       <if test="time != null" >
-        time,
+        now(),
       </if>
       <if test="isDeleted != null" >
         is_deleted,
@@ -131,7 +132,7 @@
       pageviews = #{pageviews,jdbcType=INTEGER},
       praise_points = #{praisePoints,jdbcType=INTEGER},
       comment_count = #{commentCount,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
+      time = now(),
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -145,6 +146,5 @@
     inner join message_content c
     on m.id = c.message_id
     where m.user_id = #{userId}
-    and m.is_deleted != 0
   </select>
 </mapper>
