@@ -20,6 +20,31 @@ public class Message {
 
     private Boolean isDeleted;
 
+    public Message(Integer id, Integer userId, Integer pageviews, Integer praisePoints, Integer commentCount, Date time) {
+        this.id = id;
+        this.userId = userId;
+        this.pageviews = pageviews;
+        this.praisePoints = praisePoints;
+        this.commentCount = commentCount;
+        this.time = time;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", pageviews=" + pageviews +
+                ", praisePoints=" + praisePoints +
+                ", commentCount=" + commentCount +
+                ", time=" + time +
+//                ", isDeleted=" + isDeleted +
+                ", content=" + content +
+                '}';
+    }
+
     //导入一对一的对象类型
     private Content content;
 
@@ -50,7 +75,6 @@ public class Message {
     }
 
     public Message() {
-        super();
     }
 
     public Integer getId() {

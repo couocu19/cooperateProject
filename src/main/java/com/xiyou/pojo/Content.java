@@ -14,6 +14,14 @@ public class Content {
 
     private String contentVideos;
 
+
+    public Content(Integer id, String contentText, String contentImages, String contentVideos) {
+        this.id = id;
+        this.contentText = contentText;
+        this.contentImages = contentImages;
+        this.contentVideos = contentVideos;
+    }
+
     public Content(Integer id, Integer messageId, String contentText, String contentImages, String contentVideos) {
         this.id = id;
         this.messageId = messageId;
@@ -22,8 +30,19 @@ public class Content {
         this.contentVideos = contentVideos;
     }
 
+    @Override
+    public String toString() {
+        return "Content{" +
+                "id=" + id +
+                ", messageId=" + messageId +
+                ", contentText='" + contentText + '\'' +
+                ", contentImages='" + contentImages + '\'' +
+                ", contentVideos='" + contentVideos + '\'' +
+                '}';
+    }
+
     public Content() {
-        super();
+
     }
 
     public Integer getId() {

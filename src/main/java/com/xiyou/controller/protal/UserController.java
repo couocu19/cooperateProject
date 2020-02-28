@@ -111,12 +111,29 @@ public class UserController {
     //获取某个用户的信息以及所有动态
     @ResponseBody
     @RequestMapping("get_info_and_message.do")
-    public ServletResponse<User> getUserInfoAndMessages(String studentId){
+    public ServletResponse<List<User>> getUserInfoAndMessages(String studentId){
         if(StringUtils.isBlank(studentId)){
             return ServletResponse.createByErrorMessage("无效参数");
         }
-
         //todo:测试啊!!!测试!!!
+//        User result = new User();
+//        List<User> list = iUserService.getUserInfoAndMessages(studentId).getData();
+//        result.setId(list.get(0).getId());
+//        result.setStudentId(list.get(0).getStudentId());
+//        result.setSignature(list.get(0).getSignature());
+//        result.setHeadSculpture(list.get(0).getHeadSculpture());
+//        result.setConcern(list.get(0).getConcern());
+//        result.setFans(list.get(0).getReadCount());
+//        result.setMessageCount(list.get(0).getMessageCount());
+//        result.setReadCount(list.get(0).getReadCount());
+//        result.setUsername(list.get(0).getUsername());
+//        List<Message> list1 = result.getMessages();
+
+//        for(User u:list){
+//            list1.add(u.getMessages().get(0));
+//        }
+//        System.out.println(result.toString());
+
         return iUserService.getUserInfoAndMessages(studentId);
     }
 

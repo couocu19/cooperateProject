@@ -15,6 +15,7 @@
     </constructor>
   </resultMap>
 
+
   <resultMap id="map1" type="com.xiyou.pojo.User">
 
     <constructor >
@@ -29,19 +30,35 @@
       <arg column="student_id" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
     <!--不同mapper文件中的resultMap可以互相引用-->
-    <collection property="messages" ofType="com.xiyou.pojo.Message" resultMap="com.xiyou.dao.MessageMapper.BaseResultMap">
+    <collection property="messages" ofType="com.xiyou.pojo.Message" >
+<!--      <constructor >-->
+<!--        <idArg column="m_id"  jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+<!--        <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+<!--        <arg column="pageviews" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+<!--        <arg column="praise_points" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+<!--        <arg column="comment_count" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
+<!--        <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />-->
+<!--        <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />-->
+<!--      </constructor>-->
+      <id column="mid" property="id"/>
+      <result column="user_id" property="userId"/>
+      <result column="pageviews" property="pageviews"/>
+      <result column="praise_points" property="praisePoints"/>
+      <result column="comment_count" property="commentCount"/>
+      <result column="time" property="time"/>
+      <result column="is_deleted" property="isDeleted"/>
 
-
-
-
-
+      <!--    一对一配置文件   -->
+      <association property="content" javaType="com.xiyou.pojo.Content">
+        <id column="id" property="id"></id>
+        <result column="message_id" property="messageId"></result>
+        <result column="content_text" property="contentText"></result>
+        <result column="content_images" property="contentImages"></result>
+        <result column="content_videos" property="contentVideos"></result>
+      </association>
     </collection>
 
-
   </resultMap>
-
-
-
 
 
   <sql id="Base_Column_List" >
@@ -55,11 +72,11 @@
   </sql>
 
   <sql id="Base_Column_List2" >
-    m.pageviews,m.praise_points, m.comment_count, m.time
+   m.id as mid, m.user_id,m.pageviews,m.praise_points, m.comment_count, m.time,m.is_deleted
   </sql>
 
   <sql id="Base_Column_List3" >
-  c.content_text,c.content_images,c.content_videos
+  c.id,c.message_id,c.content_text,c.content_images,c.content_videos
   </sql>
 
 
@@ -201,7 +218,7 @@
   </select>
 
   <!--  todo:这里很可能会报错  -->
-  <select id="selectAllInfoByStudyId" parameterType="string" resultMap="BaseResultMap">
+  <select id="selectAllInfoByStudyId" parameterType="string" resultMap="map1">
     select
     <include refid="Base_Column_List1"/>,
     <include refid="Base_Column_List2"/>,

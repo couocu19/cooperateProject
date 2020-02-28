@@ -11,15 +11,15 @@ import java.util.List;
 
 public class UserTest extends BaseTest {
 
-    @Test
-    public void testFindAllUserAccount(){
-        SqlSession session = getSqlSession();
-            UserMapper userMapper = session.getMapper(UserMapper.class);
-            String studentId = "04182097";
-            User u = userMapper.selectAllInfoByStudyId(studentId);
-            System.out.println(u);
-
-    }
+//    @Test
+//    public void testFindAllUserAccount(){
+//        SqlSession session = getSqlSession();
+//            UserMapper userMapper = session.getMapper(UserMapper.class);
+//            String studentId = "04182097";
+//            User u = userMapper.selectAllInfoByStudyId(studentId);
+//            System.out.println(u);
+//
+//    }
 
 
 }

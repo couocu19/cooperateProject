@@ -26,7 +26,7 @@
   </sql>
 
   <sql id="Base_Column_List1" >
-    m.id,m.user_id,m.pageviews,m.praise_points,m.comment_count,m.time,
+    m.id,m.user_id,m.pageviews,m.praise_points,m.comment_count,m.time,m.is_deleted,
   </sql>
 
   <sql id="Base_Column_List2" >
@@ -71,9 +71,9 @@
       <if test="commentCount != null" >
         comment_count,
       </if>
-      <if test="time != null" >
-        now(),
-      </if>
+<!--      <if test="time != null" >-->
+        time,
+<!--      </if>-->
       <if test="isDeleted != null" >
         is_deleted,
       </if>
@@ -94,9 +94,9 @@
       <if test="commentCount != null" >
         #{commentCount,jdbcType=INTEGER},
       </if>
-      <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
-      </if>
+<!--      <if test="time != null" >-->
+        now(),
+<!--      </if>-->
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
@@ -146,5 +146,6 @@
     inner join message_content c
     on m.id = c.message_id
     where m.user_id = #{userId}
+    and m.is_deleted != 0
   </select>
 </mapper>

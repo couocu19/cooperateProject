@@ -3,6 +3,8 @@ package com.xiyou.dao;
 import com.xiyou.pojo.User;
 import org.mybatis.spring.annotation.MapperScan;
 
+import java.util.List;
+
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -21,7 +23,7 @@ public interface UserMapper {
 
     int selectByStudentId(String studentId);
 
-   User selectAllInfoByStudyId(String studyId);
+    List<User> selectAllInfoByStudyId(String studyId);
 
 
 

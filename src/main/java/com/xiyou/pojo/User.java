@@ -34,6 +34,7 @@ public class User {
         this.messages = messages;
     }
 
+
     public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId) {
         this.id = id;
         this.username = username;
@@ -46,8 +47,23 @@ public class User {
         this.studentId = studentId;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", headSculpture='" + headSculpture + '\'' +
+                ", signature='" + signature + '\'' +
+                ", messageCount=" + messageCount +
+                ", fans=" + fans +
+                ", concern=" + concern +
+                ", readCount=" + readCount +
+                ", studentId='" + studentId + '\'' +
+                ", messages=" + messages +
+                '}';
+    }
+
     public User() {
-        super();
     }
 
     public Integer getId() {

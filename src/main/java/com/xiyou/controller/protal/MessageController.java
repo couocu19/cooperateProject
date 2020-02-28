@@ -70,8 +70,10 @@ public class MessageController {
         }
         //获取Message中的参数 userId,剩下的值先都采取默认值,时间默认为当前时间
         Message message = new Message();
+//        Date date = new Date();
         Integer userId = user.getId();
         message.setUserId(userId);
+//        message.setTime(date);
 
         //获取content中的参数,即动态中的内容
         Content content = new Content();
