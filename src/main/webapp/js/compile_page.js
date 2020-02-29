@@ -15,7 +15,7 @@ class App {
 		this.choose_btn.addEventListener('click', (e) => {
 			this.handle_choose_Click(e);
 		}, false);
-		
+
 		this.upload_imgs.addEventListener('click', () => {
 			// 调用安卓注入的方法
 			window.android.getphoto();
@@ -34,7 +34,7 @@ class App {
 		// 判断格式是否正确
 		if(!this.check()) {
 			return;
-		} 
+		}
 		console.log(this.Dt_message);
 	}
 
@@ -46,14 +46,14 @@ class App {
 			return false;
 		}
 		return true;
-	}	
+	}
 
 	getDtMessage() {
 		this.Dt_message.send_uer_student_num = window.student_num;
 		this.Dt_message.content = document.getElementsByTagName('textarea')[0].value;
 		this.Dt_message.photos = [];
 		this.Dt_message.send_time = new Date();
-	}	
+	}
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
 	// 	plus.grallery.pick(function (e) {
@@ -89,7 +89,7 @@ class App {
 		}
 	}
 
-	// 调整显示照片的尺寸 
+	// 调整显示照片的尺寸
 	adopt_photos_size() {
 		if(this.photos_show.childElementCount == 1) this.photos_show.childNodes[0].style.wihth = '99%';
 		if(this.photos_show.childElementCount == 2) {
@@ -104,7 +104,7 @@ class App {
 	}
 }
 
-var app = new App(document.getElementById('app'), 
+var app = new App(document.getElementById('app'),
 				 document.getElementById('return_btn'),
 				 document.getElementById('choose_open'),
 				 document.getElementById('photos_show'),
@@ -112,3 +112,8 @@ var app = new App(document.getElementById('app'),
 				 document.getElementById('send_btn'));
 app.init();
 
+
+
+function render(argument) {
+	// body...
+}

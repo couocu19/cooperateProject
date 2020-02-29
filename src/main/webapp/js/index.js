@@ -1,4 +1,23 @@
 
+
+window.useId = '04192077';
+// 立即执行函数，请求用户信息
+(function () {
+	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
+	xhr.onreadystatechange = function () {
+		if(xhr.readyState == 4) {
+			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
+				var json = JSON.parse(xhr.responseText);
+				console.log(json);
+			}
+		}
+	}
+	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/login.do?studentId=' + window.useId;
+	xhr.open('get', url, false);
+	xhr.send(null);
+})();
+
 class Obj{
 	constructor(user_btn, message_btn, write_btn, nav_item ) {
 		this.user_btn = user_btn;
@@ -21,7 +40,7 @@ class Obj{
 	}
 	// 渲染页面函数
 	render(data) {
-		
+
 	}
 
 
@@ -49,8 +68,7 @@ class Obj{
 				if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
 					// 正确的处理
 					let json = JSON.prase(xhr.responseText);
-
-				}	
+				}
 			}
 		}
 	}

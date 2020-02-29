@@ -1,20 +1,18 @@
-import Ajax from Ajax.js
-window.useId = '04192077';
-// 立即执行函数，请求用户信息
+
 (function () {
 	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
 	xhr.onreadystatechange = function () {
 		if(xhr.readyState == 4) {
 			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-				var json = JSON.parse(xhr.responedText)
-				renderUserMessage(json);
+				var json = JSON.parse(xhr.responseText);
+				console.log(json);
 			}
 		}
 	}
-	let url = '';
+	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do';
 	xhr.open('get', url, false);
 	xhr.send(null);
-	render(data);
 })()
 
 class Obj {
@@ -36,7 +34,6 @@ const obj = new Obj(document.getElementsByClassName('icon_wrapper')[0],
 obj.init();
 
 
-function renderUserMessage(data) {
-	// body...
-
+function renderUserMessageHeader(data) {
+	document
 }
