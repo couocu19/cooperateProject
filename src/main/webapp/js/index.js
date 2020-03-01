@@ -1,6 +1,7 @@
 
-
-window.useId = '04192077';
+window.active_user_id = null;
+window.user_student_id = '04192077';
+window.user_id = null;
 // 立即执行函数，请求用户信息
 (function () {
 	var xhr = new XMLHttpRequest();
@@ -10,10 +11,13 @@ window.useId = '04192077';
 			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
 				var json = JSON.parse(xhr.responseText);
 				console.log(json);
+				if(!json.status) {
+					window.user_id = json.data.id;
+				}
 			}
 		}
 	}
-	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/login.do?studentId=' + window.useId;
+	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/login.do?studentId=' + window.user_student_id;
 	xhr.open('get', url, false);
 	xhr.send(null);
 })();

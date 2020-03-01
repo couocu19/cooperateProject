@@ -7,10 +7,18 @@
 			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
 				var json = JSON.parse(xhr.responseText);
 				console.log(json);
+				if(json.status) {
+					alert('网络或数据库错误');
+				} else {
+
+					renderUserMessageHeader(json.data);
+				}
+
 			}
 		}
 	}
-	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do';
+	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do?id=3';
+	console.log(url);
 	xhr.open('get', url, false);
 	xhr.send(null);
 })()
@@ -35,5 +43,7 @@ obj.init();
 
 
 function renderUserMessageHeader(data) {
-	document
+	document.getElementsByClassName('user_head_pic')[0].getElementsByTagName('img')[0].src = data.headSculpture;
+	document.getElementById()
+
 }

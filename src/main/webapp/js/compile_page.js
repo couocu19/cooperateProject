@@ -8,7 +8,7 @@ class App {
 		this.upload_imgs = upload_imgs;
 		this.send_btn = send_btn;
 		this.photo_display = false;
-		this.Dt_message = {};  // 存放动态信息的对象
+		this.Dt_message = new FormData();  // 存放动态信息的表单对象
 	}
 
 	init() {
@@ -35,13 +35,12 @@ class App {
 		if(!this.check()) {
 			return;
 		}
-		console.log(this.Dt_message);
+		this.send_Ajax();
 	}
-
 
 	//判断格式是否正确
 	check() {
-		if(this.Dt_message.content == '' && this.Dt_message.photos.length == 0) {
+		if(this.Dt_message.contentText == '' && this.Dt_message.upload_file.length == 0) {
 			console.log('照片和文字不能同时为空');
 			return false;
 		}
@@ -49,10 +48,10 @@ class App {
 	}
 
 	getDtMessage() {
-		this.Dt_message.send_uer_student_num = window.student_num;
-		this.Dt_message.content = document.getElementsByTagName('textarea')[0].value;
-		this.Dt_message.photos = [];
-		this.Dt_message.send_time = new Date();
+		this.Dt_message.append('contentText', document.getElementsByTagName('textarea')[0].value);
+		this.Dt_message.append('upload_file', 'dwahduawudihuawudawd.jpg');
+		// this.Dt_message.send_time = new Date();
+		console.log(this.Dt_message);
 	}
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
@@ -102,6 +101,11 @@ class App {
 			}
 		}
 	}
+
+	send_Ajax() {
+		Ajax(this.Dt_message);
+	}
+
 }
 
 var app = new App(document.getElementById('app'),
@@ -110,10 +114,35 @@ var app = new App(document.getElementById('app'),
 				 document.getElementById('photos_show'),
 				 document.getElementById('upload_imgs'),
 				 document.getElementById('send_btn'));
+
 app.init();
 
+function Ajax(data) {
+	let xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
 
+	xhr.onreadystatechange = function () {
+		if(xhr.readyState == 4) {
+			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
+				var json = JSON.parse(xhr.responseText);
+				console.log(json);
+				if(json.status) {
+					alert('网络或数据库错误');
+				} else {
+
+					// renderUserMessageHeader(json.data);
+				}
+
+			}
+		}
+	}
+	let url = 'http://118.31.12.175:8080/xiyouProject_war/message/add.do';
+	console.log(data);
+	xhr.open('POST', url);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
+}
 
 function render(argument) {
-	// body...
+
 }
