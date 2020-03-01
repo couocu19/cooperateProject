@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @RequestMapping("/user/")
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class UserController {
+
 
     @Autowired
     private IUserService iUserService;
@@ -32,6 +34,9 @@ public class UserController {
     public ServletResponse<User> register(String studentId, HttpServletRequest request){
         //为了设置默认头像的绝对路径
         String strPrefix = "http://118.31.12.175:8080"+request.getContextPath()+"/";
+
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         return iUserService.register(studentId,strPrefix);
 
     }
@@ -39,11 +44,14 @@ public class UserController {
     @ResponseBody
     @RequestMapping("login.do")
     @CrossOrigin(origins = "*",maxAge = 3600)
-    public ServletResponse<User> login(String studentId,HttpSession session){
+    public ServletResponse<User> login(String studentId, HttpSession session, HttpServletResponse response){
+
         ServletResponse<User> selectResult = iUserService.login(studentId);
         if(selectResult.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,selectResult.getData());
         }
+        // 允许跨域请求中携带cookie
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         return selectResult;
     }
 
