@@ -82,7 +82,11 @@ public class MessageController {
         content.setContentText(contentText);
         String fileName;
 
-//        if(files!=null) {
+        if(files == null || files.length == 0){
+            content.setContentImages(null);
+            content.setContentVideos(null);
+        }else {
+
             for (MultipartFile f : files) {
                 fileName = f.getOriginalFilename();
                 //截取文件扩展名
@@ -99,7 +103,7 @@ public class MessageController {
             } else {
                 content.setContentVideos(newFileNames);
             }
-//        }
+        }
 
         return iMessageService.addMessage(message,content);
 
