@@ -1,10 +1,9 @@
 package com.xiyou.vo;
 
-import java.util.Date;
+
 import java.util.List;
 
 public class UserMainPageVo {
-    private Integer id;
 
     private String username;
 
@@ -18,38 +17,88 @@ public class UserMainPageVo {
 
     private Integer concern;
 
-    private Integer readCount;
+//    private Integer readCount;
 
     private String studentId;
 
-//    private List<>
+    private List<MessageVo> messageVos;
 
-    //动态内容
-    private Integer contentId;
+    public String getUsername() {
+        return username;
+    }
 
-    private Integer messageId;
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    private String contentText;
+    public String getHeadSculpture() {
+        return headSculpture;
+    }
 
-    private String contentImages;
+    public void setHeadSculpture(String headSculpture) {
+        this.headSculpture = headSculpture;
+    }
 
-    private String contentVideos;
+    public String getSignature() {
+        return signature;
+    }
 
-    //动态信息
-    private Integer message_Id;
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
-    private Integer userId;
+    public Integer getMessageCount() {
+        return messageCount;
+    }
 
-    private Integer pageviews;
+    public void setMessageCount(Integer messageCount) {
+        this.messageCount = messageCount;
+    }
 
-    private Integer praisePoints;
+    public Integer getFans() {
+        return fans;
+    }
 
-    private Integer commentCount;
+    public void setFans(Integer fans) {
+        this.fans = fans;
+    }
 
-    private Date time;
+    public Integer getConcern() {
+        return concern;
+    }
 
+    public void setConcern(Integer concern) {
+        this.concern = concern;
+    }
 
+    public String getStudentId() {
+        return studentId;
+    }
 
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
 
+    public List<MessageVo> getMessageVos() {
+        return messageVos;
+    }
 
+    public void setMessageVos(List<MessageVo> messageVos) {
+        this.messageVos = messageVos;
+    }
+
+    public UserMainPageVo(String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, String studentId, List<MessageVo> messageVos) {
+        this.username = username;
+        this.headSculpture = headSculpture;
+        this.signature = signature;
+        this.messageCount = messageCount;
+        this.fans = fans;
+        this.concern = concern;
+        this.studentId = studentId;
+        this.messageVos = messageVos;
+    }
+
+    public UserMainPageVo(){
+        super();
+    }
 }

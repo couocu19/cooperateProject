@@ -7,6 +7,8 @@ import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
 import com.xiyou.service.IUserService;
+import com.xiyou.vo.MessageVo;
+import com.xiyou.vo.UserMainPageVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -119,30 +122,55 @@ public class UserController {
     //获取某个用户的信息以及所有动态
     @ResponseBody
     @RequestMapping("get_info_and_message.do")
-    public ServletResponse<List<User>> getUserInfoAndMessages(String studentId){
+    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(String studentId){
         if(StringUtils.isBlank(studentId)){
             return ServletResponse.createByErrorMessage("无效参数");
         }
-        //todo:测试啊!!!测试!!!
-//        User result = new User();
-//        List<User> list = iUserService.getUserInfoAndMessages(studentId).getData();
-//        result.setId(list.get(0).getId());
-//        result.setStudentId(list.get(0).getStudentId());
-//        result.setSignature(list.get(0).getSignature());
-//        result.setHeadSculpture(list.get(0).getHeadSculpture());
-//        result.setConcern(list.get(0).getConcern());
-//        result.setFans(list.get(0).getReadCount());
-//        result.setMessageCount(list.get(0).getMessageCount());
-//        result.setReadCount(list.get(0).getReadCount());
-//        result.setUsername(list.get(0).getUsername());
-//        List<Message> list1 = result.getMessages();
+        User user = iUserService.getUserInfoAndMessages(studentId).getData();
+        UserMainPageVo userMainPageVo = assembleUserVo(user);
 
-//        for(User u:list){
-//            list1.add(u.getMessages().get(0));
-//        }
-//        System.out.println(result.toString());
+        return ServletResponse.createBySuccess(userMainPageVo);
+    }
 
-        return iUserService.getUserInfoAndMessages(studentId);
+
+    private UserMainPageVo assembleUserVo(User user){
+        UserMainPageVo userMainPageVo = new UserMainPageVo();
+        List<MessageVo> list = new ArrayList<>();
+        MessageVo messageVo = null;
+        //填充主页下的动态信息
+        for(Message m: user.getMessages()){
+            messageVo = new MessageVo();
+            messageVo.setUsername(user.getUsername());
+            messageVo.setHeader(user.getHeadSculpture());
+            messageVo.setCommentCount(m.getCommentCount());
+            messageVo.setPraiseCount(m.getPraisePoints());
+            if(m.getContent().getContentText()!=null){
+                messageVo.setContentText(m.getContent().getContentText());
+            }
+            if(m.getContent().getContentImages()!=null){
+                List<String> imagesVo = new ArrayList<>();
+               String[] images = m.getContent().getContentImages().split(",");
+               for(int i =1;i<images.length;i++){
+                   imagesVo.add(Const.urlPrefix+"uploadImage/"+images[i]);
+               }
+               messageVo.setContentImages(imagesVo);
+            }
+            if(m.getContent().getContentVideos()!=null){
+                String[] video = m.getContent().getContentVideos().split(",");
+                messageVo.setContentText(Const.urlPrefix+"uploadVideo"+video[1]);
+            }
+            list.add(messageVo);
+        }
+        //填充用户信息
+        userMainPageVo.setMessageVos(list);
+        userMainPageVo.setUsername(user.getUsername());
+        userMainPageVo.setHeadSculpture(user.getHeadSculpture());
+        userMainPageVo.setConcern(user.getConcern());
+        userMainPageVo.setFans(user.getFans());
+        userMainPageVo.setSignature(user.getSignature());
+
+        return userMainPageVo;
+
     }
 
 //    //查看某个用户的所有粉丝或者关注者

@@ -81,22 +81,25 @@ public class MessageController {
         String dirName = null;
         content.setContentText(contentText);
         String fileName;
-        for(MultipartFile f: files){
-            fileName = f.getOriginalFilename();
-            //截取文件扩展名
-            String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-            if(!Const.contentMap().containsKey(fileExt)){
-                return ServletResponse.createByErrorMessage("不合规的文件格式~请重新选择！");
+
+//        if(files!=null) {
+            for (MultipartFile f : files) {
+                fileName = f.getOriginalFilename();
+                //截取文件扩展名
+                String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+                if (!Const.contentMap().containsKey(fileExt)) {
+                    return ServletResponse.createByErrorMessage("不合规的文件格式~请重新选择！");
+                }
+                dirName = Const.contentMap().get(fileExt);
+                newFileNames = newFileNames + "," + getFilePath(f, request, session, dirName);
             }
-            dirName = Const.contentMap().get(fileExt);
-            newFileNames = newFileNames + ","+ getFilePath(f,request,session,dirName);
-        }
-        //判断上传的文件是图片还是视频
-        if(dirName.equals("uploadImage")){
-            content.setContentImages(newFileNames);
-        }else{
-            content.setContentVideos(newFileNames);
-        }
+            //判断上传的文件是图片还是视频
+            if (dirName.equals("uploadImage")) {
+                content.setContentImages(newFileNames);
+            } else {
+                content.setContentVideos(newFileNames);
+            }
+//        }
 
         return iMessageService.addMessage(message,content);
 

@@ -23,7 +23,7 @@ public interface UserMapper {
 
     int selectByStudentId(String studentId);
 
-    List<User> selectAllInfoByStudyId(String studyId);
+    User selectAllInfoByStudyId(String studyId);
 
 
 

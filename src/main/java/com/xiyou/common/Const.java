@@ -37,4 +37,11 @@ public class Const {
     //显示图片/视频文件的前缀
     public static final String urlPrefix = PropertiesUtil.getProperty("ftp.server.http.prefix");
 
+
+//    public static void main(String[] args) {
+//       String s = ",12,34,56,";
+//       String[] b = s.split(",");
+//        System.out.println(b[1]);
+//
+//    }
 }
