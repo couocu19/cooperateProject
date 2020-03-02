@@ -2,6 +2,7 @@
 window.active_user_id = null;
 window.user_student_id = '04192077';
 window.user_id = null;
+window.user_message = null;
 // 立即执行函数，请求用户信息
 (function () {
 	var xhr = new XMLHttpRequest();
@@ -10,9 +11,10 @@ window.user_id = null;
 		if(xhr.readyState == 4) {
 			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
 				var json = JSON.parse(xhr.responseText);
-				console.log(json);
-				if(!json.status) {
+				if(json.status == 0) {
+					console.log(json);
 					window.user_id = json.data.id;
+					window.user_message = json.data;
 				}
 			}
 		}
