@@ -11,6 +11,7 @@
 	<meta name="screen-orientation" content="portrait">
 	<link rel="stylesheet" type="text/css" href="../../style/compile_page.css">
 	<link rel="stylesheet" type="text/css" href="../../style/base_style.css">
+
 </head>
 <body>
 
@@ -47,7 +48,7 @@
 			<!-- 页脚部分 -->
 			<footer id="footer_wrapper">
 				<!-- 选择可见 -->
-				<div id="choose_open"><div class="text_style choose_open_tag">所有人</div><div class="text_style choose_open_tag">好友</div><div class="text_style choose_open_tag">仅自己</div>
+				<div id="choose_open"><div class="text_style choose_open_tag">所有人</div><div class="text_style choose_open_tag">粉丝</div><div class="text_style choose_open_tag">仅自己</div>
 				</div>
 
 
@@ -58,7 +59,7 @@
 					<!-- 选择图片 -->
 					<div id="add_photo_wrapper">
 						<label for="selectphoto">
-							<input id="upload_imgs" type="file" accept="image*/" multiple="multiple" capture="">
+							<input id="upload_imgs" type="file" accept="image*/" multiple="multiple" capture="" onchange="handleFiles(this.files)" />
 							<img class="add_imgs" src="../../pic/xxj.png">
 						</label>
 					</div>

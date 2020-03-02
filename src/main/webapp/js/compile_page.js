@@ -16,10 +16,10 @@ class App {
 			this.handle_choose_Click(e);
 		}, false);
 
-		this.upload_imgs.addEventListener('click', () => {
-			// 调用安卓注入的方法
-			window.android.getphoto();
-		}, false);
+		// this.upload_imgs.addEventListener('click', () => {
+		// 	// 调用安卓注入的方法
+		// 	window.android.getphoto();
+		// }, false);
 		this.return_btn.addEventListener('click', () => {
 			window.history.back();
 		}, false);
@@ -51,7 +51,7 @@ class App {
 		this.Dt_message.append('contentText', document.getElementsByTagName('textarea')[0].value);
 		this.Dt_message.append('upload_file', 'dwahduawudihuawudawd.jpg');
 		// this.Dt_message.send_time = new Date();
-		console.log(this.Dt_message);
+		// console.log(this.Dt_message);
 	}
 	// galleryImgs() {
 	// 	console.log('从相册中选取多张照片');
@@ -120,7 +120,6 @@ app.init();
 function Ajax(data) {
 	let xhr = new XMLHttpRequest();
 	xhr.withCredentials = true;
-
 	xhr.onreadystatechange = function () {
 		if(xhr.readyState == 4) {
 			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
@@ -129,20 +128,32 @@ function Ajax(data) {
 				if(json.status) {
 					alert('网络或数据库错误');
 				} else {
-
-					// renderUserMessageHeader(json.data);
+					// window.history.back();
 				}
 
 			}
 		}
 	}
 	let url = 'http://118.31.12.175:8080/xiyouProject_war/message/add.do';
-	console.log(data);
-	xhr.open('POST', url);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.open('post', url, true);
 	xhr.send(data);
 }
 
 function render(argument) {
 
+}
+
+function handleFiles(files) {
+	if(files.length) {
+		files = Array.prototype.slice.call(files);
+		console.log(files);
+		let file = files[0];
+		let reader = new FileReader();
+		reader.onload = function() {
+			console.log(typeof this.result);
+			console.log(this.result);
+			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
+		}
+		reader.readAsDataURL(file);
+	}
 }
