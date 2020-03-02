@@ -7,6 +7,7 @@ import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
 import com.xiyou.service.IUserService;
+import com.xiyou.util.DateTimeUtil;
 import com.xiyou.vo.MessageVo;
 import com.xiyou.vo.UserMainPageVo;
 import org.apache.commons.lang3.StringUtils;
@@ -116,6 +117,7 @@ public class UserController {
     @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<List<Message>> getUserAllMessage(Integer id){
 
+
         return iUserService.getUserALLMessage(id);
     }
 
@@ -142,6 +144,7 @@ public class UserController {
             messageVo = new MessageVo();
             messageVo.setUsername(user.getUsername());
             messageVo.setHeader(user.getHeadSculpture());
+            messageVo.setTime(DateTimeUtil.dateToStr(m.getTime(),DateTimeUtil.STANDARD_FORMAT));
             messageVo.setCommentCount(m.getCommentCount());
             messageVo.setPraiseCount(m.getPraisePoints());
             if(m.getContent().getContentText()!=null){

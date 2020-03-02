@@ -10,7 +10,7 @@ public class MessageVo {
     //发表动态的用户的基本信息
     private String username;
     private String header;
-    private Date time;
+    private String time;
 
     //动态内容
     private String contentText;
@@ -18,8 +18,8 @@ public class MessageVo {
     private String contentVideos;
 
     //动态的点赞和评论数
-    private int commentCount;
-    private int praiseCount;
+    private Integer commentCount;
+    private Integer praiseCount;
 
 
     public String getUsername() {
@@ -38,12 +38,20 @@ public class MessageVo {
         this.header = header;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
     }
 
     public String getContentText() {
@@ -86,7 +94,7 @@ public class MessageVo {
         this.praiseCount = praiseCount;
     }
 
-    public MessageVo(String username, String header, Date time, String contentText, List<String> contentImages, String contentVideos, int commentCount, int praiseCount) {
+    public MessageVo(String username, String header, String time, String contentText, List<String> contentImages,String contentVideos, Integer commentCount, Integer praiseCount) {
         this.username = username;
         this.header = header;
         this.time = time;

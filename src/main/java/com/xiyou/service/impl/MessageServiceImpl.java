@@ -10,6 +10,9 @@ import com.xiyou.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.util.Date;
+
 @Service("iMessageService")
 public class MessageServiceImpl implements IMessageService {
 
@@ -22,6 +25,8 @@ public class MessageServiceImpl implements IMessageService {
     public ServletResponse<Message> addMessage(Message message, Content content){
         //上传到数据库的规则:先上传message,得到message对应的id,再上传message对应的content
 
+        Date date = new Date();
+        message.setTime(date);
         int rowId = messageMapper.insertSelective(message);
         System.out.println(rowId);
         if(rowId>0){
@@ -42,6 +47,21 @@ public class MessageServiceImpl implements IMessageService {
     }
 
 
+
+    public ServletResponse<String> deleteMessage(Integer messageId){
+
+        Message message = messageMapper.selectByPrimaryKey(messageId);
+
+        if(message!=null){
+            message.setDeleted(false);
+            int rowCount =  messageMapper.updateByPrimaryKeySelective(message);
+            if(rowCount>0){
+                return ServletResponse.createBySuccessMessage("删除成功!");
+            }
+        }
+
+        return ServletResponse.createByErrorMessage("删除失败~");
+    }
 
 
 }

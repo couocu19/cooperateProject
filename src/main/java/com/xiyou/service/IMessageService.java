@@ -8,4 +8,7 @@ import org.springframework.stereotype.Service;
 
 public interface IMessageService {
     ServletResponse<Message> addMessage(Message message, Content content);
+
+    ServletResponse<String> deleteMessage(Integer messageId);
+
 }

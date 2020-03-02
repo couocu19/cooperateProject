@@ -71,9 +71,9 @@
       <if test="commentCount != null" >
         comment_count,
       </if>
-<!--      <if test="time != null" >-->
+      <if test="time != null" >
         time,
-<!--      </if>-->
+      </if>
       <if test="isDeleted != null" >
         is_deleted,
       </if>
@@ -94,9 +94,9 @@
       <if test="commentCount != null" >
         #{commentCount,jdbcType=INTEGER},
       </if>
-<!--      <if test="time != null" >-->
-        now(),
-<!--      </if>-->
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP}
+      </if>
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
