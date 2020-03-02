@@ -3,6 +3,7 @@ package com.xiyou.controller.protal;
 import com.xiyou.common.Const;
 import com.xiyou.common.ServletResponse;
 import com.xiyou.pojo.Comment;
+import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
 import com.xiyou.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,29 @@ public class CommentController {
         return iCommentService.addCommentToMessage(comment);
     }
 
+    //给评论点赞
+    @ResponseBody
+    @RequestMapping("praiseComment.do")
+    public ServletResponse praiseComment(Integer commentId,HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+        return iCommentService.praiseComment(commentId);
+
+    }
+
+
+    //用户删除评论
+    @ResponseBody
+    @RequestMapping("deleteComment.do")
+    public ServletResponse<String> deleteComment(Integer messageId,HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+        return iCommentService.deleteComment(messageId,user);
+
+    }
     
-
-
-
-
-
 }
