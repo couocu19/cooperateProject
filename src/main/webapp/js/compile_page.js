@@ -149,13 +149,17 @@ function handleFiles(files) {
 		console.log(files);
 		let file = files[0];
 		let reader = new FileReader();
+		let reader1 = new FileReader();
+		reader1.onload = function() {
+			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
+			app.adopt_photos_size();
+		}
 		reader.onload = function() {
 			console.log(typeof this.result);
 			console.log(this.result);
-			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
 			app.add_photos.push(this.result);
-			app.adopt_photos_size();
 		}
 		reader.readAsBinaryString(file);
+		reader1.readAsDataURL(file);
 	}
 }
