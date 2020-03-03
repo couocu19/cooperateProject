@@ -21,6 +21,7 @@ class App {
 		}, false);
 		this.send_btn.addEventListener('click', () => {
 			if(this.sendAjax()) {
+				console.log('修改信息成功');
 				window.history.back();
 			}
 		}, false);
@@ -85,7 +86,8 @@ function Ajax(username, signature) {
 				if(json.status) {
 					alert('网络或数据库错误');
 				} else {
-					return true;
+					window.user_message = json.data;
+					window.location.reload();
 				}
 			}
 		}
