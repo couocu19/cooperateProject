@@ -17,6 +17,8 @@ public class SetCookie implements Filter {
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpServletRequest rep = (HttpServletRequest) request;
 
+        response.setContentType("text/html;charset=utf-8");
+
         resp.addHeader("Access-Control-Allow-Origin", rep.getHeader("Origin"));
         //允许跨域请求中携带cookie
         resp.addHeader("Access-Control-Allow-Credentials", "true");

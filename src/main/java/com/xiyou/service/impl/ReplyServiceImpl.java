@@ -17,6 +17,8 @@ public class ReplyServiceImpl implements IReplyService {
     public ServletResponse<Reply> addReplyToComment(Reply reply){
         int rowCount = replyMapper.insert(reply);
         if(rowCount>0){
+
+            //todo:comment+1
             return ServletResponse.createBySuccess(reply);
         }
         return ServletResponse.createByErrorMessage("操作失败~");

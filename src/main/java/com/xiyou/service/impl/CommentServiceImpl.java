@@ -22,6 +22,16 @@ public class CommentServiceImpl implements ICommentService {
     public ServletResponse<Comment> addCommentToMessage(Comment comment){
         int rowCount = commentMapper.insertSelective(comment);
         if(rowCount>0){
+            //动态中的评论数也要加1
+            Integer messageId = comment.getMessageId();
+            Message message = messageMapper.selectByPrimaryKey(messageId);
+            if(message!=null){
+                Integer count = message.getCommentCount();
+                count++;
+                message.setCommentCount(count);
+                //todo:修改
+                messageMapper.updateByPrimaryKey(message);
+            }
             return ServletResponse.createBySuccess(comment);
         }
         return ServletResponse.createByErrorMessage("评论失败!");

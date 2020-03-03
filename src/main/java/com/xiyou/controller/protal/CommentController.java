@@ -64,7 +64,10 @@ public class CommentController {
             return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
         return iCommentService.deleteComment(messageId,user);
-
     }
-    
+
+
+//    //查看某一条评论以及下面的回复
+//    public ServletResponse<Comment> getCommentAndReply()
+
 }

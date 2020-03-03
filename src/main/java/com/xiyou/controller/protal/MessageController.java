@@ -168,6 +168,8 @@ public class MessageController {
     }
 
 
+
+    //用户删除动态
     @ResponseBody
     @RequestMapping("delete.do")
     public ServletResponse<String> deleteMessage(HttpSession session,Integer messageId){
@@ -176,7 +178,6 @@ public class MessageController {
             return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
         }
         return iMessageService.deleteMessage(messageId);
-
     }
 
 
