@@ -52,7 +52,7 @@ class App {
 		console.log(document.getElementsByTagName('textarea')[0].value);
 		console.log(this.add_photos);
 		this.Dt_message.append('contentText', document.getElementsByTagName('textarea')[0].value);
-		this.Dt_message.append('upload_file', this.add_photos);
+		this.Dt_message.append('upload_file', this.upload_imgs.files);
 		// this.Dt_message.send_time = new Date();
 		// console.log(this.Dt_message);
 	}
@@ -154,10 +154,10 @@ function handleFiles(files) {
 			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
 			app.adopt_photos_size();
 		}
-		reader.onload = function() {
-			console.log(this.result);
-			app.add_photos.push(this.result);
-		}
+		// reader.onload = function() {
+		// 	console.log(this.result);
+		// 	app.add_photos.push(this.result);
+		// }
 		reader.readAsBinaryString(file);
 		reader1.readAsDataURL(file);
 	}
