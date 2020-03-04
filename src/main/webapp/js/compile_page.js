@@ -155,7 +155,6 @@ function handleFiles(files) {
 			app.adopt_photos_size();
 		}
 		reader.onload = function() {
-			console.log(typeof this.result);
 			console.log(this.result);
 			app.add_photos.push(this.result);
 		}

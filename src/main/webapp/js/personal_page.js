@@ -13,6 +13,9 @@ class App {
 		this.change_message.addEventListener('click', () => {
 			window.location.href = 'user_message_set.html';
 		}, false);
+		this.adduser_btn.addEventListener('click', () => {
+			window.location.href = 'find_user.html';
+		}, false);
 
 	}
 

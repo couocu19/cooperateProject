@@ -26,6 +26,7 @@
  	height: 100%;
  }
 
+
 #main_content {
 	width: 90%;
 	padding: 1rem;
@@ -34,7 +35,6 @@
 	box-shadow: .1rem .1rem .7rem #888888;
 	opacity: .8;
 }
-
 #main_content:after {
 	content: "";
 	display: block;
