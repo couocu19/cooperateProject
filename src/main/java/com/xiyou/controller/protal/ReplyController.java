@@ -23,6 +23,7 @@ public class ReplyController {
     @Autowired
     private IReplyService iReplyService;
 
+    //todo:待测试
     @ResponseBody
     @RequestMapping("addToComment.do")
     public ServletResponse<Reply> addReplyToComment(HttpSession session,String content,Integer commentId,Integer receiveUserId){
@@ -39,6 +40,20 @@ public class ReplyController {
         reply.setTime(time);
         reply.setIsDeleted(true);
         return iReplyService.addReplyToComment(reply);
+
+    }
+
+
+    //todo:待测试
+    @ResponseBody
+    @RequestMapping("delete.do")
+    public ServletResponse<String> deleteReply(HttpSession session,Integer replyId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录！");
+        }
+        Integer userId = user.getId();
+        return iReplyService.deleteReply(replyId,userId);
 
     }
 

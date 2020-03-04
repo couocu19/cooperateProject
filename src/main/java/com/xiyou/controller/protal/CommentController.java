@@ -21,6 +21,7 @@ public class CommentController {
     @Autowired
     private ICommentService iCommentService;
 
+    //todo:待测试
     //给动态评论
     @ResponseBody
     @RequestMapping("addToMessage.do")
@@ -42,6 +43,7 @@ public class CommentController {
         return iCommentService.addCommentToMessage(comment);
     }
 
+    //todo:待测试
     //给评论点赞
     @ResponseBody
     @RequestMapping("praiseComment.do")
@@ -51,10 +53,10 @@ public class CommentController {
             return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
         return iCommentService.praiseComment(commentId);
-
     }
 
 
+    //todo:待测试
     //用户删除评论
     @ResponseBody
     @RequestMapping("deleteComment.do")

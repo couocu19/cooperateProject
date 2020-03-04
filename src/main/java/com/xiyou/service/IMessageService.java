@@ -11,4 +11,8 @@ public interface IMessageService {
 
     ServletResponse<String> deleteMessage(Integer messageId);
 
+    ServletResponse praiseMessage(Integer messageId,Integer userId);
+
+    ServletResponse cancelPraise(Integer praiseId,Integer userId);
+
 }

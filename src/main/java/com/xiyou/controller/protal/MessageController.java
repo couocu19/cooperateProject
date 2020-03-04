@@ -167,8 +167,7 @@ public class MessageController {
         return targetFileName;
     }
 
-
-
+    //todo:待测试
     //用户删除动态
     @ResponseBody
     @RequestMapping("delete.do")
@@ -181,5 +180,37 @@ public class MessageController {
     }
 
 
+    //todo:待测试
+    @ResponseBody
+    @RequestMapping("praise.do")
+    public ServletResponse praiseMessage(HttpSession session,Integer messageId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录!");
+        }
+        Integer id = user.getId();
+        return iMessageService.praiseMessage(messageId,id);
     }
+
+    //todo:待测试
+    @ResponseBody
+    @RequestMapping("cancel_praise.do")
+    public ServletResponse cancelPraise(HttpSession session,Integer praiseId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录!");
+        }
+        Integer id = user.getId();
+        return iMessageService.cancelPraise(praiseId,id);
+    }
+
+
+
+
+}
+
+
+
+
+
 
