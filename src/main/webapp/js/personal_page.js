@@ -113,3 +113,10 @@ function createXhr() {
 	xhr.open('get', url, false);
 	xhr.send(null);
 })()
+
+
+function Ajax(obj) {
+	let xhr = new XMLHttpRequest();
+
+}
+
