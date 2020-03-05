@@ -1,4 +1,4 @@
-
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 
 class App {
 	constructor(return_btn, search, send_btn) {
@@ -32,14 +32,3 @@ const app = new App(document.getElementsByClassName('return_btn')[0],
 					document.getElementById('send_btn')
 	);
 app.init();
-
-
-function Ajax(search_name) {
-	let xhr = new XMLHttpRequest();
-	xhr.withCredentials = true;
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4) {
-			// 需要进行的操作
-		}
-	}
-}

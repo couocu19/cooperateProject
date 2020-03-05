@@ -16,6 +16,7 @@ ajax({
 export function Ajax(obj) {
 	let xhr = new XMLHttpRequest();
 	xhr.withCredentials = true; //携带cookie
+	var message = getParmer(obj.data);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status >= 200 && xhr.status < 300) {
@@ -27,23 +28,12 @@ export function Ajax(obj) {
 	};
 
 	if (obj.type == 'get') {
-		let message = getParmer(obj.data);
 		xhr.open("get", obj.url + "?" + message, obj.async);
 		xhr.send(null);
 	} else if (obj.type == 'post') {
 		xhr.open("post", obj.url, obj.async);
-		if(obj.send_form == true) {
-			let formdata = new FormData();
-			for(let key in obj.data) {
-				formdata.append(key, obj.data[key]);
-			}
-			xhr.send(formdata);
-		} else {
-
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send(message);
-		}
-
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(message);
 	}
 
 	function getParmer(data) {

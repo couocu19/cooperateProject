@@ -1,4 +1,4 @@
-
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 
 class App {
 	constructor(return_btn, adduser_btn, change_message) {
@@ -60,63 +60,23 @@ const user = new User(  document.getElementsByClassName('user_name')[0],
 	);
 
 
-function createXhr() {
-	if(typeof XMLHttpRequest != 'undefined') {
-		createXhr = function() {
-			return new XMLHttpRequest();
+Ajax({
+	url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do',
+	type: 'get',
+	data: {
+		studentId: window.user_student_id
+	},
+	async: false,
+	success: function(responseText) {
+		var json = JSON.parse(responseText);
+		console.log(json);
+		if(json.status) {
+			alert('网络或数据库错误');
+		} else {
+			user.render(json.data);
 		}
-	} else if(typeof ActiveXObject != 'undefined'){
-		createXhr = function () {
-			if (typeof arguments.callee.activeXString != 'string')  {
-				var versions = ['MSXML2.XMLHttp.6.0', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp'];
-				var i, len;
-				for (i = 0, len = versions.length; i < len; i ++) {
-					try {
-						new ActiveXObject(versions[i]);
-						arguments.callee.activeXString = versions[i];
-							break;
-					} catch(ex) {
-
-					}
-				}
-			}
-			return new ActiveXObject(arguments.callee.activeXString);
-		}
-
-	} else {
-		createXhr = function() {
-			throw new Error('No XHR object available.');
-		}
+	},
+	fail: function(err) {
+		console.log('登陆失败，请退出后重新登录');
 	}
-	return createXhr();
-}
-
-
-(function () {
-	var xhr = createXhr();
-	xhr.withCredentials = true;
-	xhr.onreadystatechange = function () {
-		if(xhr.readyState == 4) {
-			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-				var json = JSON.parse(xhr.responseText);
-				console.log(json);
-				if(json.status) {
-					alert('网络或数据库错误');
-				} else {
-					user.render(json.data);
-				}
-			}
-		}
-	}
-	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do';
-	console.log(url);
-	xhr.open('get', url, false);
-	xhr.send(null);
-})()
-
-
-function Ajax(obj) {
-	let xhr = new XMLHttpRequest();
-
-}
-
+});

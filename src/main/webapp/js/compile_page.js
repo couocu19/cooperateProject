@@ -1,4 +1,4 @@
-
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 class App {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
@@ -8,7 +8,6 @@ class App {
 		this.upload_imgs = upload_imgs;
 		this.send_btn = send_btn;
 		this.photo_display = false;
-		this.Dt_message = new FormData();  // 存放动态信息的表单对象
 		this.add_photos = [];
 	}
 
@@ -26,9 +25,12 @@ class App {
 		}, false);
 		this.send_btn.addEventListener('click', () => {
 			// 直接将属性添加到对象的 动态信息属性上
-			this.getDtMessage();
+			// this.getDtMessage();
 			this.send_message();
 		}, false);
+		this.upload_imgs.onchange = () => {
+			handleFiles(this.upload_imgs.files);
+		};
 	}
 
 	send_message () {
@@ -41,7 +43,7 @@ class App {
 
 	//判断格式是否正确
 	check() {
-		if(this.Dt_message.contentText == '' && this.Dt_message.upload_file.length == 0) {
+		if(document.getElementsByTagName('textarea')[0].value == '' && this.add_photos.length == 0) {
 			console.log('照片和文字不能同时为空');
 			return false;
 		}
@@ -103,7 +105,23 @@ class App {
 	}
 
 	send_Ajax() {
-		Ajax(this.Dt_message);
+		Ajax({
+			url: 'http://118.31.12.175:8080/xiyouProject_war/message/add.do',
+			type: 'post',
+			send_form: true,
+			data: {
+				contentText: document.getElementsByTagName('textarea')[0].value,
+				upload_file: this.upload_imgs.files
+			},
+			success: function (responeText) {
+				let json = JSON.parse(responeText);
+				console.log(json);
+			},
+			fail: function(err) {
+				console.log(err);
+				alert('错误' + err);
+			}
+		});
 	}
 
 }
@@ -117,28 +135,6 @@ var app = new App(document.getElementById('app'),
 
 app.init();
 
-function Ajax(data) {
-	let xhr = new XMLHttpRequest();
-	xhr.withCredentials = true;
-	xhr.onreadystatechange = function () {
-		if(xhr.readyState == 4) {
-			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-				var json = JSON.parse(xhr.responseText);
-				console.log(json);
-				if(json.status) {
-					alert('网络或数据库错误');
-				} else {
-					// window.history.back();
-				}
-
-			}
-		}
-	}
-	let url = 'http://118.31.12.175:8080/xiyouProject_war/message/add.do';
-	xhr.open('post', url, true);
-	xhr.send(data);
-}
-
 function render(argument) {
 
 }
@@ -146,19 +142,13 @@ function render(argument) {
 function handleFiles(files) {
 	if(files.length) {
 		files = Array.prototype.slice.call(files);
-		console.log(files);
 		let file = files[0];
 		let reader = new FileReader();
-		let reader1 = new FileReader();
-		reader1.onload = function() {
+		reader.onload = function() {
+			//以base64格式将图片的编码添加到img的src中
 			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
 			app.adopt_photos_size();
 		}
-		// reader.onload = function() {
-		// 	console.log(this.result);
-		// 	app.add_photos.push(this.result);
-		// }
-		reader.readAsBinaryString(file);
-		reader1.readAsDataURL(file);
+		reader.readAsDataURL(file);
 	}
 }

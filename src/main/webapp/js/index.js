@@ -1,28 +1,31 @@
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 
 window.active_user_id = null;
 window.user_student_id = '04192077';
 window.user_id = null;
 window.user_message = null;
+
 // 立即执行函数，请求用户信息
-(function () {
-	var xhr = new XMLHttpRequest();
-	xhr.withCredentials = true;
-	xhr.onreadystatechange = function () {
-		if(xhr.readyState == 4) {
-			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-				var json = JSON.parse(xhr.responseText);
-				if(json.status == 0) {
-					console.log(json);
-					window.user_id = json.data.id;
-					window.user_message = json.data;
-				}
-			}
+Ajax({
+	url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
+	type: 'get',
+	data: {
+		studentId: window.user_student_id
+	},
+	send_form: false,
+	async: false,
+	success: function(responseText) {
+		var json = JSON.parse(responseText);
+		if(json.status == 0) {
+			console.log(json);
+			window.user_id = json.data.id;
+			window.user_message = json.data;
 		}
+	},
+	fail: function(err) {
+		console.log('登陆失败，请退出后重新登录');
 	}
-	let url = 'http://118.31.12.175:8080/xiyouProject_war/user/login.do?studentId=' + window.user_student_id;
-	xhr.open('get', url, false);
-	xhr.send(null);
-})();
+});
 
 class Obj{
 	constructor(user_btn, message_btn, write_btn, nav_item ) {
@@ -67,17 +70,6 @@ class Obj{
 		this.sendAjax();
 	}
 
-	sendAjax() {
-		let xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = () => {
-			if(xhr.readystate == 4) {
-				if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-					// 正确的处理
-					let json = JSON.prase(xhr.responseText);
-				}
-			}
-		}
-	}
 }
 
 
