@@ -2,23 +2,28 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="xiyouProject:war exploded" />
+      <artifact name="xiyouProject:war18" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/dao/PraiseMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Praise.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/mappers/PraiseMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/QiniuUploadImageUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/xiyouProject_war10/xiyouProject_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/xiyouProject_war11/xiyouProject_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/xiyouProject_war12/xiyouProject_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/xiyouProject_war8/xiyouProject_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/xiyouProject_war9/xiyouProject_war.war" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/IMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/IMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/IReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/IReplyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/CommentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/ReplyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/ReplyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/FileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/FileServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/xiyou.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/xiyou.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/common/Const.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/common/Const.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/common/ResponseCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/common/ResponseCode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/common/ServletResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/common/ServletResponse.class" afterDir="false" />
@@ -54,8 +59,20 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/util/PropertiesUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/util/PropertiesUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/vo/MessageVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/vo/MessageVo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/vo/UserMainPageVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/vo/UserMainPageVo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/xiyouProject.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xiyouProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xiyou.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xiyou.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/ReplyController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/ReplyController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/IMessageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/IMessageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/IReplyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/IReplyService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/FileServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/FileServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/ReplyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/ReplyServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/xiyou.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/xiyou.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -137,17 +154,17 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xiyouProject\src\main" />
+      <recent name="D:\xiyouProject\out\artifacts" />
+      <recent name="D:\xiyouProject\src\main\webapp" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\xiyouProject\src\main\java\com\xiyou\util" />
       <recent name="D:\xiyouProject\src" />
       <recent name="D:\ssm-project\eecommercell\src" />
       <recent name="D:\xiyouProject" />
       <recent name="D:\xiyouProject\src\images" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\xiyouProject\src\main" />
-      <recent name="D:\xiyouProject\out\artifacts" />
-      <recent name="D:\xiyouProject\src\main\webapp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -418,7 +435,10 @@
       <workItem from="1583223869999" duration="892000" />
       <workItem from="1583244765466" duration="2816000" />
       <workItem from="1583309596520" duration="645000" />
-      <workItem from="1583315012241" duration="9848000" />
+      <workItem from="1583315012241" duration="10055000" />
+      <workItem from="1583337114918" duration="2075000" />
+      <workItem from="1583390272616" duration="3760000" />
+      <workItem from="1583394316687" duration="5568000" />
     </task>
     <servers />
   </component>

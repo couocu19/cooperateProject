@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 @Service("iFileService")
@@ -16,7 +17,12 @@ public class FileServiceImpl implements IFileService {
     private Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
     public String upload(MultipartFile file, String path){
-        String fileName = file.getOriginalFilename();
+        String fileName = null;
+        try {
+            fileName = new String(file.getOriginalFilename().getBytes(),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         //abc.jpg
         //获取扩展名"jpg"
         String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);

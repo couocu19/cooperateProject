@@ -12,6 +12,7 @@ import com.xiyou.service.IMessageService;
 import com.xiyou.service.IUserService;
 import com.xiyou.util.DateTimeUtil;
 import com.xiyou.util.PropertiesUtil;
+import com.xiyou.util.QiniuUploadImageUtil;
 import com.xiyou.vo.MessageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.*;
 
 @Controller
@@ -37,28 +39,6 @@ public class MessageController {
     @Autowired
     private IMessageService iMessageService;
 
-//    @RequestMapping("upload.do")
-//    @ResponseBody
-//    //required:是否为必须？
-//    public ServletResponse upload(@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpSession session) {
-//
-//        User user = (User) session.getAttribute(Const.CURRENT_USER);
-//        if (user == null) {
-//            return ServletResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录,请先登录.");
-//        }
-//        //业务层
-//        String path = request.getSession().getServletContext().getRealPath("dirName");
-//        String targetFileName = iFileService.upload(file, path);
-//        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetFileName;
-//
-//        Map fileMap = Maps.newHashMap();
-//        fileMap.put("uri", targetFileName);
-//        fileMap.put("url", url);
-//        System.out.println(url);
-//        return ServletResponse.createBySuccess(fileMap);
-//    }
-
-
     //用户发表动态
     //用MultipartFile[]来表示动态中的图片或者视频
     @ResponseBody
@@ -70,10 +50,8 @@ public class MessageController {
         }
         //获取Message中的参数 userId,剩下的值先都采取默认值,时间默认为当前时间
         Message message = new Message();
-//        Date date = new Date();
         Integer userId = user.getId();
         message.setUserId(userId);
-//        message.setTime(date);
 
         //获取content中的参数,即动态中的内容
         Content content = new Content();
@@ -94,18 +72,27 @@ public class MessageController {
                 if (!Const.contentMap().containsKey(fileExt)) {
                     return ServletResponse.createByErrorMessage("不合规的文件格式~请重新选择！");
                 }
-                dirName = Const.contentMap().get(fileExt);
-                newFileNames = newFileNames + "," + getFilePath(f, request, session, dirName);
+                  dirName = Const.contentMap().get(fileExt);
+                try {
+                    String path = session.getServletContext().getRealPath("/")+fileName;
+                    System.out.println(path);
+                    f.transferTo(new File(path));
+                    String url = QiniuUploadImageUtil.fileUpload(path);
+                    newFileNames = newFileNames + "," +url;
+                    File f1 = new File(path);
+                    f1.delete();
+                    //判断上传的文件是图片还是视频
+                    if (dirName.equals("uploadImage")) {
+                        content.setContentImages(newFileNames);
+                    } else {
+                        content.setContentVideos(newFileNames);
+                    }
+                }catch (Exception e){
+                    return ServletResponse.createByErrorMessage("操作异常~");
+                }
             }
-            //判断上传的文件是图片还是视频
-            if (dirName.equals("uploadImage")) {
-                content.setContentImages(newFileNames);
-            } else {
-                content.setContentVideos(newFileNames);
-            }
-        }
 
-       // iMessageService.addMessage(message,content);
+        }
         ServletResponse<Message> response = iMessageService.addMessage(message,content);
 
         Message message1 = response.getData();
@@ -114,8 +101,6 @@ public class MessageController {
            messageVo = assembleMessage(message1,user);
             return ServletResponse.createBySuccess(messageVo);
         }
-
-       // return ServletResponse.createBySuccess(messageVo);
 
          return response;
     }
@@ -134,7 +119,7 @@ public class MessageController {
             String[] images = message.getContent().getContentImages().split(",");
             List<String> list = new ArrayList<>();
             for(int i = 1;i<images.length;i++){
-                list.add(Const.urlPrefix+"uploadImage/"+images[i]);
+                list.add(images[i]);
             }
             messageVo.setContentImages(list);
         }
@@ -162,7 +147,11 @@ public class MessageController {
 
     private String getFilePath(@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpSession session,String dirName){
 
+//        System.out.println("***");
         String path = request.getSession().getServletContext().getRealPath(dirName);
+
+//        System.out.println(path);
+
         String targetFileName = iFileService.upload(file, path);
         return targetFileName;
     }

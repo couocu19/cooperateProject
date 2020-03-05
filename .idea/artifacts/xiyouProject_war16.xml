@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="xiyouProject:war16">
+    <output-path>$PROJECT_DIR$/out/artifacts/xiyouProject_war16</output-path>
+    <root id="archive" name="xiyouProject_war.war">
+      <element id="artifact" artifact-name="xiyouProject:war exploded" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/main/webapp" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.xiyou.dao.PraiseMapper">
+    <resultMap id="BaseResultMap" type="com.xiyou.pojo.Praise" >
+        <constructor >
+            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="is_canceled" jdbcType="BIT" javaType="java.lang.Boolean" />
+        </constructor>
+    </resultMap>
+
+    <sql id="Base_List">
+        id,user_id,message_id,is_canceled
+    </sql>
+
+    <insert id="insert" parameterType="com.xiyou.pojo.Praise">
+        insert into massage_praise(id,user_id,message_id,is_canceled)
+        values (#{id},#{userId},#{messageId},#{isCanceled})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xiyou.pojo.Praise">
+        insert into message_praise
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="messageId != null" >
+                pageviews,
+            </if>
+
+            <if test="isCanceled != null" >
+                is_canceled,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="messageId != null" >
+                #{messageId,jdbcType=INTEGER},
+            </if>
+
+            <if test="isCanceled != null" >
+                #{isCanceled,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_List"/>
+        from message_praise
+        where id = #{id}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.xiyou.pojo.Praise">
+       update message_praise
+       set id = #{id}
+           user_id = #{userId}
+           message_id = #{messageId}
+           is_canceled = #{isCanceled}
+    </update>
+
+    <select id="selectByUserIdAndMessageId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_List"/>
+        from message_praise
+        where
+        user_id = #{userId} and message_id = #{messageId}
+    </select>
+
+
+
+</mapper>
