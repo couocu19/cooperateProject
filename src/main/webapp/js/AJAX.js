@@ -35,11 +35,16 @@ export function Ajax(obj) {
 		if(obj.send_form == true) {
 			let formdata = new FormData();
 			for(let key in obj.data) {
-				formdata.append(key, obj.data[key]);
+				if(key == 'upload_file') {
+					for(let i = 0, len = obj.data[key].length; i < len; i++) {
+						formdata.append(key, obj.data[key][i]);
+					}
+				} else {
+					formdata.append(key, obj.data[key]);
+				}
 			}
 			xhr.send(formdata);
 		} else {
-
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send(message);
 		}

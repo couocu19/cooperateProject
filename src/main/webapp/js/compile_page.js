@@ -1,5 +1,5 @@
 import {Ajax} from 'http://localhost:9012/js/AJAX.js'
-class App {
+class APP {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
 		this.return_btn = return_btn;
@@ -8,7 +8,7 @@ class App {
 		this.upload_imgs = upload_imgs;
 		this.send_btn = send_btn;
 		this.photo_display = false;
-		this.add_photos = [];
+		this.photos_add = [];
 	}
 
 	init() {
@@ -29,8 +29,22 @@ class App {
 			this.send_message();
 		}, false);
 		this.upload_imgs.onchange = () => {
+			this.photos_add.push(this.upload_imgs.files[0]);
+			console.log(this.photos_add);
 			handleFiles(this.upload_imgs.files);
 		};
+		this.photos_show.addEventListener('click', (e) => {
+			this.remove_photo(e);
+		}, true);
+	}
+
+	remove_photo(e) {
+		let index = e.target.classList[0] - 1;
+		console.log(index);
+		// 将该图片从待发送数组中删除
+		this.photos_add.splice(index, 1);
+		// 将display 改变
+		e.target.parentNode.style.display = 'none';
 	}
 
 	send_message () {
@@ -43,7 +57,7 @@ class App {
 
 	//判断格式是否正确
 	check() {
-		if(document.getElementsByTagName('textarea')[0].value == '' && this.add_photos.length == 0) {
+		if(document.getElementsByTagName('textarea')[0].value == '' && this.upload_imgs.files.length == 0) {
 			console.log('照片和文字不能同时为空');
 			return false;
 		}
@@ -54,7 +68,8 @@ class App {
 		console.log(document.getElementsByTagName('textarea')[0].value);
 		console.log(this.add_photos);
 		this.Dt_message.append('contentText', document.getElementsByTagName('textarea')[0].value);
-		this.Dt_message.append('upload_file', this.upload_imgs.files);
+
+		this.Dt_message.append('upload_file', this.upload_imgs.files[0]);
 		// this.Dt_message.send_time = new Date();
 		// console.log(this.Dt_message);
 	}
@@ -95,6 +110,7 @@ class App {
 
 	// 调整显示照片的尺寸
 	adopt_photos_size() {
+
 		if(this.photos_show.childElementCount == 1) this.photos_show.childNodes[0].style.wihth = '99%';
 
 		if(this.photos_show.childElementCount >= 2) {
@@ -111,9 +127,9 @@ class App {
 			send_form: true,
 			data: {
 				contentText: document.getElementsByTagName('textarea')[0].value,
-				upload_file: this.upload_imgs.files
+				upload_file: this.photos_add
 			},
-			success: function (responeText) {
+			success: (responeText) => {
 				let json = JSON.parse(responeText);
 				console.log(json);
 			},
@@ -126,14 +142,14 @@ class App {
 
 }
 
-var app = new App(document.getElementById('app'),
+var App = new APP(document.getElementById('app'),
 				 document.getElementById('return_btn'),
 				 document.getElementById('choose_open'),
 				 document.getElementById('photos_show'),
 				 document.getElementById('upload_imgs'),
 				 document.getElementById('send_btn'));
 
-app.init();
+App.init();
 
 function render(argument) {
 
@@ -146,8 +162,8 @@ function handleFiles(files) {
 		let reader = new FileReader();
 		reader.onload = function() {
 			//以base64格式将图片的编码添加到img的src中
-			app.photos_show.innerHTML += '<div class="photo_item"><img style="width: 100%;" src=\"' + this.result + '\"></div>';
-			app.adopt_photos_size();
+			App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; z-index: -10;" src=${this.result}></div>`;
+			App.adopt_photos_size();
 		}
 		reader.readAsDataURL(file);
 	}

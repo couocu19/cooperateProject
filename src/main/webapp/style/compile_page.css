@@ -126,7 +126,7 @@ span textarea {
 
 #photos_show .photo_item {
 	object-fit: cover;
-	border: 1px solid gray;
+	/*border: 1px solid gray;*/
 	border-style: dotted;
 	box-sizing: border-box;
 	line-height: 100%;
