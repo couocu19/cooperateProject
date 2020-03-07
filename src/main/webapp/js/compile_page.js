@@ -1,4 +1,5 @@
-import {Ajax} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax, returnPage} from 'http://localhost:9012/js/AJAX.js'
+import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 class APP {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
@@ -9,6 +10,11 @@ class APP {
 		this.send_btn = send_btn;
 		this.photo_display = false;
 		this.photos_add = [];
+		this.assist_var = {
+			timer : null,
+			count: 0,
+			wait_show_photo: []
+		}
 	}
 
 	init() {
@@ -21,7 +27,7 @@ class APP {
 		// 	window.android.getphoto();
 		// }, false);
 		this.return_btn.addEventListener('click', () => {
-			window.history.back();
+			returnPage()
 		}, false);
 		this.send_btn.addEventListener('click', () => {
 			// 直接将属性添加到对象的 动态信息属性上
@@ -33,16 +39,43 @@ class APP {
 			console.log(this.photos_add);
 			handleFiles(this.upload_imgs.files);
 		};
+
+		// 单击查看图片，双击取消图片
 		this.photos_show.addEventListener('click', (e) => {
-			this.remove_photo(e);
-		}, true);
+			// this.remove_photo(e);
+			this.assist_var.count++;
+			if(this.assist_var.timer == null) {
+				this.assist_var.timer = setTimeout(() => {
+					if(this.assist_var.count > 1) {
+						//双击及三击四击..以上事件
+						this.remove_photo(e);
+						this.assist_var.timer = null;
+					} else {
+						// 单击事件
+						this.show_imgs(e);
+						this.assist_var.timer = null;
+					}
+				}, 250);
+			}
+		}, false);
+	}
+
+	// 将e对应的目标放大
+	show_imgs(e) {
+		this.assist_var.count = 0;
+		console.log('success!');
+		// 参数为需要展示的数组
+		let index = e.target.classList[0] - 1;
+		show_PhotoSwipe(this.assist_var.wait_show_photo, index);
 	}
 
 	remove_photo(e) {
+		this.assist_var.count = 0;
 		let index = e.target.classList[0] - 1;
 		console.log(index);
 		// 将该图片从待发送数组中删除
 		this.photos_add.splice(index, 1);
+		this.assist_var.wait_show_photo.splice(index, 1);
 		// 将display 改变
 		e.target.parentNode.style.display = 'none';
 	}
@@ -132,6 +165,7 @@ class APP {
 			success: (responeText) => {
 				let json = JSON.parse(responeText);
 				console.log(json);
+				returnPage();
 			},
 			fail: function(err) {
 				console.log(err);
@@ -164,7 +198,9 @@ function handleFiles(files) {
 			//以base64格式将图片的编码添加到img的src中
 			App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; z-index: -10;" src=${this.result}></div>`;
 			App.adopt_photos_size();
+			App.assist_var.wait_show_photo.push(this.result);
 		}
 		reader.readAsDataURL(file);
 	}
 }
+

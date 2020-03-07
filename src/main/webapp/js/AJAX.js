@@ -13,7 +13,7 @@ ajax({
     }
 }); */
 
-export function Ajax(obj) {
+function Ajax(obj) {
 	let xhr = new XMLHttpRequest();
 	xhr.withCredentials = true; //携带cookie
 	xhr.onreadystatechange = function() {
@@ -59,3 +59,9 @@ export function Ajax(obj) {
 		return arr.join('&');
 	}
 }
+
+function returnPage() {
+		window.history.back();
+}
+
+export {Ajax, returnPage};
