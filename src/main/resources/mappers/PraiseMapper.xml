@@ -31,9 +31,8 @@
                 user_id,
             </if>
             <if test="messageId != null" >
-                pageviews,
+                message_id,
             </if>
-
             <if test="isCanceled != null" >
                 is_canceled,
             </if>
@@ -64,10 +63,10 @@
 
     <update id="updateByPrimaryKey" parameterType="com.xiyou.pojo.Praise">
        update message_praise
-       set id = #{id}
-           user_id = #{userId}
+       set user_id = #{userId}
            message_id = #{messageId}
            is_canceled = #{isCanceled}
+       where id ={id}
     </update>
 
     <select id="selectByUserIdAndMessageId" resultMap="BaseResultMap">

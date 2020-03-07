@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface IMessageService {
     ServletResponse<Message> addMessage(Message message, Content content);
 
-    ServletResponse<String> deleteMessage(Integer messageId);
+    ServletResponse<String> deleteMessage(Integer messageId,Integer currentId);
 
     ServletResponse praiseMessage(Integer messageId,Integer userId);
 

@@ -162,10 +162,11 @@ public class MessageController {
     @RequestMapping("delete.do")
     public ServletResponse<String> deleteMessage(HttpSession session,Integer messageId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
+        Integer userId = user.getId();
         if(user == null){
             return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
         }
-        return iMessageService.deleteMessage(messageId);
+        return iMessageService.deleteMessage(messageId,userId);
     }
 
 

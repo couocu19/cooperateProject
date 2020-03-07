@@ -50,13 +50,15 @@ public class MessageServiceImpl implements IMessageService {
 
     }
 
-
-
-    public ServletResponse<String> deleteMessage(Integer messageId){
+    public ServletResponse<String> deleteMessage(Integer messageId,Integer currentId){
 
         Message message = messageMapper.selectByPrimaryKey(messageId);
 
         if(message!=null){
+            Integer userId  = message.getUserId();
+            if(userId!= currentId){
+                return ServletResponse.createByErrorMessage("没有操作权限~");
+            }
             message.setDeleted(false);
             int rowCount =  messageMapper.updateByPrimaryKeySelective(message);
             if(rowCount>0){
@@ -66,8 +68,7 @@ public class MessageServiceImpl implements IMessageService {
 
         return ServletResponse.createByErrorMessage("删除失败~");
     }
-
-
+    
     public ServletResponse praiseMessage(Integer messageId,Integer userId){
         Message message = messageMapper.selectByPrimaryKey(messageId);
         Praise praise = new Praise();
@@ -102,6 +103,7 @@ public class MessageServiceImpl implements IMessageService {
 
 
 
+    //todo:测试错误原因
     //动态取消赞
     public ServletResponse cancelPraise(Integer praiseId,Integer userId){
         Praise praise = praiseMapper.selectByPrimaryKey(praiseId);
@@ -109,6 +111,7 @@ public class MessageServiceImpl implements IMessageService {
         if(praise!=null) {
             Integer messageId = praise.getMessageId();
             message = messageMapper.selectByPrimaryKey(messageId);
+
             if (message != null) {
             Integer praiseCount = message.getPraisePoints();
             praiseCount--;
