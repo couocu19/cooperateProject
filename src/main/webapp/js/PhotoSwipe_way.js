@@ -9,14 +9,8 @@ export default function show_PhotoSwipe(show_photo_arr, index) {
 	var pswpElement = document.querySelectorAll('.pswp')[0];
 
 	// build items array
-	var items = [];
-	for(let i = 0, len = show_photo_arr.length; i < len; i++) {
-		items.push({
-			src: show_photo_arr[i],
-			w: document.body.clientWidth,
-			h: 600
-		})
-	}
+	var items = show_photo_arr;
+	console.log(items);
 	// define options (if needed)
 	var options = {
 	    // optionName: 'option value'

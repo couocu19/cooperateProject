@@ -1,5 +1,6 @@
 import {Ajax, returnPage} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
+import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
 class APP {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
@@ -34,9 +35,8 @@ class APP {
 			// this.getDtMessage();
 			this.send_message();
 		}, false);
+		// 将input标签选中的图片添加到页面中
 		this.upload_imgs.onchange = () => {
-			this.photos_add.push(this.upload_imgs.files[0]);
-			console.log(this.photos_add);
 			handleFiles(this.upload_imgs.files);
 		};
 
@@ -62,16 +62,27 @@ class APP {
 
 	// 将e对应的目标放大
 	show_imgs(e) {
+		console.log(e.target)
 		this.assist_var.count = 0;
-		console.log('success!');
 		// 参数为需要展示的数组
 		let index = e.target.classList[0] - 1;
-		show_PhotoSwipe(this.assist_var.wait_show_photo, index);
+		let items = [];
+		for(let i = 0, len = this.assist_var.wait_show_photo.length; i < len; i ++) {
+			// 得到base64编码的图片的宽和高
+			let img_wh = getBase64ImgWidthHeight(this.assist_var.wait_show_photo[i]);
+			items.push({
+				src: this.assist_var.wait_show_photo[i],
+				w: img_wh.w,
+				h: img_wh.h
+			})
+
+		}
+		show_PhotoSwipe(items, index);
 	}
 
 	remove_photo(e) {
 		this.assist_var.count = 0;
-		let index = e.target.classList[0] - 1;
+		let index = e.target.classList[0];
 		console.log(index);
 		// 将该图片从待发送数组中删除
 		this.photos_add.splice(index, 1);
@@ -192,15 +203,20 @@ function render(argument) {
 function handleFiles(files) {
 	if(files.length) {
 		files = Array.prototype.slice.call(files);
-		let file = files[0];
-		let reader = new FileReader();
-		reader.onload = function() {
-			//以base64格式将图片的编码添加到img的src中
-			App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; z-index: -10;" src=${this.result}></div>`;
-			App.adopt_photos_size();
-			App.assist_var.wait_show_photo.push(this.result);
+		for(let i = 0, len = files.length; i < len; i ++) {
+			let file = files[i];
+			let reader = new FileReader();
+			reader.onload = function() {
+				//以base64格式将图片的编码添加到img的src中
+				App.photos_add.push(file);
+				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; z-index: -10;" src=${this.result}></div>`;
+				App.adopt_photos_size();
+				App.assist_var.wait_show_photo.push(this.result);
+			}
+			reader.readAsDataURL(file);
+
 		}
-		reader.readAsDataURL(file);
+
 	}
 }
 

@@ -12,5 +12,5 @@ server.use('*', function(req, res, next) {
 
 server.use(static(__dirname + '/webapp'));
 server.listen(9012, () => {
-	console.log('已打开提供Ajax方法的端口9012...');
+	console.log('已打开提供本地静态文件的端口9012...');
 })
