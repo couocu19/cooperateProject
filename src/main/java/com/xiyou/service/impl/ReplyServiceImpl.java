@@ -1,8 +1,10 @@
 package com.xiyou.service.impl;
 
 import com.xiyou.common.ServletResponse;
+import com.xiyou.dao.CommentMapper;
 import com.xiyou.dao.MessageMapper;
 import com.xiyou.dao.ReplyMapper;
+import com.xiyou.pojo.Comment;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.Reply;
 import com.xiyou.service.IReplyService;
@@ -19,7 +21,17 @@ public class ReplyServiceImpl implements IReplyService {
     @Autowired
     private MessageMapper messageMapper;
 
+    @Autowired
+    private CommentMapper commentMapper;
+
     public ServletResponse<Reply> addReplyToComment(Reply reply){
+        Integer commentId = reply.getCommentId();
+        Comment comment = commentMapper.selectByPrimaryKey(commentId);
+        if(comment!=null){
+            Integer id = comment.getMessageId();
+            reply.setMessageId(id);
+        }
+
         int rowCount = replyMapper.insert(reply);
         if(rowCount>0){
             //todo:comment+1
