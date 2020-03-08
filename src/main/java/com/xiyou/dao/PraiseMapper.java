@@ -8,8 +8,8 @@ public interface PraiseMapper {
 
     int insert(Praise record);
     int insertSelective(Praise record);
-    Praise selectByPrimaryKey(Integer id);
-    int updateByPrimaryKey(Praise record);
+    Praise selectByPrimaryKey(@Param(value = "id") Integer id);
+    int updateStatus(@Param(value = "id") Integer id,@Param("isCanceled") Boolean isCanceled);
     Praise selectByUserIdAndMessageId(@Param(value = "userId") Integer userId, @Param(value = "messageId")Integer messageId);
 
 }

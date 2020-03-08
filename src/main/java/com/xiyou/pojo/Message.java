@@ -30,21 +30,6 @@ public class Message {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", pageviews=" + pageviews +
-                ", praisePoints=" + praisePoints +
-                ", commentCount=" + commentCount +
-                ", time=" + time +
-//                ", isDeleted=" + isDeleted +
-                ", content=" + content +
-                '}';
-    }
-
     //导入一对一的对象类型
     private Content content;
 
@@ -125,11 +110,7 @@ public class Message {
         this.time = time;
     }
 
-    public Boolean getIsDeleted() {
-        return isDeleted;
-    }
 
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
+
+
 }

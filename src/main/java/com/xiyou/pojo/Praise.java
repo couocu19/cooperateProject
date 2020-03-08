@@ -1,20 +1,25 @@
 package com.xiyou.pojo;
 
+
 public class Praise {
 
     private Integer id;
+
     private Integer userId;
+
     private Integer messageId;
+
     private boolean isCanceled;
+
+    public Praise(){
+
+    }
+
     public Praise(Integer id, Integer userId, Integer messageId, boolean isCanceled) {
         this.id = id;
         this.userId = userId;
         this.messageId = messageId;
         this.isCanceled = isCanceled;
-    }
-
-    public Praise(){
-        super();
     }
 
     public Integer getId() {
@@ -41,7 +46,7 @@ public class Praise {
         this.messageId = messageId;
     }
 
-    public boolean isCanceled() {
+    public boolean getCanceled() {
         return isCanceled;
     }
 

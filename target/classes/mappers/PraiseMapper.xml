@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-
 <mapper namespace="com.xiyou.dao.PraiseMapper">
-    <resultMap id="BaseResultMap" type="com.xiyou.pojo.Praise" >
-        <constructor >
-            <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="message_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="is_canceled" jdbcType="BIT" javaType="java.lang.Boolean" />
-        </constructor>
+    <resultMap id="BaseResultMap" type="com.xiyou.pojo.Praise">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="message_id" property="messageId"></result>
+        <result column="is_canceled" property="isCanceled"></result>
     </resultMap>
 
     <sql id="Base_List">
@@ -54,19 +51,17 @@
         </trim>
     </insert>
 
-    <select id="selectByPrimaryKey" parameterType="int" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_List"/>
         from message_praise
         where id = #{id}
     </select>
 
-    <update id="updateByPrimaryKey" parameterType="com.xiyou.pojo.Praise">
+    <update id="updateStatus" parameterType="map">
        update message_praise
-       set user_id = #{userId}
-           message_id = #{messageId}
-           is_canceled = #{isCanceled}
-       where id ={id}
+       set is_canceled = #{isCanceled}
+       where id =#{id}
     </update>
 
     <select id="selectByUserIdAndMessageId" resultMap="BaseResultMap">
@@ -76,7 +71,5 @@
         where
         user_id = #{userId} and message_id = #{messageId}
     </select>
-
-
 
 </mapper>

@@ -60,12 +60,12 @@ public class CommentController {
     //用户删除评论
     @ResponseBody
     @RequestMapping("deleteComment.do")
-    public ServletResponse<String> deleteComment(Integer messageId,HttpSession session){
+    public ServletResponse<String> deleteComment(Integer commentId,HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
-        return iCommentService.deleteComment(messageId,user);
+        return iCommentService.deleteComment(commentId,user);
     }
 
 

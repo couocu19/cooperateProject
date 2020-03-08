@@ -68,7 +68,7 @@ public class MessageServiceImpl implements IMessageService {
 
         return ServletResponse.createByErrorMessage("删除失败~");
     }
-    
+
     public ServletResponse praiseMessage(Integer messageId,Integer userId){
         Message message = messageMapper.selectByPrimaryKey(messageId);
         Praise praise = new Praise();
@@ -81,6 +81,7 @@ public class MessageServiceImpl implements IMessageService {
             //首先确定此人是否曾经赞过这条动态
             Praise praise1 = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
             if(praise1!=null){
+                System.out.println("哈哈哈哈哈");
                 praise1.setCanceled(true);
                 int rowCount = praiseMapper.insertSelective(praise1);
                 if(rowCount>0){
@@ -117,8 +118,9 @@ public class MessageServiceImpl implements IMessageService {
             praiseCount--;
             message.setPraisePoints(praiseCount);
             messageMapper.updateByPrimaryKey(message);
+
             praise.setCanceled(false);
-            int rowCount = praiseMapper.updateByPrimaryKey(praise);
+            int rowCount = praiseMapper.updateStatus(praiseId,praise.getCanceled());
             if(rowCount>0){
                 return ServletResponse.createBySuccessMessage("操作成功");
             }
