@@ -65,17 +65,18 @@ class Comment {
 	}
 
 	init() {
-		this.el.addEventListener('click', () => {}, false);
 	}
 
 	render(data) {
-		for(let i = 0; i >= 0; i ++) {
-			let item = `<!--每一条动态模板--><divclass="main_content_item"><!--头部信息--><divclass="head_name_item"><divclass="user_head_pic_item"><imgsrc="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg"></div><pclass="user_name_item">EHTAN_YK</p><divclass="send_time_item">2020-2-1318:00</div></div><!--文字和图片部分--><divclass="item_main"><divclass="item_text">后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来</div><divclass="item_img_wrapper"><divclass="img_item"><imgsrc="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg"alt=""></div><divclass="img_item"><imgsrc="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg"alt=""></div><divclass="img_item"><imgsrc="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg"alt=""></div></div></div>`;
-			el.innerHTML += item;
-		}
+		let item_data = data[0];
+		// for(let i = 0; i >= 0; i --) {
+			let item = `<!--每一条动态模板--><div class="main_content_item"><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg"></div><p class="user_name_item">EHTAN_YK</p><div class="send_time_item">2020-2-13  18:00</div></div><!--文字和图片部分--><div class="item_main"><div class="item_text">后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来后来</div><div class="item_img_wrapper"><div class="img_item"><img src="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg" alt=""></div><div class="img_item"><img src="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg" alt=""></div><div class="img_item"><img src="https://wx1.sinaimg.cn/orj480/006Q5xF4ly8gb3gewuketj30u00u0wiy.jpg" alt=""></div></div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style" src="../../pic/praise.png"><div>123</div></div>`;
+			this.el.innerHTML += item;
+		// }
 	}
 }
 
+const comment_obj = new Comment(document.getElementById('main_content_message'));
 
 function proAjax(obj) {
 	return new Promise((reslove, reject) => {
@@ -115,22 +116,16 @@ proAjax({
 			id: value.id
 		},
 		async: false,
-	}).then(() => {
+	}).then((value) => {
 		// 渲染用户发送的动态部分
-
+		comment_obj.render(value)
 
 	});
 });
 
 
 // function commentHtml(argument) {
-// 	'<div class="comment_praise_wrapper">
-// 				<div class="cp_wrapper">
-// 					<img class="btn_style" src="../../pic/comment.png">
-// 					<div>12</div>
-// 					<img class="btn_style" src="../../pic/praise.png">
-// 					<div>123</div>
-// 				</div>
+// 	'
 // 				<div class="comment_main_wrapper">
 // 					<div class="comment_item_wrapper">
 // 						<div class="comment_item_header">
