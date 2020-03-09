@@ -16,7 +16,9 @@
 
 - #### 前端
 
-  - ##### 每个用户进入后都有其android对应的注入的ID,每个页面利用ID做为后端查找的主键
+  - ##### 每个用户进入后都有其android对应的注入的student_id,主页利用student_id与后台建立联系后利用后台下发的cookie保持登录
+
+  - ##### 前端对于手机页面的控制通过调用android利用js-bridge注入的方法来实现
 
 - #### 后端
 
@@ -32,7 +34,7 @@
   请求URL : '后端ip:监听端口号/dongtai'
   请求方式 : get
   参数 : none
-  
+
   返回示例
   成功
   {
@@ -46,7 +48,7 @@
       "error" : 0,
       "msg" : 'XXX'
   }
-  
+
   ```
 
 - #### 动态的评论
@@ -57,9 +59,9 @@
   参数 : {
       id : 动态id(必选)
   }
-  
+
   请求URL示例 ： 'http://xxx.xx.xx.xx:8080/comment?id=10'
-  
+
   返回示例
   成功
   {
@@ -68,8 +70,8 @@
            //评论的信息...
       }
   }
-  
-  失败 
+
+  失败
   {
       "error" : 0,
       "msg" : 'XXX'
@@ -84,9 +86,9 @@
   参数 : {
       id : '评论的id'(必选)
   }
-  
+
   请求URL示例 ： 'http://xxx.xx.xx.xx:8080/reply?id=10'
-  
+
   返回示例
   成功
   {
@@ -100,15 +102,15 @@
           ]
       }
   }
-  
-  失败 
+
+  失败
   {
       "error" : 0,
       "msg" : 'XXX'
   }
   ```
 
-  
+
 
 - #### 查找模块
 
@@ -116,8 +118,8 @@
   简述 : 请求自己的信息
   请求URL : '后端ip:监听端口号/findMessage'
   请求方式 : get
-  参数 : userStduent  必选  用户名	
-  
+  参数 : userStduent  必选  用户名
+
   返回示例
   成功
   {
@@ -126,7 +128,7 @@
           id : 数据库中学号对应的id,
           xuehao: 学号，
           name : 默认为学号,
-          header: 头像的绝对地址,  
+          header: 头像的绝对地址,
           signed: 签名,
           fans: 粉丝数量,
           guanzhu : 关注数量,
@@ -158,9 +160,9 @@
   参数 : {
       delete_id : '被删除动态的id'
   }
-  
+
   请求URL示例 ： 'http://xxx.xx.xx.xx:8080/delete?id=10'
-  
+
   返回示例
   {
   	"error" : 0,
@@ -176,6 +178,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -473,5 +476,27 @@ method:get
   
   ```
 
-  
+- #### 发送动态
+
+  ```json
+  简述 : 发送动态
+  请求URL : '后端ip:监听端口号/add_dynamic'
+  请求方式 : post
+  参数 : {
+      send_user_stduent_num : '发送人的学号',
+      content : '发送的文字内容',
+      photos : '照片数组',
+      send_time : '发送时间'
+  }
+
+
+  返回示例
+  成功
+  {
+      "error" : 0,
+      ""
+  }
+
+  ```
+>>>>>>> c2119700547be4b049c75b9f61ec48fa1e8553a5
 

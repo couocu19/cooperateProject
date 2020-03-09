@@ -135,6 +135,7 @@
      <include refid="Base_Column_List"/>
      from comment_reply
      where comment_id = #{commentId}
+     and is_deleted != 0
      order by time Desc
   </select>
 </mapper>
