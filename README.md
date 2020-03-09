@@ -16,6 +16,8 @@
 
 - #### 前端
 
+  - ##### [git地址](https://github.com/kibuniverse/cooperateProject/tree/master/src/main)
+
   - ##### 每个用户进入后都有其android对应的注入的student_id,主页利用student_id与后台建立联系后利用后台下发的cookie保持登录
 
   - ##### 前端对于手机页面的控制通过调用android利用js-bridge注入的方法来实现
@@ -190,14 +192,22 @@
       photos : '照片数组',
       send_time : '发送时间'
   }
-
-
-  返回示例
-  成功
-  {
-      "error" : 0,
-      ""
-  }
-
+    返回示例
+    成功
+    {
+        "error" : 0,
+        ""
+    }
   ```
 
+
+
+### 五、开发记录
+
+- #### 前端
+
+  - 项目中尽可能多的使用了es6 语法，包括 class, module式编程，Promise, 字符串的扩展...
+  - 其中图片的预览效果的实现使用了photoswipe插件
+    - [photoswipe的基本使用以及一些基本问题的解决]()
+
+​	
