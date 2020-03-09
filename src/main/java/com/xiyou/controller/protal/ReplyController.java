@@ -26,11 +26,11 @@ public class ReplyController {
     //todo:待测试
     @ResponseBody
     @RequestMapping("addToComment.do")
-    public ServletResponse<Reply> addReplyToComment(HttpSession session,String content,Integer commentId,Integer receiveUserId){
-       User user = (User) session.getAttribute(Const.CURRENT_USER);
-       if(user == null){
-           return ServletResponse.createByErrorMessage("用户未登录！");
-       }
+    public ServletResponse<Reply> addReplyToComment(HttpSession session, String content, Integer commentId, Integer receiveUserId) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServletResponse.createByErrorMessage("用户未登录！");
+        }
         Reply reply = new Reply();
         reply.setContent(content);
         reply.setCommentId(commentId);
@@ -47,17 +47,13 @@ public class ReplyController {
     //todo:待测试
     @ResponseBody
     @RequestMapping("delete.do")
-    public ServletResponse<String> deleteReply(HttpSession session,Integer replyId){
+    public ServletResponse<String> deleteReply(HttpSession session, Integer replyId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
+        if (user == null) {
             return ServletResponse.createByErrorMessage("用户未登录！");
         }
         Integer userId = user.getId();
-        return iReplyService.deleteReply(replyId,userId);
+        return iReplyService.deleteReply(replyId, userId);
 
     }
-
-
-
-
 }

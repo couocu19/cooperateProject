@@ -93,7 +93,7 @@ public class MessageServiceImpl implements IMessageService {
             praise.setCanceled(true);
             int rowCount = praiseMapper.insertSelective(praise);
               if(rowCount>0){
-                  return ServletResponse.createBySuccess(praise);
+                  return ServletResponse.createBySuccess("ok",praise);
               }
             }
         }
@@ -104,7 +104,6 @@ public class MessageServiceImpl implements IMessageService {
 
 
 
-    //todo:测试错误原因
     //动态取消赞
     public ServletResponse cancelPraise(Integer praiseId,Integer userId){
         Praise praise = praiseMapper.selectByPrimaryKey(praiseId);
@@ -132,4 +131,8 @@ public class MessageServiceImpl implements IMessageService {
         return ServletResponse.createByErrorMessage("操作失败~");
 
     }
+
+
+
+
 }

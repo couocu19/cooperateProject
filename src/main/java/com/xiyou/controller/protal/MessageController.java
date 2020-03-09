@@ -94,7 +94,6 @@ public class MessageController {
 
         }
         ServletResponse<Message> response = iMessageService.addMessage(message,content);
-
         Message message1 = response.getData();
         MessageVo messageVo = null;
         if(response.isSuccess()){
@@ -105,7 +104,7 @@ public class MessageController {
          return response;
     }
 
-    private MessageVo assembleMessage(Message message,User user){
+    public MessageVo assembleMessage(Message message,User user){
         MessageVo messageVo = new MessageVo();
         String username = user.getUsername();
         messageVo.setUsername(username);

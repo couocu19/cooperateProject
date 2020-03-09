@@ -3,6 +3,8 @@ package com.xiyou.dao;
 import com.xiyou.pojo.Reply;
 import org.mybatis.spring.annotation.MapperScan;
 
+import java.util.List;
+
 
 public interface ReplyMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface ReplyMapper {
     int updateByPrimaryKeySelective(Reply record);
 
     int updateByPrimaryKey(Reply record);
+
+    List<Reply> selectByCommentId(Integer commentId);
 }
