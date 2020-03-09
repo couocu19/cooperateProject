@@ -69,6 +69,12 @@ public class CommentServiceImpl implements ICommentService {
 
 
     public ServletResponse<List<Comment>> getAllComment(Integer messageId){
+        List<Comment> comments = commentMapper.selectByMessageId(messageId);
+        if(comments!=null){
+            return ServletResponse.createBySuccess(comments);
+        }
+
+        return ServletResponse.createByErrorMessage("快来发表你的评论吧~");
 
     }
 

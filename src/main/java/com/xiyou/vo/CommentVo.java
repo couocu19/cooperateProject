@@ -1,6 +1,8 @@
 package com.xiyou.vo;
 
 public class CommentVo {
+
+    private Integer commentId;
     private String sendUsername;
     private String header;
     private String time;
@@ -17,16 +19,6 @@ public class CommentVo {
         super();
     }
 
-    public CommentVo(String sendUsername, String header, String time, String content, Integer praiseCount, String firstReplyUser, String firstReplyContent, String replyCountMessage) {
-        this.sendUsername = sendUsername;
-        this.header = header;
-        this.time = time;
-        this.content = content;
-        this.praiseCount = praiseCount;
-        this.firstReplyUser = firstReplyUser;
-        this.firstReplyContent = firstReplyContent;
-        this.replyCountMessage = replyCountMessage;
-    }
 
     public Integer getPraiseCount() {
         return praiseCount;
@@ -89,6 +81,26 @@ public class CommentVo {
     }
 
     public void setReplyCountMessage(String replyCountMessage) {
+        this.replyCountMessage = replyCountMessage;
+    }
+
+    public Integer getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
+    }
+
+    public CommentVo(Integer commentId, String sendUsername, String header, String time, String content, Integer praiseCount, String firstReplyUser, String firstReplyContent, String replyCountMessage) {
+        this.commentId = commentId;
+        this.sendUsername = sendUsername;
+        this.header = header;
+        this.time = time;
+        this.content = content;
+        this.praiseCount = praiseCount;
+        this.firstReplyUser = firstReplyUser;
+        this.firstReplyContent = firstReplyContent;
         this.replyCountMessage = replyCountMessage;
     }
 }

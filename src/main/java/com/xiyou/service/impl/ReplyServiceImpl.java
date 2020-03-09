@@ -33,8 +33,13 @@ public class ReplyServiceImpl implements IReplyService {
         }
 
         int rowCount = replyMapper.insert(reply);
+        Message message = null;
         if(rowCount>0){
-            //todo:comment+1
+            //每评论一条动态中的评论总数增加一
+            message = messageMapper.selectByPrimaryKey(comment.getMessageId());
+            Integer commentCount = message.getCommentCount();
+            commentCount++;
+            messageMapper.updateByPrimaryKey(message);
             return ServletResponse.createBySuccess(reply);
         }
         return ServletResponse.createByErrorMessage("操作失败~");

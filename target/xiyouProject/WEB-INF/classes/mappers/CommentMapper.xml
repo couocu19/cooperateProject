@@ -127,4 +127,12 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByMessageId" parameterType="int" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from message_comment
+    where message_id = #{messageId}
+    ORDER BY time desc
+  </select>
 </mapper>

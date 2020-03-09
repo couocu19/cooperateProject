@@ -127,4 +127,14 @@
       receive_user_id = #{receiveUserId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+<!--  按照一定的列排序来查找  -->
+  <select id="selectByCommentId" parameterType="int" resultMap="BaseResultMap">
+     select
+     <include refid="Base_Column_List"/>
+     from comment_reply
+     where comment_id = #{commentId}
+     order by time Desc
+  </select>
 </mapper>

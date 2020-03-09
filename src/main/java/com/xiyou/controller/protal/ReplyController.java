@@ -6,6 +6,7 @@ import com.xiyou.common.ServletResponse;
 import com.xiyou.pojo.Comment;
 import com.xiyou.pojo.Reply;
 import com.xiyou.pojo.User;
+import com.xiyou.service.ICommentService;
 import com.xiyou.service.IReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class ReplyController {
     @Autowired
     private IReplyService iReplyService;
 
-    //todo:待测试
+
     @ResponseBody
     @RequestMapping("addToComment.do")
     public ServletResponse<Reply> addReplyToComment(HttpSession session, String content, Integer commentId, Integer receiveUserId) {
@@ -31,6 +32,8 @@ public class ReplyController {
         if (user == null) {
             return ServletResponse.createByErrorMessage("用户未登录！");
         }
+
+
         Reply reply = new Reply();
         reply.setContent(content);
         reply.setCommentId(commentId);
@@ -42,6 +45,10 @@ public class ReplyController {
         return iReplyService.addReplyToComment(reply);
 
     }
+
+
+
+
 
 
     //todo:待测试

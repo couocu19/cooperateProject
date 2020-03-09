@@ -8,11 +8,13 @@ import java.util.List;
 public class MessageVo {
 
     //发表动态的用户的基本信息
+    private Integer userId;
     private String username;
     private String header;
     private String time;
 
-    //动态内容
+    //动态信息
+    private Integer messageId;
     private String contentText;
     private List<String> contentImages;
     private String contentVideos;
@@ -21,6 +23,22 @@ public class MessageVo {
     private Integer commentCount;
     private Integer praiseCount;
 
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
 
     public String getUsername() {
         return username;
@@ -94,10 +112,12 @@ public class MessageVo {
         this.praiseCount = praiseCount;
     }
 
-    public MessageVo(String username, String header, String time, String contentText, List<String> contentImages,String contentVideos, Integer commentCount, Integer praiseCount) {
+    public MessageVo(Integer userId, String username, String header, String time, Integer messageId, String contentText, List<String> contentImages, String contentVideos, Integer commentCount, Integer praiseCount) {
+        this.userId = userId;
         this.username = username;
         this.header = header;
         this.time = time;
+        this.messageId = messageId;
         this.contentText = contentText;
         this.contentImages = contentImages;
         this.contentVideos = contentVideos;

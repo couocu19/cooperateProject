@@ -7,21 +7,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentAndReplyVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/MessageAndCommentVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/ReplyVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/dao/ReplyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/dao/ReplyMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/dao/CommentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/dao/CommentMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/ICommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/ICommentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/CommentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/CommentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ReplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ReplyMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentAndReplyVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentAndReplyVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/CommentVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/MessageAndCommentVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/MessageAndCommentVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/MessageVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/MessageVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/ReplyVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/ReplyVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/CommentController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/dao/CommentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/dao/CommentMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/dao/ReplyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/dao/ReplyMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/service/ICommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/service/ICommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/MessageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/MessageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mappers/ReplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/ReplyMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/CommentController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/dao/CommentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/dao/CommentMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/dao/ReplyMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/dao/ReplyMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/ICommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/ICommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/CommentMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/ReplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/ReplyMapper.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -391,7 +405,7 @@
       <workItem from="1583562841572" duration="1872000" />
       <workItem from="1583670681233" duration="4099000" />
       <workItem from="1583674887122" duration="8826000" />
-      <workItem from="1583746712185" duration="11659000" />
+      <workItem from="1583746712185" duration="15947000" />
     </task>
     <servers />
   </component>

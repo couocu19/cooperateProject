@@ -5,6 +5,7 @@ import com.xiyou.pojo.Message;
 import java.util.List;
 
 public class MessageAndCommentVo {
+
   private MessageVo messageVo;
 
   private List<CommentVo> comments;

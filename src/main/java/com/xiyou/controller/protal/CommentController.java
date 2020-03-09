@@ -34,8 +34,6 @@ public class CommentController {
 
     @Autowired
     private ICommentService iCommentService;
-
-
     @Autowired
     private MessageController messageController;
 
@@ -49,7 +47,7 @@ public class CommentController {
     //给动态评论
     @ResponseBody
     @RequestMapping("addToMessage.do")
-    public ServletResponse<Comment> addCommentToMessage(Integer messageId, HttpSession session,String content){
+    public ServletResponse addCommentToMessage(Integer messageId, HttpSession session,String content){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
@@ -65,38 +63,79 @@ public class CommentController {
         //默认评论发表时未删除
         comment.setIsDeleted(true);
         ServletResponse response = iCommentService.addCommentToMessage(comment);
+        //如果评论发表成功就返回整个评论列表
         if(response.isSuccess()){
-
+            return getMessageAllComments(session,comment.getMessageId());
         }
 
-        return ServletResponse.createByErrorMessage("操作失败~");
+        return ServletResponse.createByErrorMessage("发表失败~");
     }
 
 
-    private MessageAndCommentVo assembleMessAndComment(Message message, User user, @RequestParam(required = false) List<Comment> comments){
-      MessageAndCommentVo messageAndCommentVo = new MessageAndCommentVo();
+    //给评论点赞
+    @ResponseBody
+    @RequestMapping("praiseComment.do")
+    public ServletResponse praiseComment(Integer commentId,HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+        return iCommentService.praiseComment(commentId);
+    }
 
-        MessageVo messageVo = messageController.assembleMessage(message,user);
-        messageAndCommentVo.setMessageVo(messageVo);
 
-        List<CommentVo> commentVos = new ArrayList<>();
-        ServletResponse response = null;
-        if(comments!= null) {
-            for (Comment c : comments) {
-                response = iCommentService.getCommentFirstReply(c.getId());
-                if (response.isSuccess()) {
-                    Reply reply = (Reply) response.getData();
-                    CommentVo commentVo = assembleCommentAndFirstReply(c, reply);
-                    commentVos.add(commentVo);
-                }
+    //用户删除评论
+    @ResponseBody
+    @RequestMapping("deleteComment.do")
+    public ServletResponse<String> deleteComment(Integer commentId,HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+        return iCommentService.deleteComment(commentId,user);
+    }
+
+
+    public ServletResponse<Comment> cancelPraise(HttpSession session,Integer commentId){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+        return iCommentService.cancelPraise(commentId,user.getId());
+    }
+
+    //查看某个动态的所有评论列表
+    @ResponseBody
+    @RequestMapping("getMessAllComments.do")
+    public ServletResponse<List<CommentVo>> getMessageAllComments(HttpSession session,Integer messageId){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        }
+
+        ServletResponse response = iCommentService.getAllComment(messageId);
+        if(response.isSuccess()){
+            List<CommentVo> commentVos = new ArrayList<>();
+            List<Comment> comments = (List<Comment>)response.getData();
+            CommentVo commentVo = null;
+            for(Comment c: comments){
+                    response = iCommentService.getCommentFirstReply(c.getId());
+                    if (response.isSuccess()) {
+                        Reply reply = (Reply) response.getData();
+                        commentVo = assembleCommentAndFirstReply(c, reply);
+                        commentVos.add(commentVo);
+                    }else{
+                        commentVo = assembleComment(c);
+                        commentVos.add(commentVo);
+                    }
             }
-            messageAndCommentVo.setComments(commentVos);
+
+            return ServletResponse.createBySuccess(commentVos);
         }
-
-        return messageAndCommentVo;
-
+        return response;
 
     }
+
 
 
     //如果没有评论回复
@@ -111,6 +150,7 @@ public class CommentController {
         String content = comment.getConent();
         Integer praiseCount = comment.getPraiseCount();
         //填充信息
+        commentVo.setCommentId(comment.getId());
         commentVo.setSendUsername(sendUserName);
         commentVo.setHeader(header);
         commentVo.setTime(time);
@@ -120,7 +160,6 @@ public class CommentController {
         return commentVo;
 
     }
-
 
     private CommentVo assembleCommentAndFirstReply(Comment comment, Reply firstReply){
         CommentVo commentVo = new CommentVo();
@@ -133,6 +172,7 @@ public class CommentController {
         String content = comment.getConent();
         Integer praiseCount = comment.getPraiseCount();
         //填充信息
+        commentVo.setCommentId(comment.getId());
         commentVo.setSendUsername(sendUserName);
         commentVo.setHeader(header);
         commentVo.setTime(time);
@@ -157,55 +197,30 @@ public class CommentController {
     }
 
 
-    //给评论点赞
-    @ResponseBody
-    @RequestMapping("praiseComment.do")
-    public ServletResponse praiseComment(Integer commentId,HttpSession session){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
-        }
-        return iCommentService.praiseComment(commentId);
-    }
+    private MessageAndCommentVo assembleMessAndComment(Message message, User user, @RequestParam(required = false) List<Comment> comments){
+        MessageAndCommentVo messageAndCommentVo = new MessageAndCommentVo();
 
+        MessageVo messageVo = messageController.assembleMessage(message,user);
+        messageAndCommentVo.setMessageVo(messageVo);
 
-    //todo:待测试
-    //用户删除评论
-    @ResponseBody
-    @RequestMapping("deleteComment.do")
-    public ServletResponse<String> deleteComment(Integer commentId,HttpSession session){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
-        }
-        return iCommentService.deleteComment(commentId,user);
-    }
-
-
-    public ServletResponse<Comment> cancelPraise(HttpSession session,Integer commentId){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
-        }
-        return iCommentService.cancelPraise(commentId,user.getId());
-    }
-
-    //查看某个动态的所有评论列表
-    public ServletResponse<List<CommentVo>> getMessageAllComments(HttpSession session,Integer commentId){
-        User user = (User)session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+        List<CommentVo> commentVos = new ArrayList<>();
+        ServletResponse response = null;
+        if(comments!= null) {
+            for (Comment c : comments) {
+                response = iCommentService.getCommentFirstReply(c.getId());
+                if (response.isSuccess()) {
+                    Reply reply = (Reply) response.getData();
+                    CommentVo commentVo = assembleCommentAndFirstReply(c, reply);
+                    commentVos.add(commentVo);
+                }
+            }
+            messageAndCommentVo.setComments(commentVos);
         }
 
+        return messageAndCommentVo;
 
 
     }
-
-
-
-
-
-
 
 //    //查看某一条评论以及下面的回复
 //    public ServletResponse<Comment> getCommentAndReply()

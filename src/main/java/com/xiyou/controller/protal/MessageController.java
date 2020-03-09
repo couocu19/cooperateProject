@@ -107,6 +107,9 @@ public class MessageController {
     public MessageVo assembleMessage(Message message,User user){
         MessageVo messageVo = new MessageVo();
         String username = user.getUsername();
+
+        messageVo.setMessageId(message.getId());
+        messageVo.setUserId(user.getId());
         messageVo.setUsername(username);
         messageVo.setHeader(user.getHeadSculpture());
         messageVo.setTime(DateTimeUtil.dateToStr(message.getTime(),"yyyy-MM-dd HH:mm:ss"));
