@@ -137,7 +137,6 @@ public class CommentController {
     }
 
 
-
     //如果没有评论回复
     private CommentVo assembleComment(Comment comment){
         CommentVo commentVo = new CommentVo();

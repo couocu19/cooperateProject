@@ -3,7 +3,7 @@
 <head>
 	<title>编辑发送动态页面</title>
 	<!-- <link rel="icon" href="./pic/favicon.ioc"> -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,
 	minimum-scale=1.0, maximum-scale=1.0">
 	<!-- 禁止缩放 -->
 	<meta name="view" content="user-scalable=no, minimal-ui">
@@ -11,6 +11,12 @@
 	<meta name="screen-orientation" content="portrait">
 	<link rel="stylesheet" type="text/css" href="../../style/compile_page.css">
 	<link rel="stylesheet" type="text/css" href="../../style/base_style.css">
+	<link rel="icon" href="../../pic/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="../../photoswipe/dist/photoswipe.css">
+	<link rel="stylesheet" type="text/css" href="../../photoswipe/dist/default-skin/default-skin.css">
+	<script type="text/javascript" src="../../photoswipe/dist/photoswipe.min.js"></script>
+	<script type="text/javascript" src="../../photoswipe/dist/photoswipe-ui-default.min.js"></script>
+
 </head>
 <body>
 
@@ -27,39 +33,32 @@
 
 			<!-- 内容区域 -->
 			<main>
-				
+
 				<div class="main_content_box">
-					
 					<div class="main_context">
 						<!-- 文字部分 -->
 						<span>
 							<textarea placeholder="what are U thinking about...." style="height: 10rem;"></textarea>
 						</span>
 					</div>
-					<div id="photos_show"><div class="photo_item">
-							<img style="width: 100%;" src="../../pic/xxj.png">
-						</div><div class="photo_item">
-							<img style="width: 100%;" src="../../pic/xxj.png">
-						</div><div class="photo_item">
-							<img style="width: 100%;" src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xNjc5ODIzLWM1MWRkN2IyNTFjZGRkZWMucG5n?x-oss-process=image/format,png">
-						</div></div>
+					<div id="photos_show"></div>
 				</div>
 			</main>
 			<!-- 页脚部分 -->
 			<footer id="footer_wrapper">
 				<!-- 选择可见 -->
-				<div id="choose_open"><div class="text_style choose_open_tag">所有人</div><div class="text_style choose_open_tag">好友</div><div class="text_style choose_open_tag">仅自己</div>
+				<div id="choose_open"><div class="text_style choose_open_tag">所有人</div><div class="text_style choose_open_tag">粉丝</div><div class="text_style choose_open_tag">仅自己</div>
 				</div>
-				
+
 
 
 				<!-- 选择照片和表情 -->
-			
+
 				<div id="add_photo_mem_wrapper">
 					<!-- 选择图片 -->
 					<div id="add_photo_wrapper">
 						<label for="selectphoto">
-							<input id="upload_imgs" type="file" accept="image*/" multiple="multiple" capture="">
+							<input id="upload_imgs" type="file" accept="image*/" multiple/>
 							<img class="add_imgs" src="../../pic/xxj.png">
 						</label>
 					</div>
@@ -67,14 +66,81 @@
 					<div id="add_mem_wrapper">
 						<img src="../../pic/smlie.png" alt="" class="add_imgs">
 					</div>
-					
+
 					<!-- 选择表情 -->
-					
+
 				</div>
 			</footer>
 		</div>
 	</div>
 
-	<script type="text/javascript" src="../../js/compile_page.js"></script>
-</body>	
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+	<script type="module" src="http://localhost:9012/js/compile_page.js"></script>
+</body>
 </html>

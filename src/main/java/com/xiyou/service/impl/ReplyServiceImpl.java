@@ -57,6 +57,10 @@ public class ReplyServiceImpl implements IReplyService {
                 reply.setIsDeleted(false);
                 int rowCount = replyMapper.updateByPrimaryKey(reply);
                 if(rowCount>0){
+                    //每删除一次评论总数减一
+                    Integer commentCount = message.getCommentCount();
+                    commentCount--;
+                    messageMapper.updateByPrimaryKey(message);
                     return ServletResponse.createBySuccess("删除成功!");
                 }
             }
