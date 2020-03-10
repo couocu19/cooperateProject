@@ -1,6 +1,14 @@
 import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
+import {AddpullUp, AddSlideUp} from 'http://localhost:9012/js/pull_slide_event.js'
 window.user_student_id = '04192077';
+
+function Ab(argument) {
+	// body...
+	console.log(a);
+}
+AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax('a'));
+
 class App {
 	constructor(return_btn, adduser_btn, change_message) {
 		this.return_btn = return_btn;
@@ -164,6 +172,9 @@ proAjax({
 
 	});
 });
+
+
+
 
 
 // function commentHtml(argument) {
