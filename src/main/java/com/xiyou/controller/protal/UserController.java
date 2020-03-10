@@ -142,11 +142,13 @@ public class UserController {
         //填充主页下的动态信息
         for(Message m: user.getMessages()){
             messageVo = new MessageVo();
+            messageVo.setUserId(user.getId());
             messageVo.setUsername(user.getUsername());
             messageVo.setHeader(user.getHeadSculpture());
             messageVo.setTime(DateTimeUtil.dateToStr(m.getTime(),DateTimeUtil.STANDARD_FORMAT));
             messageVo.setCommentCount(m.getCommentCount());
             messageVo.setPraiseCount(m.getPraisePoints());
+            messageVo.setMessageId(m.getId());
             if(m.getContent().getContentText()!=null){
                 messageVo.setContentText(m.getContent().getContentText());
             }
@@ -165,6 +167,7 @@ public class UserController {
             list.add(messageVo);
         }
         //填充用户信息
+        userMainPageVo.setUserId(user.getId());
         userMainPageVo.setMessageVos(list);
         userMainPageVo.setUsername(user.getUsername());
         userMainPageVo.setHeadSculpture(user.getHeadSculpture());

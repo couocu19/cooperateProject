@@ -30,7 +30,7 @@ html, body, #app {
     margin-top: 5px;
     margin-left: .75rem;
     margin-right: 1.001rem;
-    text-align: center;	
+    text-align: center;
     font-weight: 300;
     color: #fff;
     background-color: #1b9af4;
@@ -97,7 +97,7 @@ span textarea {
 
 
 #add_photo_wrapper label {
-	
+
 }
 
 #add_photo_mem_wrapper {
@@ -126,7 +126,7 @@ span textarea {
 
 #photos_show .photo_item {
 	object-fit: cover;
-	border: 1px solid gray;
+	/*border: 1px solid gray;*/
 	border-style: dotted;
 	box-sizing: border-box;
 	line-height: 100%;

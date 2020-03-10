@@ -31,15 +31,6 @@
     </constructor>
     <!--不同mapper文件中的resultMap可以互相引用-->
     <collection property="messages" ofType="com.xiyou.pojo.Message" >
-<!--      <constructor >-->
-<!--        <idArg column="m_id"  jdbcType="INTEGER" javaType="java.lang.Integer" />-->
-<!--        <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
-<!--        <arg column="pageviews" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
-<!--        <arg column="praise_points" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
-<!--        <arg column="comment_count" jdbcType="INTEGER" javaType="java.lang.Integer" />-->
-<!--        <arg column="time" jdbcType="TIMESTAMP" javaType="java.util.Date" />-->
-<!--        <arg column="is_deleted" jdbcType="BIT" javaType="java.lang.Boolean" />-->
-<!--      </constructor>-->
       <id column="mid" property="id"/>
       <result column="user_id" property="userId"/>
       <result column="pageviews" property="pageviews"/>

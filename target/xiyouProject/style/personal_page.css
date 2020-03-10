@@ -1,8 +1,8 @@
- 
+
 
  #header_wrapper {
  	display: flex;
- 	justify-content: space-between; 
+ 	justify-content: space-between;
  }
 
 
@@ -14,7 +14,7 @@
 
 
 .add_user_btn {
- 	margin: .5rem 0 0 1rem;
+ 	margin: .5rem 0 0 0;
  }
 
  .set_btn {
@@ -26,6 +26,7 @@
  	height: 100%;
  }
 
+
 #main_content {
 	width: 90%;
 	padding: 1rem;
@@ -34,7 +35,6 @@
 	box-shadow: .1rem .1rem .7rem #888888;
 	opacity: .8;
 }
-
 #main_content:after {
 	content: "";
 	display: block;
@@ -42,6 +42,7 @@
 }
 #head_name {
 	width: 100%;
+	padding: 2rem;
 }
 
 #head_name:after{
@@ -54,39 +55,41 @@
 	width: 4rem;
 	height: 4rem;
 	float: left;
-	margin: 1.5rem;
+	/*margin: 1.5rem;*/
 
 }
 
+.return_btn {
+	margin: .5rem 0 0 1rem;
+}
 .user_head_pic img{
 	width: 100%;
 	border-radius: 10rem;
 }
 .user_name {
-	width: 5rem;
-	float: left;
-	margin: 1.5rem 0 .5rem 0;
+	margin: .3rem 0 .5rem 0;
 	font-size: 1.5rem;
 }
 
+.name_sign {
+	margin-left: 5rem;
+}
 .user_sign {
-	width: 60%;
-	height: 2.3rem;
-	float: left;
+
 	overflow: auto;
 	font-size: 80%;
 	color: gray;
 }
 
-#user_message {
+#user_mess {
 	width: 80%;
 	margin: auto;
 	display: flex;
 	justify-content: space-between;
 }
 
-#user_message .mess_item {
-	width: 20%;
+#user_mess .mess_item {
+	/*width: 20%;*/
 	text-align: center;
 }
 
@@ -126,16 +129,17 @@
 	height: 100%;
 	border-radius: 50%;
 }
+.comment_name_sign_box {
+	margin-left: 2.5rem;
+}
 
 .user_name_item{
-	float: left;
 	margin-bottom: .4rem;
 	font-size: 1rem;
+	margin-bottom: .4rem;
 }
 
 .send_time_item {
-	width: 70%;
-	float: left;
 	overflow: auto;
 	font-size: 90%;
 	color: gray;
@@ -207,6 +211,7 @@
 
 .comment_main_wrapper {
 	width: 100%;
+	margin-bottom: 2rem;
 }
 
 .comment_item_wrapper {
@@ -256,7 +261,7 @@
 	margin-top: .3rem;
 }
 .comment_item_mainer_text{
-	
+
 }
 
 .comment_item_reply {
@@ -282,5 +287,5 @@
 .reply_user_name {
 	color: #507DAF;
 }
- 
+
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class UserMainPageVo {
 
+    private Integer userId;
+
     private String username;
 
     private String headSculpture;
@@ -22,6 +24,14 @@ public class UserMainPageVo {
     private String studentId;
 
     private List<MessageVo> messageVos;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
@@ -87,7 +97,8 @@ public class UserMainPageVo {
         this.messageVos = messageVos;
     }
 
-    public UserMainPageVo(String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, String studentId, List<MessageVo> messageVos) {
+    public UserMainPageVo(Integer userId, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, String studentId, List<MessageVo> messageVos) {
+        this.userId = userId;
         this.username = username;
         this.headSculpture = headSculpture;
         this.signature = signature;

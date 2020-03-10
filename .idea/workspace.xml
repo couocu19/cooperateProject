@@ -2,15 +2,37 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="xiyouProject:war exploded" />
+      <artifact name="xiyouProject:war20" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/ReplyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/ReplyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/ReplyMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/ReplyMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war19.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/xiyouProject_war20.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/UserMainPageVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/vo/UserMainPageVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/vo/UserMainPageVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/vo/UserMainPageVo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/vo/UserMainPageVo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/vo/UserMainPageVo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/compile_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/compile_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/personal_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/personal_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/user_message_set.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web_project/user_message_set.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/js/compile_page.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/js/compile_page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/js/getUserStudentId.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/js/getUserStudentId.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/js/personal_page.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/js/personal_page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/js/user_message_set.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/js/user_message_set.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/style/compile_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/style/compile_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/style/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/style/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/style/personal_page.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/style/personal_page.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/style/user_message_set.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/style/user_message_set.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -380,7 +402,10 @@
       <workItem from="1583562841572" duration="1872000" />
       <workItem from="1583670681233" duration="4099000" />
       <workItem from="1583674887122" duration="8826000" />
-      <workItem from="1583746712185" duration="17476000" />
+      <workItem from="1583746712185" duration="18700000" />
+      <workItem from="1583772760248" duration="549000" />
+      <workItem from="1583829326716" duration="1176000" />
+      <workItem from="1583837842633" duration="4584000" />
     </task>
     <servers />
   </component>

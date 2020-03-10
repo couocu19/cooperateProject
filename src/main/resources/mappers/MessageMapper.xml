@@ -136,7 +136,8 @@
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
-<!--todo:记得先在数据库中测试正确性-->
+
+  <!--todo:记得先在数据库中测试正确性-->
   <select id="getUserAllMessage" resultType="map" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List1"/>
