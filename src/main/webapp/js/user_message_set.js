@@ -1,7 +1,8 @@
 
 
 import {Ajax} from 'http://localhost:9012/js/AJAX.js'
-
+import {getBase64ImgWidthHeight} from 'http://localhsot:9012/js/getBase64ImgWidthHeight.js'
+import show_photoswipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 class App {
 
 

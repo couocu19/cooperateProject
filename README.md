@@ -207,7 +207,33 @@
 - #### 前端
 
   - 项目中尽可能多的使用了es6 语法，包括 class, module式编程，Promise, 字符串的扩展...
+  
   - 其中图片的预览效果的实现使用了photoswipe插件
+    
     - [photoswipe的基本使用以及一些基本问题的解决]()
+    
+  - 上拉刷新和下拉加载的实现
+  
+    - > 用到了 css3动画 touchstart touchend touchmove事件
+  
+    - 下拉刷新主要利用了`e.touches[0].pageY`的差值判断是否执行刷新页面的回调函数
+  
+      ```javascript
+      let start_pos = 0,	// 记录开始的位置
+          move_distant = 0; // 记录移动距离变量的值
+      
+      // 添加事件
+      element.addEventListener('touchstart', (e) => {
+          //记录开始滑动的位置
+          start_pos = e.touches[0].pageY;
+      }, false);
+      // 添加按住移动的事件
+      element.addEventListener('touchmove', () => {
+          // 更新记录移动距离变量的值
+          move_distant = e.touches[0].pageY - start_pos;
+          if(move_distant > 0 && move_distant < 100) {
+              // 执行回调函数
+          }
+      }, false);
+      ```
 
-​	

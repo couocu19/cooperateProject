@@ -1,30 +1,6 @@
 
 
- #header_wrapper {
- 	display: flex;
- 	justify-content: space-between;
- }
 
-
- .icon_wrapper {
- 	width: 2rem;
- 	height: 2rem;
- 	opacity: .8;
- }
-
-
-.add_user_btn {
- 	margin: .5rem 0 0 0;
- }
-
- .set_btn {
- 	margin: .5rem 1rem 0 0;
- }
-
- .icon_wrapper img{
- 	width: 100%;
- 	height: 100%;
- }
 
 
 #main_content {
@@ -59,13 +35,12 @@
 
 }
 
-.return_btn {
-	margin: .5rem 0 0 1rem;
-}
+
 .user_head_pic img{
 	width: 100%;
 	border-radius: 10rem;
 }
+
 .user_name {
 	margin: .3rem 0 .5rem 0;
 	font-size: 1.5rem;

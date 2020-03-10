@@ -60,8 +60,5 @@ function Ajax(obj) {
 	}
 }
 
-function returnPage() {
-		window.history.back();
-}
 
-export {Ajax, returnPage};
+export {Ajax};

@@ -1,4 +1,4 @@
-import {Ajax, returnPage} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
 class APP {
@@ -28,7 +28,7 @@ class APP {
 		// 	window.android.getphoto();
 		// }, false);
 		this.return_btn.addEventListener('click', () => {
-			returnPage()
+			window.history.back()
 		}, false);
 		this.send_btn.addEventListener('click', () => {
 			// 直接将属性添加到对象的 动态信息属性上
@@ -176,7 +176,7 @@ class APP {
 			success: (responeText) => {
 				let json = JSON.parse(responeText);
 				console.log(json);
-				returnPage();
+				// window.history.back();
 			},
 			fail: function(err) {
 				console.log(err);

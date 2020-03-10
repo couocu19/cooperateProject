@@ -41,7 +41,7 @@ class Obj{
 		}, false);
 		this.user_btn.addEventListener('click', () => {
 			console.log('ok');
-			window.location.href = 'personal_page.html?name="ykz"';
+			window.location.href = 'personal_page.html?';
 		}, false);
 		this.write_btn.addEventListener('click', () => {
 			window.location.href = 'compile_page.html';
@@ -67,7 +67,6 @@ class Obj{
 
 		target.classList.add('cur');
 		//执行渲染函数
-		this.sendAjax();
 	}
 
 }

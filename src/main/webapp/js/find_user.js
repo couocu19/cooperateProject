@@ -1,4 +1,4 @@
-import {Ajax, returnPage} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 
 class App {
 	constructor(return_btn, search, send_btn) {
@@ -8,7 +8,7 @@ class App {
 	}
 	init() {
 		this.return_btn.addEventListener('click', () => {
-			returnPage();
+			window.history.back();
 		}, false);
 		this.send_btn.addEventListener('click', () => {
 			this.send_Ajax();
