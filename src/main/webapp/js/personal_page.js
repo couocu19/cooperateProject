@@ -81,6 +81,7 @@ class Dynamic {
 	}
 
 	render() {
+		if(this.data.length == 0) {return}
 		console.log(this.data)
 		// 每次加载结束的下标
 		let end_index = this.data.length - this.dynamic_num - 5 >= 0 ?  this.dynamic_num + 5 : this.data.length - 1;
@@ -88,7 +89,6 @@ class Dynamic {
 		let item_str = '';
 		for(let i = this.dynamic_num; i < end_index; i++) {
 			let item_data = this.data[i];
-			console.log(item_data)
 			let imgs_str = this.getImgStr(item_data.contentImages);
 			item_str += `<!--每一条动态模板--><div class="main_content_item" onclick=examine_dynamic(${item_data.userId},${item_data.messageId})><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main"><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style" src="../../pic/praise.png"><div>123</div></div></div></div>`
 
