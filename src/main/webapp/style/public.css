@@ -21,7 +21,8 @@
     height: 100%;
 }
 .refreshText {
-	position: absolute;
+	float: left;
+	/*position: absolute;*/
 	width: 100%;
 	line-height: 50px;
 	text-align: center;

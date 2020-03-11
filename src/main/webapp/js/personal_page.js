@@ -7,8 +7,10 @@ function Ab(argument) {
 	// body...
 	console.log(a);
 }
-AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax('a'));
 
+function Test(a_) {
+	console.log(a_);
+}
 class App {
 	constructor(return_btn, adduser_btn, change_message) {
 		this.return_btn = return_btn;
@@ -72,18 +74,21 @@ class Dynamic {
 	constructor(el) {
 		this.el = el;
 		this.dynamic_num = 0;
+		this.data = [];
 	}
 
 	init() {
 	}
 
-	render(data) {
-		console.log(data);
+	render() {
+		console.log(this.data)
 		// 每次加载结束的下标
-		let end_index = data.length - this.dynamic_num - 5 >= 0 ?  this.dynamic_num + 5 : data.length - 1;
+		let end_index = this.data.length - this.dynamic_num - 5 >= 0 ?  this.dynamic_num + 5 : this.data.length - 1;
+		console.log(end_index);
 		let item_str = '';
 		for(let i = this.dynamic_num; i < end_index; i++) {
-			let item_data = data[i];
+			let item_data = this.data[i];
+			console.log(item_data)
 			let imgs_str = this.getImgStr(item_data.contentImages);
 			item_str += `<!--每一条动态模板--><div class="main_content_item" onclick=examine_dynamic(${item_data.userId},${item_data.messageId})><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main"><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style" src="../../pic/praise.png"><div>123</div></div></div></div>`
 
@@ -167,12 +172,14 @@ proAjax({
 	}).then((value) => {
 		// 渲染用户发送的动态部分
 		// console.log(value);
-
-		dynamic_obj.render(value.messageVos);
+		dynamic_obj.data = value.messageVos;
+		dynamic_obj.render();
 
 	});
 });
 
+AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax);
+AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render());
 
 
 

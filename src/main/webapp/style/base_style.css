@@ -4,10 +4,11 @@
 	border: 0;
 }
 
-html {
+html, body{
 	font: inherit;
 	font-size: 100%;
 	vertical-align: baseline;
+	/*overflow: hidden;*/
 }
 
 a {
