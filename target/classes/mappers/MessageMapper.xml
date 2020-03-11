@@ -148,4 +148,16 @@
     where m.user_id = #{userId}
     and m.is_deleted != 0
   </select>
+
+<!--  <select id="selectByKeyInfo" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <include refid="Base_Column_List1"/>-->
+<!--    <include refid="Base_Column_List2"/>-->
+<!--    from  user_message m-->
+<!--    inner join message_content c-->
+<!--    on m.id = c.message_id-->
+<!--    where c.content LIKE #{info}-->
+<!--    and m.is_deleted != 0-->
+
+<!--  </select>-->
 </mapper>

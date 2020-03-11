@@ -72,4 +72,13 @@
         user_id = #{userId} and message_id = #{messageId}
     </select>
 
+    <select id="selectByMessageId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_List"/>
+        from message_praise
+        where
+        message_id = #{messageId}
+        and is_canceled != 0
+    </select>
+
 </mapper>

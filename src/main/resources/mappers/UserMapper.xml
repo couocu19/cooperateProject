@@ -220,4 +220,11 @@
     where u.student_id = #{studentId}
     and m.is_deleted != 0
   </select>
+
+  <select id="selectByKeyInfo" resultMap="BaseResultMap" parameterType="string">
+     select
+     <include refid="Base_Column_List"/>
+     from xiyou_user
+     where username like #{info}
+  </select>
 </mapper>

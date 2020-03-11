@@ -16,4 +16,6 @@ public interface ICommentService {
     ServletResponse<Reply> getCommentFirstReply(Integer commentId);
     ServletResponse<List<Comment>> getAllComment(Integer messageId);
 
+    ServletResponse<List<Reply>> getCommentAllReply(Integer commentId);
+
 }

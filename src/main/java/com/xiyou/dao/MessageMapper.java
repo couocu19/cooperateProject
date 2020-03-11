@@ -20,4 +20,6 @@ public interface MessageMapper {
     int updateByPrimaryKey(Message record);
 
     List<Message> getUserAllMessage(Integer userId);
+
+//    List<Message> selectByKeyInfo(String info);
 }

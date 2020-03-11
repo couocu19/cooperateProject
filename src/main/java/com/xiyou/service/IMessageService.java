@@ -15,4 +15,6 @@ public interface IMessageService {
 
     ServletResponse cancelPraise(Integer praiseId,Integer userId);
 
+    ServletResponse getPraiseUsers(Integer messageId);
+
 }

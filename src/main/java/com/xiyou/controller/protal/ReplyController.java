@@ -46,11 +46,6 @@ public class ReplyController {
 
     }
 
-
-
-
-
-
     //todo:待测试
     @ResponseBody
     @RequestMapping("delete.do")
@@ -63,4 +58,9 @@ public class ReplyController {
         return iReplyService.deleteReply(replyId, userId);
 
     }
+
+
+
+
+
 }

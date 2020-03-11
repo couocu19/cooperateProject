@@ -5,14 +5,22 @@ import com.xiyou.common.ServletResponse;
 import com.xiyou.dao.ContentMapper;
 import com.xiyou.dao.MessageMapper;
 import com.xiyou.dao.PraiseMapper;
+import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Content;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.Praise;
+import com.xiyou.pojo.User;
 import com.xiyou.service.IMessageService;
+import com.xiyou.util.DateTimeUtil;
+import com.xiyou.vo.MessageVo;
+import com.xiyou.vo.PraiseVo;
+import com.xiyou.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service("iMessageService")
 public class MessageServiceImpl implements IMessageService {
@@ -25,6 +33,9 @@ public class MessageServiceImpl implements IMessageService {
 
     @Autowired
     private PraiseMapper praiseMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public ServletResponse<Message> addMessage(Message message, Content content){
         //上传到数据库的规则:先上传message,得到message对应的id,再上传message对应的content
@@ -102,8 +113,6 @@ public class MessageServiceImpl implements IMessageService {
 
     }
 
-
-
     //动态取消赞
     public ServletResponse cancelPraise(Integer praiseId,Integer userId){
         Praise praise = praiseMapper.selectByPrimaryKey(praiseId);
@@ -132,6 +141,35 @@ public class MessageServiceImpl implements IMessageService {
 
     }
 
+    //获取某个动态的点赞列表
+    public ServletResponse getPraiseUsers(Integer messageId){
+        List<Praise> praises = praiseMapper.selectByMessageId(messageId);
+        if(praises!=null && praises.size()!=0){
+            List<PraiseVo> praiseVos = new ArrayList<>();
+            PraiseVo praiseVo = null;
+            for(Praise p:praises){
+                praiseVo = assemblePraise(p);
+                praiseVos.add(praiseVo);
+            }
+
+            return ServletResponse.createBySuccess(praiseVos);
+        }
+
+        return ServletResponse.createBySuccessMessage("你的赞是让我最开心的事~");
+
+    }
+
+
+
+    private PraiseVo assemblePraise(Praise praise){
+        PraiseVo praiseVo = new PraiseVo();
+        praiseVo.setPraiseId(praise.getId());
+        praiseVo.setPraiseUserId(praise.getUserId());
+        User praiseUser = userMapper.selectByPrimaryKey(praise.getUserId());
+        praiseVo.setPraiseUserName(praiseUser.getUsername());
+        praiseVo.setSignature(praiseUser.getSignature());
+        return praiseVo;
+    }
 
 
 

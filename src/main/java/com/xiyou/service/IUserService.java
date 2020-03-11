@@ -18,4 +18,6 @@ public interface IUserService {
 
     ServletResponse<User> getUserInfoAndMessages(String studentId);
 
+    ServletResponse vagueSelect(String massage);
+
 }

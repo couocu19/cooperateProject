@@ -7,11 +7,13 @@ import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
 import com.xiyou.service.IUserService;
+import com.xiyou.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("iUserService")
@@ -95,6 +97,32 @@ public class UserServiceImpl implements IUserService {
         }
 
         return ServletResponse.createBySuccess(users);
+    }
+
+    public ServletResponse<List<UserVo>> vagueSelect(String massage){
+        String sqlMassage = "%"+massage+"%";
+        List<User> users = userMapper.selectByKeyInfo(sqlMassage);
+        if(users!=null){
+            List<UserVo> userVos = new ArrayList<>();
+            UserVo userVo = null;
+            for(User user:users){
+                userVo = assembleUser(user);
+                userVos.add(userVo);
+            }
+            return ServletResponse.createBySuccess(userVos);
+        }
+        return ServletResponse.createByErrorMessage("没有查到相关用户~");
+    }
+
+    private UserVo assembleUser(User user){
+        UserVo userVo = new UserVo();
+        userVo.setId(user.getId());
+        userVo.setHeader(user.getHeadSculpture());
+        userVo.setUserName(user.getUsername());
+        userVo.setFans(user.getFans());
+        userVo.setSignature(user.getSignature());
+
+        return userVo;
     }
 
 }

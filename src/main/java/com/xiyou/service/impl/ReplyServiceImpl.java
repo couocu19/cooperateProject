@@ -39,6 +39,7 @@ public class ReplyServiceImpl implements IReplyService {
             message = messageMapper.selectByPrimaryKey(comment.getMessageId());
             Integer commentCount = message.getCommentCount();
             commentCount++;
+            message.setCommentCount(commentCount);
             messageMapper.updateByPrimaryKey(message);
             return ServletResponse.createBySuccess(reply);
         }
@@ -60,6 +61,7 @@ public class ReplyServiceImpl implements IReplyService {
                     //每删除一次评论总数减一
                     Integer commentCount = message.getCommentCount();
                     commentCount--;
+                    message.setCommentCount(commentCount);
                     messageMapper.updateByPrimaryKey(message);
                     return ServletResponse.createBySuccess("删除成功!");
                 }
@@ -70,5 +72,7 @@ public class ReplyServiceImpl implements IReplyService {
 
     }
 
+
+//    public ServletResponse<>
 
 }

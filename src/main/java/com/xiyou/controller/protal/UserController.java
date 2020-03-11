@@ -10,6 +10,7 @@ import com.xiyou.service.IUserService;
 import com.xiyou.util.DateTimeUtil;
 import com.xiyou.vo.MessageVo;
 import com.xiyou.vo.UserMainPageVo;
+import com.xiyou.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -135,6 +136,13 @@ public class UserController {
     }
 
 
+    //模糊查询
+    @ResponseBody
+    @RequestMapping("vagueSelect.do")
+    public ServletResponse vagueSelectInfo(String info){
+        return iUserService.vagueSelect(info);
+    }
+
     private UserMainPageVo assembleUserVo(User user){
         UserMainPageVo userMainPageVo = new UserMainPageVo();
         List<MessageVo> list = new ArrayList<>();
@@ -179,11 +187,9 @@ public class UserController {
 
     }
 
-//    //查看某个用户的所有粉丝或者关注者
-//    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
+    //查看某个用户的所有粉丝或者关注者
+    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
 
-    //模糊查找用户 //按照用户名查找
-//    public ServletResponse
 
 
 }

@@ -53,8 +53,7 @@ public class CommentServiceImpl implements ICommentService {
         if(replies!=null && replies.size()!=0){
             return ServletResponse.createBySuccess(replies);
         }
-
-        return ServletResponse.createByErrorMessage("error");
+        return ServletResponse.createByErrorMessage("null");
     }
 
     //获取某一条评论的第一条回复
@@ -66,7 +65,6 @@ public class CommentServiceImpl implements ICommentService {
         }
         return ServletResponse.createByErrorMessage("empty");
     }
-
 
     public ServletResponse<List<Comment>> getAllComment(Integer messageId){
         List<Comment> comments = commentMapper.selectByMessageId(messageId);

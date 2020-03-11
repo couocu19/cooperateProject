@@ -104,6 +104,57 @@ public class MessageController {
          return response;
     }
 
+
+    //用户删除动态
+    @ResponseBody
+    @RequestMapping("delete.do")
+    public ServletResponse<String> deleteMessage(HttpSession session,Integer messageId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        Integer userId = user.getId();
+        if(user == null){
+            return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
+        }
+        return iMessageService.deleteMessage(messageId,userId);
+    }
+
+
+    //todo:完善点赞功能
+    @ResponseBody
+    @RequestMapping("praise.do")
+    public ServletResponse praiseMessage(HttpSession session,Integer messageId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录!");
+        }
+        Integer id = user.getId();
+        return iMessageService.praiseMessage(messageId,id);
+    }
+
+    @ResponseBody
+    @RequestMapping("cancel_praise.do")
+    public ServletResponse cancelPraise(HttpSession session,Integer id){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录!");
+        }
+        Integer userId = user.getId();
+        return iMessageService.cancelPraise(id,userId);
+    }
+
+
+    @ResponseBody
+    @RequestMapping("getPraiseUsers.do")
+    public ServletResponse getPraiseUsers(HttpSession session,Integer messageId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("登录账户,解锁更多信息~");
+        }
+
+        return iMessageService.getPraiseUsers(messageId);
+
+    }
+
+
     public MessageVo assembleMessage(Message message,User user){
         MessageVo messageVo = new MessageVo();
         String username = user.getUsername();
@@ -146,7 +197,6 @@ public class MessageController {
         return messageVo;
 
     }
-
     private String getFilePath(@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpSession session,String dirName){
 
 //        System.out.println("***");
@@ -157,46 +207,6 @@ public class MessageController {
         String targetFileName = iFileService.upload(file, path);
         return targetFileName;
     }
-
-
-    //用户删除动态
-    @ResponseBody
-    @RequestMapping("delete.do")
-    public ServletResponse<String> deleteMessage(HttpSession session,Integer messageId){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        Integer userId = user.getId();
-        if(user == null){
-            return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
-        }
-        return iMessageService.deleteMessage(messageId,userId);
-    }
-
-
-
-    //todo:完善点赞功能
-    @ResponseBody
-    @RequestMapping("praise.do")
-    public ServletResponse praiseMessage(HttpSession session,Integer messageId){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录!");
-        }
-        Integer id = user.getId();
-        return iMessageService.praiseMessage(messageId,id);
-    }
-
-    @ResponseBody
-    @RequestMapping("cancel_praise.do")
-    public ServletResponse cancelPraise(HttpSession session,Integer id){
-        User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录!");
-        }
-        Integer userId = user.getId();
-        return iMessageService.cancelPraise(id,userId);
-    }
-
-
 
 
 }

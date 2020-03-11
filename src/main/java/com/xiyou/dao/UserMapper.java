@@ -25,6 +25,8 @@ public interface UserMapper {
 
     User selectAllInfoByStudyId(String studyId);
 
+    List<User> selectByKeyInfo(String info);
+
 
 
 }
