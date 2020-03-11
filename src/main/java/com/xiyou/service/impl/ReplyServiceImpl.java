@@ -31,10 +31,15 @@ public class ReplyServiceImpl implements IReplyService {
             Integer id = comment.getMessageId();
             reply.setMessageId(id);
         }
-
         int rowCount = replyMapper.insert(reply);
         Message message = null;
+        Integer replyCount = 0;
         if(rowCount>0){
+            //回复中的回复总数加一
+            replyCount = comment.getReplyCount();
+            replyCount++;
+            comment.setReplyCount(replyCount);
+            commentMapper.updateByPrimaryKey(comment);
             //每评论一条动态中的评论总数增加一
             message = messageMapper.selectByPrimaryKey(comment.getMessageId());
             Integer commentCount = message.getCommentCount();

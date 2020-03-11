@@ -99,6 +99,8 @@ public class CommentController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("cancelPraise.do")
     public ServletResponse<Comment> cancelPraise(HttpSession session,Integer commentId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){

@@ -187,9 +187,8 @@ public class UserController {
 
     }
 
-    //查看某个用户的所有粉丝或者关注者
-    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
-
+//    //查看某个用户的所有粉丝或者关注者
+//    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
 
 
 }

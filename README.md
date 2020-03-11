@@ -488,15 +488,360 @@ method:get
       photos : '照片数组',
       send_time : '发送时间'
   }
-
-
   返回示例
-  成功
-  {
-      "error" : 0,
-      ""
-  }
-
+    成功
+    {
+        "error" : 0,
+        ""
+    }
   ```
->>>>>>> c2119700547be4b049c75b9f61ec48fa1e8553a5
+
+
+
+- ### 用户点赞动态
+
+  (这个接口返回的数据还没有进行加工,记得提醒我改)
+
+  ```json
+  url:/message/praise.do
+  参数:messageId(动态id)
+  method:get/post
+  返回示例:
+  {
+      "status": 0,
+      "msg": "ok",
+      "data":{
+          "id": null,
+          "userId": 3,
+          "messageId": 15,
+          "canceled": true
+      }
+  }
+  ```
+
+- ### 用户取消赞动态
+
+  ```json
+  url:/message/cancel_praise.do
+  参数:id(该点赞记录对应的id)
+  method:get/post
+  返回示例:
+  {
+     "status": 0,
+     "msg": "操作成功"
+  }
+  ```
+
+  
+
+## 评论模块接口
+
+- ### 用户评论动态
+
+  ```json
+  请求url:/comment/addToMessage.do
+  参数:messageId(动态id),content(评论内容)
+  说明:如果评论成功,则返回当前动态的所有评论列表并按照时间的降序排列展示，即最上面的评论为刚刚发表的评论
+  method:get/post
+  返回示例:
+  {
+      "status": 1,
+      "msg": "用户尚未登录,请先登录~"
+  }
+  {
+  "status": 0,
+  "data":[ 
+      {
+      "commentId": 7,
+      "sendUsername": "美女1号",
+      "header":"http://118.31.12.175:8080/.....images/defaultHeader.jpg",
+      "time": "2020-03-11 23:02:16",
+      "content": "您真好看啊啊",
+      "praiseCount": 0,
+      "firstReplyUser": null,
+      "firstReplyContent": null,
+      "replyCountMessage": null
+     },
+      {
+      "commentId": 5,
+      "sendUsername": "美女1号",
+      "header": "http://118.31.12.175:8080/.....images/defaultHeader.jpg",
+      "time": "2020-03-09 23:47:00",
+      "content": "我自己给自己评论",
+      "praiseCount": 0,
+      "firstReplyUser": null,
+      "firstReplyContent": null,
+      "replyCountMessage": null
+     }
+  ]
+  }
+  ```
+
+- ### 用户删除动态评论
+
+  ```json
+  url:/comment/deleteComment.do
+  参数:commentId(被删除评论的id)
+  method:get/post
+  说明:当用户没有删除该评论的权限时，会返回没有操作权限；数据库删除失败时，会返回"操作失败".
+  返回示例:
+  {
+      "status": 1,
+      "msg": "用户尚未登录,请先登录~"
+  }
+  {
+      "status": 1,
+      "msg": "没有操作权限"
+  }
+  {
+      "status": 1,
+      "msg": "操作失败"
+  }
+  {
+      "status": 0,
+      "data": "操作成功！"
+  }
+  ```
+
+- ### 查看某条动态的所有评论
+
+  ```json
+  url:/comment/getMessAllComments.do
+  参数:messageId(动态id)
+  返回示例:
+  {
+      "status": 1,
+      "msg": "用户尚未登录,请先登录~"
+  }
+  {
+  "status": 0,
+  "data":[
+     {
+     "commentId": 4,
+     "sendUsername": "美女1号",
+     "header": "http://118.31.12.175:8080/....defaultHeader.jpg",
+     "time": "2020-03-09 23:22:16",
+     "content": "aaaaaaa",
+     "praiseCount": 0,
+     "firstReplyUser": "美女1号",
+     "firstReplyContent": ":啦啦啦啦阿里",
+     "replyCountMessage": "共0条评论回复"
+    },
+     {
+     "commentId": 3,
+     "sendUsername": "美女1号",
+     "header": "http://118.31.12.175:8080/....defaultHeader.jpg",
+     "time": "2020-03-09 18:23:38",
+     "content": "哈哈哈哈哈哈哈哈",
+     "praiseCount": 1,
+     "firstReplyUser": null,
+     "firstReplyContent": null,
+     "replyCountMessage": null
+    },
+     {
+     "commentId": 2,
+     "sendUsername": "美女1号",
+     "header": "http://118.31.12.175:8080/....defaultHeader.jpg",
+     "time": "2020-03-08 23:30:40",
+     "content": "哼！",
+     "praiseCount": 1,
+     "firstReplyUser": null,
+     "firstReplyContent": null,
+     "replyCountMessage": null
+    }
+  ]
+  }
+  ```
+
+
+
+- ### 查看某条动态下某一条评论以及该评论的所有回复
+
+  ```json
+  url:/comment/getCommentAndReply.do
+  参数:commentId(评论对应的id)
+  method:get/post
+  返回示例:
+  {
+      "status": 1,
+      "msg": "登录您的账户,查看更多内容~"
+  }
+  {
+      
+      "status": 0,
+      "data":{
+      "commentId": 4,
+      "sendUsername": "美女1号",
+      "header": "http://118.31.12.175:8080/....mages/defaultHeader.jpg",
+      "time": "2020-03-09 23:22:16",
+      "content": "aaaaaaa",
+      "praiseCount": 0,
+      "replies":[
+          
+          {
+          "replyId": 4,
+          "sendReplyUserId": 3,
+          "replyUsername": "美女1号",
+          "header": "http://118.31.12.175:8080/....mages/defaultHeader.jpg",
+          "time": "2020-03-11 11:08:08",
+          "content": "啦啦啦啦阿里",
+          "receiveReplyUserId": 3,
+          "receiveReplyUserName": "美女1号"
+         },
+          {
+          "replyId": 3,
+          "sendReplyUserId": 3,
+          "replyUsername": "美女1号",
+          "header": "http://118.31.12.175:8080/...images/defaultHeader.jpg",
+          "time": "2020-03-11 11:06:47",
+          "content": "嘻嘻嘻嘻嘻嘻",
+          "receiveReplyUserId": 3,
+          "receiveReplyUserName": "美女1号"
+         },
+          {
+          "replyId": 2,
+          "sendReplyUserId": 3,
+          "replyUsername": "美女1号",
+          "header": "http://118.31.12.175:8080/.../images/defaultHeader.jpg",
+          "time": "2020-03-09 23:25:09",
+          "content": "你说的对啊",
+          "receiveReplyUserId": 3,
+          "receiveReplyUserName": "美女1号"
+         }
+  ]
+  }
+  }
+  ```
+
+- ### 用户点赞某一条评论
+
+  ```json
+  url:/comment/praiseComment.do
+  参数:commentId(评论id)
+  method:get/post
+  返回示例:
+  {
+      "status": 1,
+      "msg": "用户尚未登录,请先登录~"
+  }
+  {
+      "status": 0,
+      "data": "ok"
+  }
+  ```
+
+  
+
+  ## 评论回复模块
+
+- ### 用户回复某一条评论(给评论进行评论)
+
+  (这个接口返回的数据还没有进行加工,记得提醒我改)
+
+  ```json
+  url:/reply/addToComment.do
+  参数:content(回复内容),commentId(该评论的id),receiveUserId(收到回复的用户id)
+  method:get/post
+  返回示例:
+  {  
+      "status": 0,
+      "data":{
+      "id": null,
+      "messageId": 46,
+      "commentId": 5,
+      "sendUserId": 3,
+      "content": "略略略",
+      "time": 1583942076281,
+      "isDeleted": true,
+      "receiveUserId": 3
+     }
+  }
+  ```
+
+- ### 用户删除回复
+
+  ```json
+  url:/reply/delete.do
+  参数:replyId(回复的id)
+  method:get/method
+  返回示例:
+  {
+      "status": 0,
+      "data": "删除成功!"
+  }
+  {
+      "status": 1,
+      "data": "删除失败!"
+  }
+  ```
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- ### 模糊查询用户
+
+  ```json
+  url:/user/vagueSelect.do
+  说明:用户输入关键字,查找用户名中含有关键字的用户列表
+  参数:info(关键字)
+  method:get/method
+  参数示例:'美女'
+  返回示例:
+  {
+  "status": 0,
+  "data":[   
+      {
+      "id": 3,
+      "userName": "美女1号",
+      "signature": "我很美",
+      "header": "http://118.31.12.175:8080..../images/defaultHeader.jpg",
+      "fans": 0
+     },
+      {
+      "id": 4,
+      "userName": "美女2号",
+      "signature": null,
+      "header": "http://118.31.12.175:8080..../images/defaultHeader.jpg",
+      "fans": 0
+     },
+  {
+      "id": 5,
+      "userName": "美女3号",
+      "signature": null,
+      "header": "http://118.31.12.175:8080....images/defaultHeader.jpg",
+      "fans": 0
+     }
+  ]
+  }
+  
+  ```
+
+- ### 用户获取某个动态的点赞列表
+
+  ```json
+  url:/message/getPraiseUsers.do
+  参数:messageId(动态id)
+  method:get/post
+  返回示例:
+  {
+      "status": 0,
+      "data":[
+      {
+      "praiseId": 1,
+      "praiseUserId": 3,
+      "praiseUserName": "美女1号",
+      "header": null,
+      "signature": "我很美"
+     },
+      {
+      "praiseId": 5,
+      "praiseUserId": 2,
+      "praiseUserName": "楚楚",
+      "header": null,
+      "signature": "我是一个美女！！！"
+     }
+  ]
+  }
+  ```
+
+  
 
