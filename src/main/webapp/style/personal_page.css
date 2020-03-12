@@ -21,6 +21,7 @@
 	padding: 2rem;
 }
 
+
 #head_name:after{
 	content: '';
 	display: block;

@@ -18,6 +18,5 @@ export function getQueryStringArgs(data_str) {
 		args[name] = value;
 		i++;
 	}
-	console.log(args);
 	return args;
 }

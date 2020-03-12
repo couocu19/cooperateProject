@@ -14,6 +14,7 @@ class Obj {
 		this.return_btn.addEventListener('click', () => {
 			window.history.back();
 		}, false);
+		console.log(this.user_message);
 	}
 }
 

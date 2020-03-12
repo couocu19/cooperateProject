@@ -1,21 +1,16 @@
 import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {AddpullUp, AddSlideUp} from 'http://localhost:9012/js/pull_slide_event.js'
+import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
 window.user_student_id = '04192077';
 
-function Ab(argument) {
-	// body...
-	console.log(a);
-}
-
-function Test(a_) {
-	console.log(a_);
-}
 class App {
-	constructor(return_btn, adduser_btn, change_message) {
+	constructor(return_btn, adduser_btn, change_message, attent_btn) {
 		this.return_btn = return_btn;
 		this.adduser_btn = adduser_btn;
 		this.change_message = change_message;
+		this.data = getQueryStringArgs(location.search);
+		this.attent_btn =attent_btn;
 	}
 	init() {
 		this.return_btn.addEventListener('click', () => {
@@ -27,27 +22,91 @@ class App {
 		this.adduser_btn.addEventListener('click', () => {
 			window.location.href = 'find_user.html';
 		}, false);
+		this.attent_btn.addEventListener('click', () => {
+			this.send_attent();
+		}, false);
+		// 若该属性存在,则为查看别人的主页,
+		console.log(this.data.check_id);
+		this.render();
+		if(this.data.check_id != undefined) {
 
+			// 查看别人的页面
+			proAjax({
+				url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
+				type: 'get',
+				data: {
+					studentId : '04182097'
+				},
+				async: false,
+			}).then((value) => {
+				user.render(value);
+				console.log(value);
+				dynamic_obj.data = value.messageVos;
+				dynamic_obj.render();
+			});
+		} else {
+			// 查看自己的页面
+			proAjax({
+				//  得到用户的信息
+				url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do',
+				type: 'get',
+				data: {
+				},
+				async: false,
+			})
+			.then((value) => {
+				// 渲染用户头像和签名
+				user.render(value);
+				console.log(value.id);
+				proAjax({
+					url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
+					type: 'get',
+					data: {
+						studentId: value.studentId
+					},
+					async: false,
+				}).then((value) => {
+					// 渲染用户发送的动态部分
+					// console.log(value);
+					dynamic_obj.data = value.messageVos;
+					dynamic_obj.render();
+
+				});
+			});
+					}
 	}
+	render() {
+		if(this.data.check_id != undefined) {
+			this.change_message.style.display = 'none';
+			this.adduser_btn.style.display = 'none';
+		} else {
+			this.attent_btn.style.display = 'none';
+		}
+	}
+	send_attent() {
+		proAjax({
 
+		})
+	}
 }
 
 const app = new App(document.getElementsByClassName('icon_wrapper')[0],
 					document.getElementsByClassName('icon_wrapper')[1],
-					document.getElementsByClassName('icon_wrapper')[2]
+					document.getElementsByClassName('icon_wrapper')[2],
+					document.getElementsByClassName('icon_wrapper')[3]
 					);
 app.init();
 
 
 class User {
-	constructor(name, headSculpture, signature, fans, concern, readCount, studentId) {
+	constructor(name, headSculpture, signature, fans, concern, readCount) {
 		this.name = name;
 		this.headSculpture = headSculpture;
 		this.signature = signature;
 		this.fans = fans;
 		this.concern = concern;
 		this.readCount = readCount;
-		this.studentId = studentId;
+		// this.studentId = studentId;
 	}
 
 
@@ -66,8 +125,7 @@ const user = new User(  document.getElementsByClassName('user_name')[0],
 					    document.getElementsByClassName('user_sign')[0],
 					    document.getElementById('fans_num'),
 					    document.getElementById('gz_num'),
-					    document.getElementById('view_num'),
-					    window.user_student_id
+					    document.getElementById('view_num')
 	);
 
 class Dynamic {
@@ -81,20 +139,18 @@ class Dynamic {
 	}
 
 	render() {
-		if(this.data.length == 0) {return}
-		console.log(this.data)
+		console.log(dynamic_obj.data.length);
+		if(dynamic_obj.data.length == 0) {return}
 		// 每次加载结束的下标
-		let end_index = this.data.length - this.dynamic_num - 5 >= 0 ?  this.dynamic_num + 5 : this.data.length - 1;
-		console.log(end_index);
+		let end_index = dynamic_obj.data.length - dynamic_obj.dynamic_num - 5 >= 0 ?  dynamic_obj.dynamic_num + 5 : dynamic_obj.data.length - 1;
 		let item_str = '';
-		for(let i = this.dynamic_num; i < end_index; i++) {
-			let item_data = this.data[i];
-			let imgs_str = this.getImgStr(item_data.contentImages);
-			item_str += `<!--每一条动态模板--><div class="main_content_item" onclick=examine_dynamic(${item_data.userId},${item_data.messageId})><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main"><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style" src="../../pic/praise.png"><div>123</div></div></div></div>`
-
+		for(let i = dynamic_obj.dynamic_num; i < end_index; i++) {
+			let item_data = dynamic_obj.data[i];
+			let imgs_str = dynamic_obj.getImgStr(item_data.contentImages);
+			item_str += `<!--每一条动态模板--><div class="main_content_item" ><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examine_dynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseComment(${item_data.messageId}) src="../../pic/praise.png"><div class= "dynamic${item_data.messageId}">123</div></div></div></div>`;
 		}
-		this.el.innerHTML += item_str;
-		this.dynamic_num = end_index;
+		dynamic_obj.el.innerHTML += item_str;
+		dynamic_obj.dynamic_num = end_index;
 	}
 	getImgStr(imgs_arr) {
 		let return_str = '';
@@ -114,7 +170,7 @@ function proAjax(obj) {
 			var json = JSON.parse(responseText);
 			console.log(json);
 			if(json.status) {
-				if(json.msg = '当前未登录,请先登录~'){
+				if(json.msg == '当前未登录,请先登录~'){
 					Ajax({
 						url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
 						type: 'get',
@@ -150,36 +206,10 @@ function proAjax(obj) {
 	});
 }
 
-proAjax({
-	//  得到用户的信息
-	url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do',
-	type: 'get',
-	data: {
-	},
-	async: false,
-})
-.then((value) => {
-	// 渲染用户头像和签名
-	user.render(value);
-	console.log(value.id);
-	proAjax({
-		url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
-		type: 'get',
-		data: {
-			studentId: value.studentId
-		},
-		async: false,
-	}).then((value) => {
-		// 渲染用户发送的动态部分
-		// console.log(value);
-		dynamic_obj.data = value.messageVos;
-		dynamic_obj.render();
 
-	});
-});
 
 AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax);
-AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render());
+AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render, '');
 
 
 
