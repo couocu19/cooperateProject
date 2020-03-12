@@ -102,6 +102,7 @@ public class MessageServiceImpl implements IMessageService {
             praise.setUserId(userId);
             praise.setMessageId(messageId);
             praise.setCanceled(true);
+
             int rowCount = praiseMapper.insertSelective(praise);
               if(rowCount>0){
                   return ServletResponse.createBySuccess("ok",praise);

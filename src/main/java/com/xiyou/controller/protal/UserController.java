@@ -125,11 +125,11 @@ public class UserController {
     //获取某个用户的信息以及所有动态
     @ResponseBody
     @RequestMapping("get_info_and_message.do")
-    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(String studentId){
-        if(StringUtils.isBlank(studentId)){
+    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(String id){
+        if(StringUtils.isBlank(id)){
             return ServletResponse.createByErrorMessage("无效参数");
         }
-        User user = iUserService.getUserInfoAndMessages(studentId).getData();
+        User user = iUserService.getUserInfoAndMessages(id).getData();
         UserMainPageVo userMainPageVo = assembleUserVo(user);
 
         return ServletResponse.createBySuccess(userMainPageVo);

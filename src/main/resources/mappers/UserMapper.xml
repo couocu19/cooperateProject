@@ -217,7 +217,7 @@
     from xiyou_user u
     left outer join user_message m on u.id = m.user_id
     left outer join message_content c on m.id = c.message_id
-    where u.student_id = #{studentId}
+    where u.id = #{studentId}
     and m.is_deleted != 0
   </select>
 
