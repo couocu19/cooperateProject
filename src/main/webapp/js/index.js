@@ -41,7 +41,7 @@ class Obj{
 		}, false);
 		this.user_btn.addEventListener('click', () => {
 			console.log('ok');
-			window.location.href = 'personal_page.html?check_id=3';
+			window.location.href = 'personal_page.html';
 		}, false);
 		this.write_btn.addEventListener('click', () => {
 			window.location.href = 'compile_page.html';

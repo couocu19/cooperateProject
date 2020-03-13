@@ -146,6 +146,7 @@ class Dynamic {
 		let item_str = '';
 		for(let i = dynamic_obj.dynamic_num; i < end_index; i++) {
 			let item_data = dynamic_obj.data[i];
+			console.log(item_data);
 			let imgs_str = dynamic_obj.getImgStr(item_data.contentImages);
 			item_str += `<!--每一条动态模板--><div class="main_content_item" ><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examine_dynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" src="../../pic/comment.png"><div>12</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseComment(${item_data.messageId}) src="../../pic/praise.png"><div class= "dynamic${item_data.messageId}">123</div></div></div></div>`;
 		}
@@ -158,6 +159,7 @@ class Dynamic {
 		for(let i = 0, len = imgs_arr.length; i < len; i ++) {
 			return_str += `<div class="img_item"><img src=${imgs_arr[i]} alt=""></div>`
 		}
+
 		return return_str;
 	}
 }

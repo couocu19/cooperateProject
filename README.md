@@ -995,7 +995,7 @@
 
 - ### 获取某个用户的所有动态
 
-```
+```json
 简述:根据用户的id获取用户所发表的所有动态
 url:/user/get_user_message.do
 参数:id
@@ -1066,7 +1066,7 @@ method:get
 
 - ### 查看某个用户的信息和动态(用户主页)
 
-  ```
+  ```json
   简述:根据用户的id查看用户的主页,主页包括用户的基本信息和发表的动态
   url:/user/get_info_and_message.do
   参数:id
@@ -1102,7 +1102,8 @@ method:get
                     "pageviews":200,
                     "praisePoints":36,
                     "commentCount":5,
-                    "time":2020.3.10,
+                    "time": 2020.3.10,
+                    "is_parise": 0,
                     "content":{
                         "id":1,
                         "messageId":1,
@@ -1117,6 +1118,7 @@ method:get
                     "pageviews":430,
                     "praisePoints":66,
                     "commentCount":20,
+                  
                     "time":2020.4.6,
                     "content":{
                         "id":6,
@@ -1146,6 +1148,8 @@ method:get
           } 
       }
   }
+  
+  基本逻辑: 利用cookie做身份识别，每条动态中添加该用户是否对该条动态进行点赞
   ```
 
 - #### 发送动态

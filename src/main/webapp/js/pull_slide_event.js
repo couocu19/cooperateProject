@@ -48,14 +48,15 @@ function AddSlideUp(text_dom, el_dom, callback, data) {
 	// 获取当前滚动条的位置
 
 	window.onscroll = function() {
+
 		let scrollTop = getScrollTop();
 		// 获取当前可视范围内的高度
 		let cilentHeight = getCilentHeight();
 		// 获取文档的完整高度
 		let AllHeight = getScrollHeight();
-		// console.log(scrollTop, cilentHeight, AllHeight);
-		if(scrollTop + cilentHeight >= AllHeight) {
-
+		console.log(scrollTop, cilentHeight, AllHeight);
+		if(scrollTop + cilentHeight >= AllHeight - 20) {
+			text_dom.style.display = 'block';
 			text_dom.innerHTML = '加载中...';
 			// 此处添加滚动条事件的节流函数
 			throttle(callback, data);
@@ -68,7 +69,7 @@ function AddSlideUp(text_dom, el_dom, callback, data) {
 let throttle_var = null;
 function throttle(callback, data) {
 	clearTimeout(throttle_var);
-	setTimeout(() => {
+	throttle_var = setTimeout(() => {
 		console.log('callback 执行')
 		callback(data);
 	}, 300);
