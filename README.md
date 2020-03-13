@@ -16,7 +16,7 @@
 
 - #### 前端
 
-  - ##### [git地址](https://github.com/kibuniverse/cooperateProject/tree/master/src/main)
+  - ##### [git地址](https://github.com/kibuniverse/cooperateProject)
 
   - ##### 每个用户进入后都有其android对应的注入的student_id,主页利用student_id与后台建立联系后利用后台下发的cookie保持登录
 
