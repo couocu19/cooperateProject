@@ -32,3 +32,7 @@ function pariseComment(messageId) {
 	xhr.open('get', url, false);
 	xhr.send(null);
 }
+
+function deleteDynamic(delete_id) {
+	console.log(`删除动态id为${delete_id}的动态`);
+}

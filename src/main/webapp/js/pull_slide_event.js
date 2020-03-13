@@ -56,12 +56,12 @@ function AddSlideUp(text_dom, el_dom, callback, data) {
 		let AllHeight = getScrollHeight();
 		console.log(scrollTop, cilentHeight, AllHeight);
 		if(scrollTop + cilentHeight >= AllHeight - 20) {
-			text_dom.style.display = 'block';
+			text_dom.style.opacity = 1;
 			text_dom.innerHTML = '加载中...';
 			// 此处添加滚动条事件的节流函数
 			throttle(callback, data);
 			setTimeout(() => {
-				text_dom.style.display = 'none';
+				text_dom.style.opacity = 0;
 			}, 500);
 		}
 	}

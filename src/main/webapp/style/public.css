@@ -20,6 +20,10 @@
 	 margin: .5rem 1rem 0 0;
 }
 
+.delete_btn {
+    float: right;
+}
+
 
 .icon_wrapper img {
     width: 100%;
