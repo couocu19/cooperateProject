@@ -92,4 +92,11 @@
       content_videos = #{contentVideos,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByMessageId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from message_content
+    where message_id = #{messageId}
+
+  </select>
 </mapper>

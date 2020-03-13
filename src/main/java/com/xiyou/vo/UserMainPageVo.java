@@ -19,11 +19,19 @@ public class UserMainPageVo {
 
     private Integer concern;
 
-//    private Integer readCount;
+    private Integer readCount;
 
     private String studentId;
 
     private List<MessageVo> messageVos;
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -97,7 +105,8 @@ public class UserMainPageVo {
         this.messageVos = messageVos;
     }
 
-    public UserMainPageVo(Integer userId, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, String studentId, List<MessageVo> messageVos) {
+
+    public UserMainPageVo(Integer userId, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId, List<MessageVo> messageVos) {
         this.userId = userId;
         this.username = username;
         this.headSculpture = headSculpture;
@@ -105,6 +114,7 @@ public class UserMainPageVo {
         this.messageCount = messageCount;
         this.fans = fans;
         this.concern = concern;
+        this.readCount = readCount;
         this.studentId = studentId;
         this.messageVos = messageVos;
     }

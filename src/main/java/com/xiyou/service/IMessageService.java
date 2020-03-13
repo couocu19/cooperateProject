@@ -17,4 +17,6 @@ public interface IMessageService {
 
     ServletResponse getPraiseUsers(Integer messageId);
 
+    ServletResponse getMessageById(Integer messageId);
+
 }

@@ -135,7 +135,6 @@ public class UserController {
         return ServletResponse.createBySuccess(userMainPageVo);
     }
 
-
     //模糊查询
     @ResponseBody
     @RequestMapping("vagueSelect.do")
@@ -143,8 +142,10 @@ public class UserController {
         return iUserService.vagueSelect(info);
     }
 
+
     private UserMainPageVo assembleUserVo(User user){
         UserMainPageVo userMainPageVo = new UserMainPageVo();
+        userMainPageVo.setReadCount(user.getReadCount());
         List<MessageVo> list = new ArrayList<>();
         MessageVo messageVo = null;
         //填充主页下的动态信息
@@ -164,13 +165,13 @@ public class UserController {
                 List<String> imagesVo = new ArrayList<>();
                String[] images = m.getContent().getContentImages().split(",");
                for(int i =1;i<images.length;i++){
-                   imagesVo.add(Const.urlPrefix+"uploadImage/"+images[i]);
+                   imagesVo.add(images[i]);
                }
                messageVo.setContentImages(imagesVo);
             }
             if(m.getContent().getContentVideos()!=null){
                 String[] video = m.getContent().getContentVideos().split(",");
-                messageVo.setContentText(Const.urlPrefix+"uploadVideo"+video[1]);
+                messageVo.setContentText(video[1]);
             }
             list.add(messageVo);
         }

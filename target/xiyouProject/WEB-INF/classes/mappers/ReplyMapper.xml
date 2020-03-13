@@ -26,7 +26,7 @@
     delete from comment_reply
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.xiyou.pojo.Reply" >
+  <insert id="insert" parameterType="com.xiyou.pojo.Reply" useGeneratedKeys="true" keyProperty="id">
     insert into comment_reply (id, message_id, comment_id, 
       send_user_id, content, time, 
       is_deleted, receive_user_id)
@@ -34,7 +34,7 @@
       #{sendUserId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
       #{isDeleted,jdbcType=BIT}, #{receiveUserId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.xiyou.pojo.Reply" >
+  <insert id="insertSelective" parameterType="com.xiyou.pojo.Reply" useGeneratedKeys="true" keyProperty="id">
     insert into comment_reply
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

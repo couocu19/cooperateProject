@@ -8,6 +8,7 @@ import com.xiyou.pojo.Reply;
 import com.xiyou.pojo.User;
 import com.xiyou.service.ICommentService;
 import com.xiyou.service.IReplyService;
+import com.xiyou.vo.ReplyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +28,11 @@ public class ReplyController {
 
     @ResponseBody
     @RequestMapping("addToComment.do")
-    public ServletResponse<Reply> addReplyToComment(HttpSession session, String content, Integer commentId, Integer receiveUserId) {
+    public ServletResponse<ReplyVo> addReplyToComment(HttpSession session, String content, Integer commentId, Integer receiveUserId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
             return ServletResponse.createByErrorMessage("用户未登录！");
         }
-
 
         Reply reply = new Reply();
         reply.setContent(content);

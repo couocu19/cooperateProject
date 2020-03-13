@@ -4,10 +4,14 @@ import com.xiyou.common.ServletResponse;
 import com.xiyou.dao.CommentMapper;
 import com.xiyou.dao.MessageMapper;
 import com.xiyou.dao.ReplyMapper;
+import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Comment;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.Reply;
+import com.xiyou.pojo.User;
 import com.xiyou.service.IReplyService;
+import com.xiyou.util.DateTimeUtil;
+import com.xiyou.vo.ReplyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +28,11 @@ public class ReplyServiceImpl implements IReplyService {
     @Autowired
     private CommentMapper commentMapper;
 
-    public ServletResponse<Reply> addReplyToComment(Reply reply){
+    @Autowired
+    private UserMapper userMapper;
+
+
+    public ServletResponse<ReplyVo> addReplyToComment(Reply reply){
         Integer commentId = reply.getCommentId();
         Comment comment = commentMapper.selectByPrimaryKey(commentId);
         if(comment!=null){
@@ -34,6 +42,7 @@ public class ReplyServiceImpl implements IReplyService {
         int rowCount = replyMapper.insert(reply);
         Message message = null;
         Integer replyCount = 0;
+        ReplyVo replyVo = null;
         if(rowCount>0){
             //回复中的回复总数加一
             replyCount = comment.getReplyCount();
@@ -46,7 +55,8 @@ public class ReplyServiceImpl implements IReplyService {
             commentCount++;
             message.setCommentCount(commentCount);
             messageMapper.updateByPrimaryKey(message);
-            return ServletResponse.createBySuccess(reply);
+            replyVo = assembleReply(reply);
+            return ServletResponse.createBySuccess(replyVo);
         }
         return ServletResponse.createByErrorMessage("操作失败~");
     }
@@ -77,7 +87,22 @@ public class ReplyServiceImpl implements IReplyService {
 
     }
 
+    private ReplyVo assembleReply(Reply reply){
+        ReplyVo replyVo = new ReplyVo();
+        replyVo.setReplyId(reply.getId());
+        replyVo.setReceiveReplyUserId(reply.getReceiveUserId());
+        replyVo.setSendReplyUserId(reply.getSendUserId());
+        replyVo.setContent(reply.getContent());
+        replyVo.setTime(DateTimeUtil.dateToStr(reply.getTime(),DateTimeUtil.STANDARD_FORMAT));
+        User user = userMapper.selectByPrimaryKey(reply.getSendUserId());
+        replyVo.setReplyUsername(user.getUsername());
+        replyVo.setHeader(user.getHeadSculpture());
+        User user1 = userMapper.selectByPrimaryKey(reply.getReceiveUserId());
+        replyVo.setReceiveReplyUserName(user1.getUsername());
+        replyVo.setReceiveReplyUserId(user1.getId());
 
-//    public ServletResponse<>
+        return replyVo;
+
+    }
 
 }

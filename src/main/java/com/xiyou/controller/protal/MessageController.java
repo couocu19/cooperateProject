@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.xiyou.common.Const;
 import com.xiyou.common.ResponseCode;
 import com.xiyou.common.ServletResponse;
+import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Content;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
@@ -14,6 +15,7 @@ import com.xiyou.util.DateTimeUtil;
 import com.xiyou.util.PropertiesUtil;
 import com.xiyou.util.QiniuUploadImageUtil;
 import com.xiyou.vo.MessageVo;
+import com.xiyou.vo.ReplyVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,6 +40,8 @@ public class MessageController {
     private IUserService iUserService;
     @Autowired
     private IMessageService iMessageService;
+    @Autowired
+    private UserMapper userMapper;
 
     //用户发表动态
     //用MultipartFile[]来表示动态中的图片或者视频
@@ -141,7 +145,6 @@ public class MessageController {
         return iMessageService.cancelPraise(id,userId);
     }
 
-
     @ResponseBody
     @RequestMapping("getPraiseUsers.do")
     public ServletResponse getPraiseUsers(HttpSession session,Integer messageId){
@@ -154,6 +157,27 @@ public class MessageController {
 
     }
 
+
+    @ResponseBody
+    @RequestMapping("getMessageById.do")
+    public ServletResponse getMessage(HttpSession session,Integer messageId){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户未登录!");
+        }
+        ServletResponse response = iMessageService.getMessageById(messageId);
+
+        MessageVo messageVo = null;
+        Message message = null;
+        if(response.isSuccess()){
+            message = (Message) response.getData();
+            User user1 = userMapper.selectByPrimaryKey(message.getUserId());
+            messageVo = assembleMessage(message,user1);
+            return ServletResponse.createBySuccess(messageVo);
+        }
+        return ServletResponse.createByErrorMessage("error");
+
+    }
 
     public MessageVo assembleMessage(Message message,User user){
         MessageVo messageVo = new MessageVo();

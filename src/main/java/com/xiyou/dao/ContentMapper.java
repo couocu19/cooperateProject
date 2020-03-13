@@ -13,7 +13,10 @@ public interface ContentMapper {
 
     Content selectByPrimaryKey(Integer id);
 
+    Content selectByMessageId(Integer messageId);
+
     int updateByPrimaryKeySelective(Content record);
 
     int updateByPrimaryKey(Content record);
+
 }

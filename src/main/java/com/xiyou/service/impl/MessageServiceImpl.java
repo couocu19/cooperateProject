@@ -16,8 +16,10 @@ import com.xiyou.vo.MessageVo;
 import com.xiyou.vo.PraiseVo;
 import com.xiyou.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
+import java.rmi.ServerError;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -161,6 +163,16 @@ public class MessageServiceImpl implements IMessageService {
     }
 
 
+    public ServletResponse getMessageById(Integer messageId){
+        Message message = messageMapper.selectByPrimaryKey(messageId);
+        Content content = null;
+        if(message!=null){
+            content = contentMapper.selectByMessageId(messageId);
+            message.setContent(content);
+            return ServletResponse.createBySuccess(message);
+        }
+        return ServletResponse.createByErrorMessage("操作失败");
+    }
 
     private PraiseVo assemblePraise(Praise praise){
         PraiseVo praiseVo = new PraiseVo();
