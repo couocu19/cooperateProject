@@ -16,7 +16,7 @@ public interface IUserService {
 
     ServletResponse<List<Message>> getUserALLMessage(Integer id);
 
-    ServletResponse<User> getUserInfoAndMessages(String studentId);
+    ServletResponse<User> getUserInfoAndMessages(Integer studentId);
 
     ServletResponse vagueSelect(String massage);
 

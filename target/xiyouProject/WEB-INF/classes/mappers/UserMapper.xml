@@ -209,7 +209,7 @@
   </select>
 
   <!--  todo:这里很可能会报错  -->
-  <select id="selectAllInfoByStudyId" parameterType="string" resultMap="map1">
+  <select id="selectAllInfoByStudyId" parameterType="int" resultMap="map1">
     select
     <include refid="Base_Column_List1"/>,
     <include refid="Base_Column_List2"/>,

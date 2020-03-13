@@ -90,21 +90,25 @@ public class UserServiceImpl implements IUserService {
 
     }
 
-    public ServletResponse<User> getUserInfoAndMessages(String studentId){
-        User users = userMapper.selectAllInfoByStudyId(studentId);
+    //todo:改bug
+    public ServletResponse<User> getUserInfoAndMessages(Integer studentId){
+        User users = null;
+        try {
+            users = userMapper.selectAllInfoByStudyId(studentId);
+        } catch (Exception e) {
+            users = userMapper.selectByPrimaryKey(studentId);
+            if(users == null){
+                return ServletResponse.createByErrorMessage("用户不存在~");
+            }
+        }
         User user = new User();
         user.setId(users.getId());
         Integer readCount = users.getReadCount();
         readCount++;
-        //更新主页阅读总量
         user.setReadCount(readCount);
         userMapper.updateByPrimaryKeySelective(user);
 
-        if(users==null){
-            return ServletResponse.createByErrorMessage("该用户不存在!");
-        }
-
-        return ServletResponse.createBySuccess(users);
+        return ServletResponse.createByErrorMessage("获取失败");
     }
 
 

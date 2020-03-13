@@ -125,14 +125,18 @@ public class UserController {
     //获取某个用户的信息以及所有动态
     @ResponseBody
     @RequestMapping("get_info_and_message.do")
-    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(String id){
-        if(StringUtils.isBlank(id)){
+    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(Integer id){
+        if(id == null){
             return ServletResponse.createByErrorMessage("无效参数");
         }
-        User user = iUserService.getUserInfoAndMessages(id).getData();
-        UserMainPageVo userMainPageVo = assembleUserVo(user);
+        ServletResponse response =  iUserService.getUserInfoAndMessages(id);
+        if(response.isSuccess()){
+            User user = (User)response.getData();
+            UserMainPageVo userMainPageVo = assembleUserVo(user);
+            return ServletResponse.createBySuccess(userMainPageVo);
+        }
+        return response;
 
-        return ServletResponse.createBySuccess(userMainPageVo);
     }
 
     //模糊查询
