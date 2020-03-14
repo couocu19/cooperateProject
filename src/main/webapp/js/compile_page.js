@@ -209,14 +209,12 @@ function handleFiles(files) {
 			reader.onload = function() {
 				//以base64格式将图片的编码添加到img的src中
 				App.photos_add.push(file);
-				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; z-index: -10;" src=${reader.result}></div>`;
+				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; height: 100%; z-index: -10;" src=${reader.result}></div>`;
 				App.adopt_photos_size();
 				App.assist_var.wait_show_photo.push(this.result);
 			}
 			reader.readAsDataURL(file);
-
 		}
-
 	}
 }
 

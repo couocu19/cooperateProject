@@ -54,7 +54,7 @@ function AddSlideUp(text_dom, el_dom, callback, data) {
 		let cilentHeight = getCilentHeight();
 		// 获取文档的完整高度
 		let AllHeight = getScrollHeight();
-		console.log(scrollTop, cilentHeight, AllHeight);
+		// console.log(scrollTop, cilentHeight, AllHeight);
 		if(scrollTop + cilentHeight >= AllHeight - 20) {
 			text_dom.style.opacity = 1;
 			text_dom.innerHTML = '加载中...';

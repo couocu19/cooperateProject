@@ -30,6 +30,16 @@
 	opacity: .8;
 }
 
+#show_box {
+	display: none;
+	width: 90%;
+	padding: 1rem;
+	margin: 1rem auto 0 auto;
+	border-radius: 1rem;
+	box-shadow: .1rem .1rem .7rem #888888;
+	opacity: .8;
+}
+
 #search {
 	width: 95%;
 	margin: auto;
@@ -65,4 +75,10 @@
 	content: "";
 	display: block;
 	clear: both;
+}
+
+
+.head_name_item {
+	border-bottom: 1px solid gray;
+	padding-bottom: 1rem;
 }

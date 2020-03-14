@@ -59,3 +59,20 @@ obj.init();
 // 得到信息数组
 
 
+Ajax({
+	url: 'http://118.31.12.175:8080/xiyouProject_war/getMessageById.do',
+	type: 'get',
+	data: {
+		messageId: getQueryStringArgs(location.search).message_id
+	},
+	send_formA: false,
+	async: false,
+	success: (responesText) => {
+		let json = JSON.parse(responedText)
+		console.log(json);
+	},
+	fail: (err) => {
+		let json = JSON.parse(err)
+		console.log(json);
+	}
+})

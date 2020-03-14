@@ -189,6 +189,7 @@ function proAjax(obj) {
 								console.log(json);
 								window.user_id = json.data.id;
 								window.user_message = json.data;
+								window.location.onload();
 							}
 						},
 						fail: function(err) {
@@ -214,8 +215,6 @@ function proAjax(obj) {
 
 AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax);
 AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render, '');
-
-
 
 
 // function commentHtml(argument) {

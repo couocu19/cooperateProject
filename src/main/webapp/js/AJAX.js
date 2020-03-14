@@ -62,4 +62,15 @@ function Ajax(obj) {
 }
 
 
-export {Ajax};
+function promiseAjax(obj) {
+	return new Promise((reslove, reject) => {
+		obj.success = (responseText) => {
+			reslove(responseText);
+		};
+		obj.fail = (err) => {
+			reject(err);
+		}
+		Ajax(obj);
+	});
+}
+export {Ajax, promiseAjax};

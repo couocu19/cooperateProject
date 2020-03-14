@@ -76,33 +76,20 @@ function createXhr() {
 }
 
 
-(function () {
-	var xhr = createXhr();
-	xhr.withCredentials = true;
-	xhr.onreadystatechange = function () {
-		if(xhr.readyState == 4) {
-			if((xhr.status >= 200 && xhr.status <= 300) || xhr.status == 304) {
-				var json = JSON.parse(xhr.responseText);
-				console.log(json);
-				if(json.status) {
-					alert('网络或数据库错误');
-				} else {
-					app.render(json.data);
-				}
-			}
-		}
-	}
-	let url = '';
-	console.log(url);
-	xhr.open('get', url, false);
-	xhr.send(null);
-})()
-
 Ajax({
 	url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do',
 	type: 'get',
 	data: {
-
 	},
-
+	send_form: false,
+	async: false,
+	success: (responesText) => {
+		let json = JSON.parse(responesText);
+		app.render(json.data)
+		console.log(json.data)
+	},
+	fail: (err) => {
+		err = JSON.parse(err);
+		console.log(err);
+	}
 })
