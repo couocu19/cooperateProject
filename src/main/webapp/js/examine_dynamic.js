@@ -11,7 +11,7 @@ function getLocationSendUrl(url, user_id, message_id) {
 }
 
 function pariseComment(messageId) {
-	console.log('paiseCommie open')
+	console.log('paiseCommie open');
 	let xhr = new XMLHttpRequest();
 	xhr.withCredentials = true; //携带cookie
 	xhr.onreadystatechange = function() {

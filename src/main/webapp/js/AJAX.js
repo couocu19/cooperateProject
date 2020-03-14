@@ -31,6 +31,7 @@ function Ajax(obj) {
 		xhr.open("get", obj.url + "?" + message, obj.async);
 		xhr.send(null);
 	} else if (obj.type == 'post') {
+		console.log(obj.url);
 		xhr.open("post", obj.url, obj.async);
 		if(obj.send_form == true) {
 			let formdata = new FormData();
