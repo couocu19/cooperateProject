@@ -130,11 +130,13 @@ public class UserController {
             return ServletResponse.createByErrorMessage("无效参数");
         }
         ServletResponse response =  iUserService.getUserInfoAndMessages(id);
-        if(response.isSuccess()){
-            User user = (User)response.getData();
-            UserMainPageVo userMainPageVo = assembleUserVo(user);
-            return ServletResponse.createBySuccess(userMainPageVo);
-        }
+
+            if(response.isSuccess()){
+                User user = (User)response.getData();
+                UserMainPageVo userMainPageVo = assembleUserVo(user);
+                return ServletResponse.createBySuccess(userMainPageVo);
+            }
+
         return response;
 
     }
@@ -153,33 +155,37 @@ public class UserController {
         List<MessageVo> list = new ArrayList<>();
         MessageVo messageVo = null;
         //填充主页下的动态信息
-        for(Message m: user.getMessages()){
-            messageVo = new MessageVo();
-            messageVo.setUserId(user.getId());
-            messageVo.setUsername(user.getUsername());
-            messageVo.setHeader(user.getHeadSculpture());
-            messageVo.setTime(DateTimeUtil.dateToStr(m.getTime(),DateTimeUtil.STANDARD_FORMAT));
-            messageVo.setCommentCount(m.getCommentCount());
-            messageVo.setPraiseCount(m.getPraisePoints());
-            messageVo.setMessageId(m.getId());
-            if(m.getContent().getContentText()!=null){
-                messageVo.setContentText(m.getContent().getContentText());
+        if(user.getMessages()!=null) {
+            for (Message m : user.getMessages()) {
+                messageVo = new MessageVo();
+                messageVo.setUserId(user.getId());
+                messageVo.setUsername(user.getUsername());
+                messageVo.setHeader(user.getHeadSculpture());
+                messageVo.setTime(DateTimeUtil.dateToStr(m.getTime(), DateTimeUtil.STANDARD_FORMAT));
+                messageVo.setCommentCount(m.getCommentCount());
+                messageVo.setPraiseCount(m.getPraisePoints());
+                messageVo.setMessageId(m.getId());
+                if (m.getContent().getContentText() != null) {
+                    messageVo.setContentText(m.getContent().getContentText());
+                }
+                if (m.getContent().getContentImages() != null) {
+                    List<String> imagesVo = new ArrayList<>();
+                    String[] images = m.getContent().getContentImages().split(",");
+                    for (int i = 1; i < images.length; i++) {
+                        imagesVo.add(images[i]);
+                    }
+                    messageVo.setContentImages(imagesVo);
+                }
+                if (m.getContent().getContentVideos() != null) {
+                    String[] video = m.getContent().getContentVideos().split(",");
+                    messageVo.setContentText(video[1]);
+                }
+                list.add(messageVo);
             }
-            if(m.getContent().getContentImages()!=null){
-                List<String> imagesVo = new ArrayList<>();
-               String[] images = m.getContent().getContentImages().split(",");
-               for(int i =1;i<images.length;i++){
-                   imagesVo.add(images[i]);
-               }
-               messageVo.setContentImages(imagesVo);
-            }
-            if(m.getContent().getContentVideos()!=null){
-                String[] video = m.getContent().getContentVideos().split(",");
-                messageVo.setContentText(video[1]);
-            }
-            list.add(messageVo);
         }
         //填充用户信息
+        userMainPageVo.setStudentId(user.getStudentId());
+        userMainPageVo.setMessageCount(user.getMessageCount());
         userMainPageVo.setUserId(user.getId());
         userMainPageVo.setMessageVos(list);
         userMainPageVo.setUsername(user.getUsername());

@@ -46,14 +46,23 @@ public class MessageServiceImpl implements IMessageService {
         message.setTime(date);
         int rowId = messageMapper.insertSelective(message);
         System.out.println(rowId);
+        Integer userId = null;
+        User user = null;
         if(rowId>0){
             int realId =message.getId();
             content.setMessageId(realId);
             int rowCount = contentMapper.insertSelective(content);
-            System.out.println(content.getMessageId());
-            System.out.println(rowCount);
+
 
             if(rowCount>0){
+                //更新动态总数
+                userId = message.getUserId();
+                user = userMapper.selectByPrimaryKey(userId);
+                Integer messCount = user.getMessageCount();
+                messCount++;
+                user.setMessageCount(messCount);
+                userMapper.updateByPrimaryKeySelective(user);
+
                 message.setContent(content);
                 return ServletResponse.createBySuccess(message);
             }
