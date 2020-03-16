@@ -18,7 +18,7 @@ function Ajax(obj) {
 	xhr.withCredentials = true; //携带cookie
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
-			if (xhr.status >= 200 && xhr.status < 300) {
+			if (xhr.status >= 200 && xhr.status <= 300) {
 				obj.success(xhr.responseText, xhr.responseXML);
 			} else {
 				obj.fail(xhr.status);
@@ -65,12 +65,41 @@ function Ajax(obj) {
 function promiseAjax(obj) {
 	return new Promise((reslove, reject) => {
 		obj.success = (responseText) => {
+			// 如果提示该操作需要cookie 则重新请求下发cookie
+			let json = JSON.parse(responseText);
+			if(json.msg == '当前未登录,请先登录~'){
+				setCookie();
+			}
 			reslove(responseText);
 		};
 		obj.fail = (err) => {
 			reject(err);
 		}
 		Ajax(obj);
+	});
+}
+
+function setCookie() {
+	Ajax({
+		url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
+		type: 'get',
+		data: {
+			studentId: window.user_student_id
+		},
+		send_form: false,
+		async: false,
+		success: function(responseText) {
+			var json = JSON.parse(responseText);
+			if(json.status == 0) {
+				console.log(json);
+				window.user_id = json.data.id;
+				window.user_message = json.data;
+				window.location.reload();
+			}
+		},
+		fail: function(err) {
+			console.log('登陆失败，请退出后重新登录');
+		}
 	});
 }
 export {Ajax, promiseAjax};

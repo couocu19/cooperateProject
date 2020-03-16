@@ -5,13 +5,20 @@ class App {
 		this.search = search;
 		this.send_btn = send_btn;
 		this.show_box = show_box;
+		this.timer = null;
 	}
 	init() {
 		this.return_btn.addEventListener('click', () => {
 			window.history.back();
 		}, false);
 		this.send_btn.addEventListener('click', () => {
-			this.send_Ajax();
+			if(!this.timer) {
+				this.send_Ajax();
+				this.timer = setTimeout(() => {
+					clearTimeout(this.timer);
+					this.timer = null;
+				}, 1000);
+			}
 		}, false);
 	}
 

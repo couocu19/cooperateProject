@@ -2,7 +2,6 @@ import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {AddpullUp, AddSlideUp} from 'http://localhost:9012/js/pull_slide_event.js'
 import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
-window.user_student_id = '04192077';
 
 class App {
 	constructor(return_btn, adduser_btn, change_message, attent_btn) {
@@ -64,7 +63,7 @@ class App {
 					url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
 					type: 'get',
 					data: {
-						studentId: value.studentId
+						id: value.id
 					},
 					async: false,
 				}).then((value) => {
@@ -101,7 +100,7 @@ app.init();
 
 
 class User {
-	constructor(name, headSculpture, signature, fans, concern, readCount) {
+	constructor(name, headSculpture, signature, fans, concern, readCount, user_attent_btn, user_fans_btn, readCount_btn) {
 		this.name = name;
 		this.headSculpture = headSculpture;
 		this.signature = signature;
@@ -109,6 +108,9 @@ class User {
 		this.concern = concern;
 		this.readCount = readCount;
 		// this.studentId = studentId;
+		this.user_attent_btn = user_attent_btn;
+		this.user_fans_btn = user_fans_btn;
+		this.readCount_btn = readCount_btn;
 	}
 
 
@@ -127,7 +129,10 @@ const user = new User(  document.getElementsByClassName('user_name')[0],
 					    document.getElementsByClassName('user_sign')[0],
 					    document.getElementById('fans_num'),
 					    document.getElementById('gz_num'),
-					    document.getElementById('view_num')
+					    document.getElementById('view_num'),
+					    document.getElementsByClassName('mess_item')[0],
+					    document.getElementsByClassName('mess_item')[1],
+					    document.getElementsByClassName('mess_item')[2]
 	);
 
 class Dynamic {
@@ -189,15 +194,15 @@ function proAjax(obj) {
 								console.log(json);
 								window.user_id = json.data.id;
 								window.user_message = json.data;
-								window.location.onload();
+								window.location.reload();
 							}
 						},
 						fail: function(err) {
 							console.log('登陆失败，请退出后重新登录');
 						}
-					})
+					});
 				}else {
-					alert('网络或数据库错误');
+					console.log('网络或数据库错误');
 				}
 			} else {
 				reslove(json.data)

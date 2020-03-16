@@ -1,6 +1,6 @@
 
 
-import {Ajax} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
 import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
 import show_photoswipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 class App {
@@ -21,10 +21,7 @@ class App {
 			window.history.back();
 		}, false);
 		this.send_btn.addEventListener('click', () => {
-			if(this.sendAjax()) {
-				console.log('修改信息成功');
-				window.history.back();
-			}
+			this.sendAjax();
 		}, false);
 
 	}
@@ -34,7 +31,22 @@ class App {
 		this.user_message.headSculpture.src = data.headSculpture;
 	}
 	sendAjax() {
-		return Ajax(this.user_message.username.value, this.user_message.signature.value);
+		promiseAjax({
+			url: 'http://118.31.12.175:8080/xiyouProject_war/user/update.do',
+			type: 'post',
+			data: {
+				username : this.user_message.username.value,
+				signature : this.user_message.signature.value
+			},
+			send_form: true,
+			async: false
+		}).then((value) => {
+			let json = JSON.parse(value);
+			console.log(json);
+		}).catch((err) => {
+			let json = JSON.parse(err);
+			console.log(json);
+		});
 	}
 }
 
@@ -85,8 +97,8 @@ Ajax({
 	async: false,
 	success: (responesText) => {
 		let json = JSON.parse(responesText);
+		console.log(json)
 		app.render(json.data)
-		console.log(json.data)
 	},
 	fail: (err) => {
 		err = JSON.parse(err);
