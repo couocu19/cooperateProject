@@ -40,9 +40,13 @@ public class UserController {
         //为了设置默认头像的绝对路径
         String strPrefix = "http://118.31.12.175:8080"+request.getContextPath()+"/";
 
-//        response.setHeader("Access-Control-Allow-Credentials", "true");
+        ServletResponse response = iUserService.register(studentId,strPrefix);
+        if(response.isSuccess()){
+            return iUserService.login(studentId);
+        }
 
-        return iUserService.register(studentId,strPrefix);
+        return ServletResponse.createByErrorMessage("注册失败~");
+
 
     }
 
@@ -138,6 +142,44 @@ public class UserController {
             }
 
         return response;
+
+    }
+
+
+    //关注他人
+    @ResponseBody
+    @RequestMapping("concernUser.do")
+    public ServletResponse concernUser(HttpSession session,Integer concernedUserId){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("当前用户未登录,请先登录~");
+        }
+        return iUserService.concernUser(user,concernedUserId);
+
+    }
+
+    //获取某个用户的关注列表
+    @ResponseBody
+    @RequestMapping("getConcerns.do")
+    public ServletResponse getConcerns(HttpSession session,Integer id){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
+        }
+
+        return iUserService.getConcernsById(id);
+    }
+
+
+    @ResponseBody
+    @RequestMapping("getFans.do")
+    public ServletResponse getFans(HttpSession session,Integer id){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
+        }
+
+        return iUserService.getFansById(id);
 
     }
 

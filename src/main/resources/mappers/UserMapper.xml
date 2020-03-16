@@ -12,12 +12,13 @@
       <arg column="concern" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="read_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="student_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="concern_users" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fan_users" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
 
 
   <resultMap id="map1" type="com.xiyou.pojo.User">
-
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -28,6 +29,8 @@
       <arg column="concern" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="read_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="student_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="concern_users" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="fan_users" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
     <!--不同mapper文件中的resultMap可以互相引用-->
     <collection property="messages" ofType="com.xiyou.pojo.Message" >
@@ -54,7 +57,7 @@
 
   <sql id="Base_Column_List" >
     id, username, head_sculpture, signature, message_count, fans, concern, read_count, 
-    student_id
+    student_id,concern_users,fan_users
   </sql>
 
   <sql id="Base_Column_List1">
@@ -121,6 +124,12 @@
       <if test="studentId != null" >
         student_id,
       </if>
+      <if test="concernUsers != null" >
+        concern_users,
+      </if>
+      <if test="fanUsers != null" >
+        fan_users,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -149,6 +158,12 @@
       </if>
       <if test="studentId != null" >
         #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="concernUsers != null" >
+        #{concernUsers,jdbcType=VARCHAR},
+      </if>
+      <if test="fanUsers != null" >
+        #{fanUsers,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,6 +194,12 @@
       <if test="studentId != null" >
         student_id = #{studentId,jdbcType=VARCHAR},
       </if>
+      <if test="concernUsers != null" >
+       concern_users =  #{concernUsers,jdbcType=VARCHAR},
+      </if>
+      <if test="fanUsers != null" >
+       fan_users =  #{fanUsers,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -191,7 +212,9 @@
       fans = #{fans,jdbcType=INTEGER},
       concern = #{concern,jdbcType=INTEGER},
       read_count = #{readCount,jdbcType=INTEGER},
-      student_id = #{studentId,jdbcType=VARCHAR}
+      student_id = #{studentId,jdbcType=VARCHAR},
+      concern_users =  #{concernUsers,jdbcType=VARCHAR},
+      fan_users =  #{fanUsers,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 

@@ -24,6 +24,11 @@ public class User {
 
     private String studentId;
 
+    private String concernUsers;
+
+    private String fanUsers;
+
+
     private List<Message> messages;
 
     public List<Message> getMessages() {
@@ -35,7 +40,23 @@ public class User {
     }
 
 
-    public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId) {
+    public String getConcernUsers() {
+        return concernUsers;
+    }
+
+    public void setConcernUsers(String concernUsers) {
+        this.concernUsers = concernUsers;
+    }
+
+    public String getFanUsers() {
+        return fanUsers;
+    }
+
+    public void setFanUsers(String fanUsers) {
+        this.fanUsers = fanUsers;
+    }
+
+    public User(Integer id, String username, String headSculpture, String signature, Integer messageCount, Integer fans, Integer concern, Integer readCount, String studentId, String concernUsers, String fanUsers) {
         this.id = id;
         this.username = username;
         this.headSculpture = headSculpture;
@@ -45,22 +66,8 @@ public class User {
         this.concern = concern;
         this.readCount = readCount;
         this.studentId = studentId;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", headSculpture='" + headSculpture + '\'' +
-                ", signature='" + signature + '\'' +
-                ", messageCount=" + messageCount +
-                ", fans=" + fans +
-                ", concern=" + concern +
-                ", readCount=" + readCount +
-                ", studentId='" + studentId + '\'' +
-                ", messages=" + messages +
-                '}';
+        this.concernUsers = concernUsers;
+        this.fanUsers = fanUsers;
     }
 
     public User() {

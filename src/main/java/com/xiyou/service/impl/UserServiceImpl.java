@@ -90,7 +90,6 @@ public class UserServiceImpl implements IUserService {
 
     }
 
-    //todo:改bug
     public ServletResponse<User> getUserInfoAndMessages(Integer studentId){
 
         User users = userMapper.selectByPrimaryKey(studentId);
@@ -117,7 +116,97 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
+    public ServletResponse concernUser(User user,Integer concernedUserId){
+        Integer userId = user.getId();
+        User cUser = userMapper.selectByPrimaryKey(concernedUserId);
+        if(cUser == null){
+            return ServletResponse.createByErrorMessage("您想要关注的用户不存在~");
+        }
+        //A关注B
+        //A的关注人数+1,A的关注用户中添加B的id
+        //B的粉丝人数+1,B的粉丝用户中添加A的id
+        Integer concernCount = user.getConcern();
+        concernCount++;
+        user.setConcern(concernCount);
+        String id = String.valueOf(concernedUserId);
+        String concerns = user.getConcernUsers();
+        concerns = concerns+","+id;
+        user.setConcernUsers(concerns);
+        //更新A
+        userMapper.updateByPrimaryKeySelective(user);
 
+        Integer fanCount = cUser.getFans();
+        fanCount++;
+        cUser.setFans(fanCount);
+        String id1 = String.valueOf(userId);
+        String fans = cUser.getFanUsers();
+        fans = fans + ","+id1;
+        cUser.setFanUsers(fans);
+        //更新B
+        userMapper.updateByPrimaryKey(cUser);
+
+        //返回被关注用户的粉丝数和成功信息
+        return ServletResponse.createBySuccess("关注成功~",fanCount);
+
+
+    }
+
+
+    public ServletResponse<List<UserVo>> getConcernsById(Integer id){
+        User user = userMapper.selectByPrimaryKey(id);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户不存在~");
+        }
+        String concerns = user.getConcernUsers();
+        String[] con = concerns.split(",");
+        Integer sid = null;
+        List<User> users = new ArrayList<>();
+        User sUser = null;
+        for(int i = 1;i<con.length;i++){
+            sid = Integer.valueOf(con[i]);
+            sUser = userMapper.selectByPrimaryKey(sid);
+            if(sUser!=null){
+                users.add(sUser);
+            }
+        }
+        List<UserVo> userVos = new ArrayList<>();
+        UserVo userVo = null;
+        for(User u: users){
+            userVo = assembleUser(u);
+            userVos.add(userVo);
+        }
+        return ServletResponse.createBySuccess(userVos);
+
+    }
+
+    public ServletResponse<List<UserVo>> getFansById(Integer id){
+        User user = userMapper.selectByPrimaryKey(id);
+        if(user == null){
+            return ServletResponse.createByErrorMessage("用户不存在~");
+        }
+        String fans = user.getFanUsers();
+        String[] fan = fans.split(",");
+        Integer sid = null;
+        List<User> users = new ArrayList<>();
+        User sUser = null;
+        for(int i = 1;i<fan.length;i++){
+            sid = Integer.valueOf(fan[i]);
+            sUser = userMapper.selectByPrimaryKey(sid);
+            if(sUser!=null){
+                users.add(sUser);
+            }
+        }
+
+        List<UserVo> userVos = new ArrayList<>();
+        UserVo userVo = null;
+        for(User u: users){
+            userVo = assembleUser(u);
+            userVos.add(userVo);
+        }
+        return ServletResponse.createBySuccess(userVos);
+
+
+}
 
     public ServletResponse<List<UserVo>> vagueSelect(String massage){
         String sqlMassage = "%"+massage+"%";

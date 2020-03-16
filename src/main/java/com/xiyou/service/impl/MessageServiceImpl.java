@@ -41,7 +41,6 @@ public class MessageServiceImpl implements IMessageService {
 
     public ServletResponse<Message> addMessage(Message message, Content content){
         //上传到数据库的规则:先上传message,得到message对应的id,再上传message对应的content
-
         Date date = new Date();
         message.setTime(date);
         int rowId = messageMapper.insertSelective(message);
@@ -52,8 +51,6 @@ public class MessageServiceImpl implements IMessageService {
             int realId =message.getId();
             content.setMessageId(realId);
             int rowCount = contentMapper.insertSelective(content);
-
-
             if(rowCount>0){
                 //更新动态总数
                 userId = message.getUserId();
@@ -103,7 +100,6 @@ public class MessageServiceImpl implements IMessageService {
             //首先确定此人是否曾经赞过这条动态
             Praise praise1 = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
             if(praise1!=null){
-                System.out.println("哈哈哈哈哈");
                 praise1.setCanceled(true);
                 int rowCount = praiseMapper.insertSelective(praise1);
                 if(rowCount>0){
@@ -171,7 +167,6 @@ public class MessageServiceImpl implements IMessageService {
 
     }
 
-
     public ServletResponse getMessageById(Integer messageId){
         Message message = messageMapper.selectByPrimaryKey(messageId);
         Content content = null;
@@ -182,6 +177,8 @@ public class MessageServiceImpl implements IMessageService {
         }
         return ServletResponse.createByErrorMessage("操作失败");
     }
+
+
 
     private PraiseVo assemblePraise(Praise praise){
         PraiseVo praiseVo = new PraiseVo();
