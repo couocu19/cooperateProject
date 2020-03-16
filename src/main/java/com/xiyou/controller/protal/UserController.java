@@ -70,9 +70,8 @@ public class UserController {
     @CrossOrigin(origins = "*",maxAge = 3600)
     public ServletResponse<User> updateInformation(HttpSession session,User user){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
-
         if(currentUSer == null){
-            return ServletResponse.createByErrorMessage("当前未登录,请先登录~");
+            return ServletResponse.createByError();
         }
         //todo:换另一种写法
         currentUSer.setUsername(user.getUsername());
@@ -96,7 +95,7 @@ public class UserController {
     public ServletResponse<User> getUserInformation(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
-            return ServletResponse.createByErrorMessage("当前未登录,请先登录~");
+            return ServletResponse.createByError();
         }
         return ServletResponse.createBySuccess(currentUSer);
 
@@ -109,7 +108,7 @@ public class UserController {
     public ServletResponse<List<Message>> getCurrentUserAllMessage(HttpSession session){
         User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
         if(currentUSer == null){
-            return ServletResponse.createByErrorMessage("当前会话已超时~,请重新登录以查看~");
+            return ServletResponse.createByError();
         }
         Integer id = currentUSer.getId();
         System.out.println(id);
@@ -129,7 +128,11 @@ public class UserController {
     //获取某个用户的信息以及所有动态
     @ResponseBody
     @RequestMapping("get_info_and_message.do")
-    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(Integer id){
+    public ServletResponse<UserMainPageVo> getUserInfoAndMessages(HttpSession session,Integer id) {
+        User currentUSer = (User) session.getAttribute(Const.CURRENT_USER);
+        if(currentUSer == null){
+            return ServletResponse.createByError();
+        }
         if(id == null){
             return ServletResponse.createByErrorMessage("无效参数");
         }
@@ -137,7 +140,7 @@ public class UserController {
 
             if(response.isSuccess()){
                 User user = (User)response.getData();
-                UserMainPageVo userMainPageVo = assembleUserVo(user);
+                UserMainPageVo userMainPageVo = assembleUserVo(currentUSer.getId(),user);
                 return ServletResponse.createBySuccess(userMainPageVo);
             }
 
@@ -146,13 +149,14 @@ public class UserController {
     }
 
 
+
     //关注他人
     @ResponseBody
     @RequestMapping("concernUser.do")
     public ServletResponse concernUser(HttpSession session,Integer concernedUserId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("当前用户未登录,请先登录~");
+            return ServletResponse.createByError();
         }
         return iUserService.concernUser(user,concernedUserId);
 
@@ -164,7 +168,7 @@ public class UserController {
     public ServletResponse getConcerns(HttpSession session,Integer id){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
+            return ServletResponse.createByError();
         }
 
         return iUserService.getConcernsById(id);
@@ -176,7 +180,8 @@ public class UserController {
     public ServletResponse getFans(HttpSession session,Integer id){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
         }
 
         return iUserService.getFansById(id);
@@ -191,7 +196,7 @@ public class UserController {
     }
 
 
-    private UserMainPageVo assembleUserVo(User user){
+    private UserMainPageVo assembleUserVo(Integer curId,User user){
         UserMainPageVo userMainPageVo = new UserMainPageVo();
         userMainPageVo.setReadCount(user.getReadCount());
         List<MessageVo> list = new ArrayList<>();
@@ -236,12 +241,19 @@ public class UserController {
         userMainPageVo.setFans(user.getFans());
         userMainPageVo.setSignature(user.getSignature());
 
+        //标志查看主页的用户是否关注了被查看用户
+        Boolean isConcerned = iUserService.isConcerned(curId,user.getId());
+        if(isConcerned == true){
+            userMainPageVo.setIsConcernUser(1);
+        }else{
+            userMainPageVo.setIsConcernUser(0);
+        }
+
         return userMainPageVo;
 
     }
 
 //    //查看某个用户的所有粉丝或者关注者
 //    public ServletResponse<List<User>> getFansOrConcern(String studyId,)
-
 
 }

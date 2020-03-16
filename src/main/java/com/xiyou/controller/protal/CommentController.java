@@ -53,7 +53,8 @@ public class CommentController {
     public ServletResponse addCommentToMessage(Integer messageId, HttpSession session,String content){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
         Comment comment = new Comment();
         comment.setMessageId(messageId);
@@ -81,7 +82,8 @@ public class CommentController {
     public ServletResponse praiseComment(Integer commentId,HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
         return iCommentService.praiseComment(commentId);
     }
@@ -93,7 +95,8 @@ public class CommentController {
     public ServletResponse<String> deleteComment(Integer commentId,HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+            return ServletResponse.createByError();
+            // return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
         return iCommentService.deleteComment(commentId,user);
     }
@@ -104,7 +107,7 @@ public class CommentController {
     public ServletResponse<Comment> cancelPraise(HttpSession session,Integer commentId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+            return ServletResponse.createByError();
         }
         return iCommentService.cancelPraise(commentId,user.getId());
     }
@@ -115,7 +118,8 @@ public class CommentController {
     public ServletResponse<List<CommentVo>> getMessageAllComments(HttpSession session,Integer messageId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户尚未登录,请先登录~");
         }
 
         ServletResponse response = iCommentService.getAllComment(messageId);
@@ -148,7 +152,8 @@ public class CommentController {
     public ServletResponse getCommentAndReply(Integer commentId, HttpSession session){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("登录您的账户,查看更多内容~");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("登录您的账户,查看更多内容~");
         }
 
         ServletResponse response = iCommentService.getCommentAllReply(commentId);
@@ -270,10 +275,10 @@ public class CommentController {
     }
 
 
-    private MessageAndCommentVo assembleMessAndComment(Message message, User user, @RequestParam(required = false) List<Comment> comments){
+    private MessageAndCommentVo assembleMessAndComment(Integer id,Message message, User user, @RequestParam(required = false) List<Comment> comments){
         MessageAndCommentVo messageAndCommentVo = new MessageAndCommentVo();
 
-        MessageVo messageVo = messageController.assembleMessage(message,user);
+        MessageVo messageVo = messageController.assembleMessage(id,message,user);
         messageAndCommentVo.setMessageVo(messageVo);
 
         List<CommentVo> commentVos = new ArrayList<>();

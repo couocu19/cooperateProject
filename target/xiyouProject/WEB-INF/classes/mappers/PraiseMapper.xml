@@ -60,8 +60,8 @@
 
     <update id="updateStatus" parameterType="map">
        update message_praise
-       set is_canceled = #{isCanceled}
-       where id =#{id}
+       set is_canceled = #{isCanceled,jdbcType=BIT}
+       where id =#{id,jdbcType=INTEGER}
     </update>
 
     <select id="selectByUserIdAndMessageId" resultMap="BaseResultMap">
@@ -70,6 +70,7 @@
         from message_praise
         where
         user_id = #{userId} and message_id = #{messageId}
+        and is_canceled != 0
     </select>
 
     <select id="selectByMessageId" resultMap="BaseResultMap">

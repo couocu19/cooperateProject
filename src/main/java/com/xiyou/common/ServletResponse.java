@@ -78,7 +78,6 @@ public class ServletResponse<T> implements Serializable {
 
 
     public static <T> ServletResponse<T> createByError(){
-
         return new ServletResponse<T>(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
     }
 

@@ -61,8 +61,7 @@
   </sql>
 
   <sql id="Base_Column_List1">
-    u.id,u.username, u.head_sculpture, u.signature,
-    u. message_count,u. fans, u.concern, u.read_count,u.student_id
+   u.*
   </sql>
 
   <sql id="Base_Column_List2" >

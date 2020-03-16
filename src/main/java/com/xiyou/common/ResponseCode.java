@@ -7,7 +7,7 @@ package com.xiyou.common;
 public enum ResponseCode {
 
     SUCCESS(0,"SUCCESS"),
-    ERROR(1,"ERROR"),
+    ERROR(1,"LOSE-COOKIE"),
     NEED_LOGIN(10,"NEED_LOGIN"),
     ILLEGAL_ARGUMENT(2,"ILLEGAL_ARGUMENT");
 

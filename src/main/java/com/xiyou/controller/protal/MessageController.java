@@ -50,7 +50,7 @@ public class MessageController {
     public ServletResponse addMessage(HttpSession session,HttpServletRequest request,String contentText,@RequestParam(value = "upload_file",required = false)MultipartFile[] files){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录,清先登录~");
+            return ServletResponse.createByError();
         }
         //获取Message中的参数 userId,剩下的值先都采取默认值,时间默认为当前时间
         Message message = new Message();
@@ -101,7 +101,7 @@ public class MessageController {
         Message message1 = response.getData();
         MessageVo messageVo = null;
         if(response.isSuccess()){
-           messageVo = assembleMessage(message1,user);
+           messageVo = assembleMessage(userId,message1,user);
             return ServletResponse.createBySuccess(messageVo);
         }
 
@@ -116,7 +116,8 @@ public class MessageController {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         Integer userId = user.getId();
         if(user == null){
-            return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("当前会话已超时~请登录后再操作!");
         }
         return iMessageService.deleteMessage(messageId,userId);
     }
@@ -128,7 +129,8 @@ public class MessageController {
     public ServletResponse praiseMessage(HttpSession session,Integer messageId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录!");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户未登录!");
         }
         Integer id = user.getId();
         return iMessageService.praiseMessage(messageId,id);
@@ -139,7 +141,8 @@ public class MessageController {
     public ServletResponse cancelPraise(HttpSession session,Integer id){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录!");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户未登录!");
         }
         Integer userId = user.getId();
         return iMessageService.cancelPraise(id,userId);
@@ -150,7 +153,8 @@ public class MessageController {
     public ServletResponse getPraiseUsers(HttpSession session,Integer messageId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("登录账户,解锁更多信息~");
+            return ServletResponse.createByError();
+           // return ServletResponse.createByErrorMessage("登录账户,解锁更多信息~");
         }
 
         return iMessageService.getPraiseUsers(messageId);
@@ -163,7 +167,8 @@ public class MessageController {
     public ServletResponse getMessage(HttpSession session,Integer messageId){
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServletResponse.createByErrorMessage("用户未登录!");
+            return ServletResponse.createByError();
+            //return ServletResponse.createByErrorMessage("用户未登录!");
         }
         ServletResponse response = iMessageService.getMessageById(messageId);
 
@@ -172,14 +177,16 @@ public class MessageController {
         if(response.isSuccess()){
             message = (Message) response.getData();
             User user1 = userMapper.selectByPrimaryKey(message.getUserId());
-            messageVo = assembleMessage(message,user1);
+            messageVo = assembleMessage(user.getId(),message,user1);
             return ServletResponse.createBySuccess(messageVo);
         }
         return ServletResponse.createByErrorMessage("error");
 
     }
 
-    public MessageVo assembleMessage(Message message,User user){
+
+
+    public MessageVo assembleMessage(Integer id,Message message,User user){
         MessageVo messageVo = new MessageVo();
         String username = user.getUsername();
 
@@ -200,24 +207,29 @@ public class MessageController {
             }
             messageVo.setContentImages(list);
         }
-
         if(message.getContent().getContentVideos()!=null){
             String[] video = message.getContent().getContentVideos().split(",");
             messageVo.setContentVideos(Const.urlPrefix+"uploadVideo/"+video[1]);
         }
-
         if(message.getPraisePoints() == null) {
             messageVo.setPraiseCount(0);
         }else{
             messageVo.setPraiseCount(message.getPraisePoints());
         }
-
         if(message.getPraisePoints() == null) {
             messageVo.setCommentCount(0);
         }else{
             messageVo.setCommentCount(message.getCommentCount());
         }
 
+        //填充当前的点赞信息
+        Boolean isPraise = iMessageService.isPraised(id,message.getId());
+        if(isPraise == true){
+            messageVo.setIsPraise(1);
+        }else{
+            messageVo.setIsPraise(0);
+
+        }
         return messageVo;
 
     }

@@ -151,13 +151,16 @@ public class UserServiceImpl implements IUserService {
 
     }
 
-
     public ServletResponse<List<UserVo>> getConcernsById(Integer id){
         User user = userMapper.selectByPrimaryKey(id);
         if(user == null){
             return ServletResponse.createByErrorMessage("用户不存在~");
         }
+
         String concerns = user.getConcernUsers();
+        if(concerns == null){
+            return ServletResponse.createByErrorMessage("还没有人关注ta~");
+        }
         String[] con = concerns.split(",");
         Integer sid = null;
         List<User> users = new ArrayList<>();
@@ -185,6 +188,9 @@ public class UserServiceImpl implements IUserService {
             return ServletResponse.createByErrorMessage("用户不存在~");
         }
         String fans = user.getFanUsers();
+        if(fans == null){
+            return ServletResponse.createByErrorMessage("ta还没关注任何人~");
+        }
         String[] fan = fans.split(",");
         Integer sid = null;
         List<User> users = new ArrayList<>();
@@ -232,6 +238,21 @@ public class UserServiceImpl implements IUserService {
         userVo.setSignature(user.getSignature());
 
         return userVo;
+    }
+
+    //判断前者是否关注了后者
+    public boolean isConcerned(Integer curId,Integer conId){
+        User curUser = userMapper.selectByPrimaryKey(curId);
+        User conUser = userMapper.selectByPrimaryKey(conId);
+        String concerns = curUser.getConcernUsers();
+        String[] cons = concerns.split(",");
+        String id = String.valueOf(conId);
+        for(int i =1;i<cons.length;i++){
+            if(cons[i].equals(id)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

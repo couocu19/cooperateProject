@@ -103,7 +103,7 @@ public class MessageServiceImpl implements IMessageService {
                 praise1.setCanceled(true);
                 int rowCount = praiseMapper.insertSelective(praise1);
                 if(rowCount>0){
-                    return ServletResponse.createBySuccess(praise1);
+                    return ServletResponse.createBySuccess("canceled",praise1);
                 }
             }else{
             praise.setUserId(userId);
@@ -112,7 +112,7 @@ public class MessageServiceImpl implements IMessageService {
 
             int rowCount = praiseMapper.insertSelective(praise);
               if(rowCount>0){
-                  return ServletResponse.createBySuccess("ok",praise);
+                  return ServletResponse.createBySuccess("ok",praiseCount);
               }
             }
         }
@@ -123,12 +123,11 @@ public class MessageServiceImpl implements IMessageService {
 
     //动态取消赞
     public ServletResponse cancelPraise(Integer praiseId,Integer userId){
-        Praise praise = praiseMapper.selectByPrimaryKey(praiseId);
+        Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,praiseId);
         Message message = null;
         if(praise!=null) {
             Integer messageId = praise.getMessageId();
             message = messageMapper.selectByPrimaryKey(messageId);
-
             if (message != null) {
             Integer praiseCount = message.getPraisePoints();
             praiseCount--;
@@ -138,7 +137,7 @@ public class MessageServiceImpl implements IMessageService {
             praise.setCanceled(false);
             int rowCount = praiseMapper.updateStatus(praiseId,praise.getCanceled());
             if(rowCount>0){
-                return ServletResponse.createBySuccessMessage("操作成功");
+                return ServletResponse.createBySuccess("ok",praiseCount);
             }
 
         }else{
@@ -178,7 +177,16 @@ public class MessageServiceImpl implements IMessageService {
         return ServletResponse.createByErrorMessage("操作失败");
     }
 
+    //判断是否当前用户是否赞过这个动态
+    public Boolean isPraised(Integer userId,Integer messageId){
+        Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
+        if(praise.getCanceled() == false){
+            return false;
+        }else{
+            return true;
+        }
 
+    }
 
     private PraiseVo assemblePraise(Praise praise){
         PraiseVo praiseVo = new PraiseVo();

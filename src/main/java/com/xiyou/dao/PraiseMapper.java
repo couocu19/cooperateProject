@@ -13,6 +13,5 @@ public interface PraiseMapper {
     Praise selectByPrimaryKey(@Param(value = "id") Integer id);
     int updateStatus(@Param(value = "id") Integer id,@Param("isCanceled") Boolean isCanceled);
     Praise selectByUserIdAndMessageId(@Param(value = "userId") Integer userId, @Param(value = "messageId")Integer messageId);
-
     List<Praise> selectByMessageId(Integer messageId);
 }

@@ -28,4 +28,6 @@ public interface IUserService {
 
     ServletResponse<List<UserVo>> getFansById(Integer id);
 
+    boolean isConcerned(Integer curId,Integer conId);
+
 }

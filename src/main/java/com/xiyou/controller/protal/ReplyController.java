@@ -31,7 +31,7 @@ public class ReplyController {
     public ServletResponse<ReplyVo> addReplyToComment(HttpSession session, String content, Integer commentId, Integer receiveUserId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServletResponse.createByErrorMessage("用户未登录！");
+            return ServletResponse.createByError();
         }
 
         Reply reply = new Reply();
@@ -52,7 +52,7 @@ public class ReplyController {
     public ServletResponse<String> deleteReply(HttpSession session, Integer replyId) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
-            return ServletResponse.createByErrorMessage("用户未登录！");
+            return ServletResponse.createByError();
         }
         Integer userId = user.getId();
         return iReplyService.deleteReply(replyId, userId);

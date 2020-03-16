@@ -23,6 +23,17 @@ public class MessageVo {
     private Integer commentCount;
     private Integer praiseCount;
 
+    //查看该动态的用户的点赞状态
+    private Integer isPraise;
+
+
+    public Integer getIsPraise() {
+        return isPraise;
+    }
+
+    public void setIsPraise(Integer isPraise) {
+        this.isPraise = isPraise;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -112,7 +123,7 @@ public class MessageVo {
         this.praiseCount = praiseCount;
     }
 
-    public MessageVo(Integer userId, String username, String header, String time, Integer messageId, String contentText, List<String> contentImages, String contentVideos, Integer commentCount, Integer praiseCount) {
+    public MessageVo(Integer userId, String username, String header, String time, Integer messageId, String contentText, List<String> contentImages, String contentVideos, Integer commentCount, Integer praiseCount, Integer isPraise) {
         this.userId = userId;
         this.username = username;
         this.header = header;
@@ -123,6 +134,7 @@ public class MessageVo {
         this.contentVideos = contentVideos;
         this.commentCount = commentCount;
         this.praiseCount = praiseCount;
+        this.isPraise = isPraise;
     }
 
     public MessageVo(){

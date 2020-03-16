@@ -19,4 +19,6 @@ public interface IMessageService {
 
     ServletResponse getMessageById(Integer messageId);
 
+    Boolean isPraised(Integer userId,Integer messageId);
+
 }
