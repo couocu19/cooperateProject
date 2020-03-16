@@ -1,8 +1,11 @@
-import {Ajax} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {AddpullUp, AddSlideUp} from 'http://localhost:9012/js/pull_slide_event.js'
 import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
+import {window_addEvent, setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
 
+// 修改window返回页面触发的函数
+window_addEvent();
 class App {
 	constructor(return_btn, adduser_btn, change_message, attent_btn) {
 		this.return_btn = return_btn;
@@ -12,6 +15,7 @@ class App {
 		this.attent_btn =attent_btn;
 	}
 	init() {
+
 		this.return_btn.addEventListener('click', () => {
 			window.history.back();
 		}, false);
@@ -32,49 +36,54 @@ class App {
 		if(this.data.check_id != undefined) {
 
 			// 查看别人的页面
-			proAjax({
+			promiseAjax({
 				url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
 				type: 'get',
 				data: {
-					studentId : '04182097'
+					studentId : this.data.check_id
 				},
 				async: false,
 			}).then((value) => {
-				user.render(value);
+				value = JSON.parse(value);
 				console.log(value);
 				dynamic_obj.data = value.messageVos;
+				// 展示用户信息
+				user.render(value);
+				// 展示动态信息
 				dynamic_obj.render();
 			});
 		} else {
 			// 查看自己的页面
-			proAjax({
+			promiseAjax({
 				//  得到用户的信息
 				url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_user_info.do',
 				type: 'get',
 				data: {
 				},
 				async: false,
-			})
-			.then((value) => {
+			}).then((value) => {
+				value = JSON.parse(value);
+				console.log(value);
 				// 渲染用户头像和签名
-				user.render(value);
-				console.log(value.id);
-				proAjax({
+				user.render(value.data);
+				user.init(value.data.id);
+				promiseAjax({
 					url: 'http://118.31.12.175:8080/xiyouProject_war/user/get_info_and_message.do',
 					type: 'get',
 					data: {
-						id: value.id
+						id: value.data.id
 					},
 					async: false,
-				}).then((value) => {
+				}).then((value_dy) => {
 					// 渲染用户发送的动态部分
 					// console.log(value);
-					dynamic_obj.data = value.messageVos;
+					value_dy = JSON.parse(value_dy);
+					dynamic_obj.data = value_dy.messageVos;
 					dynamic_obj.render();
 
 				});
 			});
-					}
+			}
 	}
 	render() {
 		if(this.data.check_id != undefined) {
@@ -96,7 +105,7 @@ const app = new App(document.getElementsByClassName('icon_wrapper')[0],
 					document.getElementsByClassName('icon_wrapper')[2],
 					document.getElementsByClassName('icon_wrapper')[3]
 					);
-app.init();
+
 
 
 class User {
@@ -113,7 +122,14 @@ class User {
 		this.readCount_btn = readCount_btn;
 	}
 
-
+	init(user_id) {
+		this.user_attent_btn.addEventListener('click', () => {
+			window.location.href = `user_list_page.html?id=${user_id}&way=getAttentUsers`;
+		}, false);
+		this.user_fans_btn.addEventListener('click', () => {
+			window.location.href = `user_list_page.html?id=${user_id}&way=getFansUsers`;
+		}, false)
+	}
 	render (data) {
 		this.name.innerHTML = data.username;
 		this.headSculpture.src = data.headSculpture;
@@ -173,51 +189,8 @@ class Dynamic {
 
 const dynamic_obj = new Dynamic(document.getElementById('main_content_message'));
 
-function proAjax(obj) {
-	return new Promise((reslove, reject) => {
-		obj.success = function(responseText) {
-			var json = JSON.parse(responseText);
-			console.log(json);
-			if(json.status) {
-				if(json.msg == '当前未登录,请先登录~'){
-					Ajax({
-						url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
-						type: 'get',
-						data: {
-							studentId: window.user_student_id
-						},
-						send_form: false,
-						async: false,
-						success: function(responseText) {
-							var json = JSON.parse(responseText);
-							if(json.status == 0) {
-								console.log(json);
-								window.user_id = json.data.id;
-								window.user_message = json.data;
-								window.location.reload();
-							}
-						},
-						fail: function(err) {
-							console.log('登陆失败，请退出后重新登录');
-						}
-					});
-				}else {
-					console.log('网络或数据库错误');
-				}
-			} else {
-				reslove(json.data)
-			}
-	  	}
-		obj.fail = function (err) {
-			console.log('登陆失败，请退出后重新登录');
-			reject(err);
-		}
-		Ajax(obj);
-	});
-}
-
-
-
+app.init();
+dynamic_obj.init();
 AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax);
 AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render, '');
 

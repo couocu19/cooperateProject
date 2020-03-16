@@ -67,7 +67,7 @@ function promiseAjax(obj) {
 		obj.success = (responseText) => {
 			// 如果提示该操作需要cookie 则重新请求下发cookie
 			let json = JSON.parse(responseText);
-			if(json.msg == '当前未登录,请先登录~'){
+			if(json.msg == 'LOSE-COOKIE'){
 				setCookie();
 			}
 			reslove(responseText);

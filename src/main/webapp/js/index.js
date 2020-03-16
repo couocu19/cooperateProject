@@ -1,31 +1,42 @@
-import {Ajax} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
 
 window.active_user_id = null;
-window.user_student_id = '04192077';
+window.user_student_id = '04181019';
 window.user_id = null;
 window.user_message = null;
 
-// 立即执行函数，请求用户信息
-Ajax({
-	url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
+
+promiseAjax({
+	url: 'http://118.31.12.175:8080/xiyouProject_war/user/register.do',
 	type: 'get',
 	data: {
 		studentId: window.user_student_id
 	},
 	send_form: false,
-	async: false,
-	success: function(responseText) {
-		var json = JSON.parse(responseText);
-		if(json.status == 0) {
-			console.log(json);
-			window.user_id = json.data.id;
-			window.user_message = json.data;
-		}
-	},
-	fail: function(err) {
-		console.log('登陆失败，请退出后重新登录');
+	async: false
+}).then((responesText) => {
+	let json = JSON.parse(responesText);
+	if(json.msg == '注册失败~') {
+		Ajax({
+			url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
+			type: 'get',
+			data: {
+				studentId: window.user_student_id
+			},
+			send_form: false,
+			async: false,
+			success: (responesText) => {
+				let json = JSON.parse(responesText);
+				console.log(json);
+			},
+			fail: (err) => {
+				console.log(err);
+			}
+		})
 	}
-});
+}).catch((err) => {
+	console.log(err);
+})
 
 class Obj{
 	constructor(user_btn, message_btn, write_btn, nav_item ) {
