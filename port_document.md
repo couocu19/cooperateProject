@@ -74,7 +74,7 @@
 
   ```json
   简述:更新当前已登录用户的信息(修改头像除外)
-  url:/user/update.do
+  url: /user/update.do
   参数:username(用户名) , signature(个性签名)
   注意事项:这两个参数不一定全部修改,视情况而定。
   method:post
@@ -113,7 +113,7 @@
   url:/user/vagueSelect.do
   说明:用户输入关键字,查找用户名中含有关键字的用户列表
   参数:info(关键字)
-  method:get/method
+  method:get/post
   参数示例:'美女'
   返回示例:
   {
