@@ -1,56 +1,52 @@
 import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-
+import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
 
 
 class App {
-	constructor(return_btn, search, send_btn) {
+	constructor(return_btn, show_box) {
 		this.return_btn = return_btn;
-		this.search = search;
-		this.send_btn = send_btn;
+		this.show_message = getQueryStringArgs();
 		this.show_box = show_box;
-		this.timer = null;
 	}
+
 	init() {
 		this.return_btn.addEventListener('click', () => {
-			window.history.back();
+			setSessionBack();
 		}, false);
-		this.send_btn.addEventListener('click', () => {
-			if(!this.timer) {
-				this.send_Ajax();
-				this.timer = setTimeout(() => {
-					clearTimeout(this.timer);
-					this.timer = null;
-				}, 1000);
-			}
-		}, false);
+		console.log(this.show_message);
+		this.getData();
 	}
 
-
-	send_Ajax() {
-		if(this.search.value == '') {
-			console.log('输入的内容为空');
-			return;
+	getData() {
+		switch(this.show_message.way) {
+			case 'getFansUsers':
+				this.sendAjax('http://118.31.12.175:8080/xiyouProject_war/user/getFans.do');
+				break;
+			case 'getAttentUsers':
+				this.sendAjax('http://118.31.12.175:8080/xiyouProject_war/user/getConcernUsers.do')
 		}
+	}
+
+	sendAjax(send_url) {
 		promiseAjax({
-			url: 'http://118.31.12.175:8080/xiyouProject_war/user/vagueSelect.do',
+			url: send_url,
 			type: 'get',
 			data: {
-				info: app.search.value
+				id: this.show_message.id
 			},
-			send_form: false,
 			async: false
 		}).then((value) => {
 			value = JSON.parse(value);
 			console.log(value);
 			this.render(value.data);
-		}).catch((err) => {
-			console.log(err);
-		});
+		})
 	}
+
 	render(data_arr) {
 		this.show_box.style.display = 'block';
-		if(data_arr.length == 0) {
-			this.show_box.innerHTML = '输错了吧，咋啥都没搜到呢~~~';
+		if(data_arr == undefined || data_arr.length == 0) {
+			this.show_box.innerHTML = '这里什么都没有呢~~~';
 			return
 		}
 		let str_ = '';
@@ -60,14 +56,10 @@ class App {
 		}
 		this.show_box.innerHTML = str_;
 	}
-
 }
 
 
-
-
-const app = new App(document.getElementsByClassName('return_btn')[0],
-					document.getElementById('search_name'),
-					document.getElementById('send_btn'),
-					document.getElementById('show_box'));
+let app = new App(document.getElementsByClassName('return_btn')[0],
+				  document.getElementById('show_box')
+	);
 app.init();

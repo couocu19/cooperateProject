@@ -60,7 +60,7 @@ obj.init();
 
 
 Ajax({
-	url: 'http://118.31.12.175:8080/xiyouProject_war/getMessageById.do',
+	url: 'http://118.31.12.175:8080/xiyouProject_war/dynamicDetail.do',
 	type: 'get',
 	data: {
 		messageId: getQueryStringArgs(location.search).message_id

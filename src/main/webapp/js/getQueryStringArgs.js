@@ -1,7 +1,8 @@
 
 
 
-export function getQueryStringArgs(data_str) {
+export function getQueryStringArgs() {
+	let data_str = window.location.search;
 	let str = (data_str.length > 0 ? data_str.substring(1) : ''),
 		args = {}, // 保存数据的对象
 

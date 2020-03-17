@@ -4,9 +4,41 @@
 
 
 
-## 一、登陆接口
+## 一、登陆注册接口
 
-- ### 登陆接口
+- ### 注册
+
+  ```json
+  简述:通过学号注册账户,并且账户中的学号不可重复。
+  url:/user/register.do
+  method:post
+  参数:studentId(学号)
+  返回示例:
+  {
+      "status": 0,
+      "msg": "注册成功~",
+      "data":{
+          "id": null,
+          "username": "04182095",
+          "headSculpture":"默认头像的绝对地址",
+          "signature": null,
+          "messageCount": null,
+          "fans": null,
+          "concern": null,
+          "readCount": null,
+          "studentId": "04182095",
+          "messages": null
+      }
+  }
+  {
+      "status": 1,
+      "msg": "该学号已存在!"
+  }
+  ```
+
+  
+
+- ### 登陆
 
   ```json
   简述：通过学号登录账户
@@ -107,7 +139,7 @@
   }
   ```
 
-- ### 用户信息查询
+- ### 根据用户名查询用户
 
   ```json
   url:/user/vagueSelect.do
@@ -149,18 +181,124 @@
 - ### 关注用户接口
 
   ```json
-  简述: 添加关注
-  url: /user/adduser.do
-  参数: id  (被关注人的id)
-  请求方式: get
-  返回示例
-  {
+  url: /user/concernUser.do
+  参数: concernUserId(被关注的用户id)
+  说明: data中的数据为被关注的用户的粉丝总数
+  返回实例:
+  {  
       "status": 0,
+      "msg": "关注成功~",
+      "data": 1
   }
-  基本逻辑: 利用cookie获取当前用户，添加关注
+  {  
+      "status": 1,
+      "msg": "自己不能关注自己奥~",
+  }
+  {  
+      "status": 1,
+      "msg": "您想要关注的用户不存在",
+  }
+  ```
+
+- ### 获取某个用户的关注人列表
+
+  ```json
+  url:/user/getConcernUsers.do
+  参数:id(用户的id)
+  返回示例:
+  {    
+      "status": 0,
+      "data":[
+      {
+      "id": 12,
+      "userName": "04182077",
+      "signature": null,
+      "header": "http://118.31.12.175:8080...mages/defaultHeader.jpg",
+      "fans": 2
+     },
+      {
+      "id": 12,
+      "userName": "04182077",
+      "signature": null,
+          "header": "http://118.31.12.175:8080/xi...mages/defaultHeader.jpg",
+      "fans": 2
+     },
+      {
+      "id": 11,
+      "userName": "李岳耿",
+      "signature": "李岳耿",
+          "header": "http://118.31.12.175:8080/xiyouPro...es/defaultHeader.jpg",
+      "fans": 1
+     },
+      {
+      "id": 7,
+      "userName": "????",
+      "signature": "???????????",
+      "header": "http://118.31.12.175:8080/xiyouPr...ages/defaultHeader.jpg",
+      "fans": 1
+     }
+  ]
+  }
+  
+  { 
+      "status": 1,
+      "msg": "TA还没有关注任何人~"
+  }
+  { 
+      "status": 1,
+      "msg": "该用户不存在"
+  }
+  ```
+
+- ### 获取某个用户的粉丝列表
+
+  ```json
+  url:/user/getFans.do
+  参数:id(用户的id)
+  返回示例:
+  { 
+      "status": 1,
+      "msg": "还没有人关注TA~"
+  }
+  {
+      
+      "status": 0,
+      "data":[
+      {
+      "id": 9,
+      "userName": "新的美女",
+      "signature": "当然了，我也是一个美女",
+      "header": "http://118.31.12.175:8080/..s/defaultHeader.jpg",
+      "fans": 0
+     }
+  ]
+  }
+  
+  { 
+      "status": 1,
+      "msg": "用户不存在~"
+  }
   ```
 
   
+
+- ### 取关用户接口
+
+  ```json
+  url: /user/canceledConcern.do
+  参数:concernUserId(被关注的用户id)
+  说明:data中的数据为被关注的用户的粉丝总数
+  返回实例:
+  { 
+      "status": 0,
+      "msg": "success",
+      "data": 0
+  }
+  {  
+      "status": 1,
+      "msg": "您要取关=的用户不存在~",
+  }
+  ```
 
 - ### 查看某个用户的信息和动态
 
@@ -245,6 +383,10 @@
       }
   }
   ```
+  
+  
+  
+  
 
 ## 三、获取各种动态的接口
 

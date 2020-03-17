@@ -69,8 +69,9 @@ function promiseAjax(obj) {
 			let json = JSON.parse(responseText);
 			if(json.msg == 'LOSE-COOKIE'){
 				setCookie();
+			}else {
+				reslove(responseText);
 			}
-			reslove(responseText);
 		};
 		obj.fail = (err) => {
 			reject(err);

@@ -2,7 +2,7 @@
 
 
 
-function examine_dynamic(user_id, message_id) {
+function examineDynamic(user_id, message_id) {
 	window.location.href  = getLocationSendUrl('detail_dynamic.html' ,user_id, message_id);
 }
 
@@ -10,7 +10,7 @@ function getLocationSendUrl(url, user_id, message_id) {
 	return `${url}?user_id=${user_id}&message_id=${message_id}`;
 }
 
-function pariseComment(messageId) {
+function pariseDynamic(messageId, parise) {
 	console.log('paiseCommie open');
 	let xhr = new XMLHttpRequest();
 	xhr.withCredentials = true; //携带cookie
@@ -23,16 +23,17 @@ function pariseComment(messageId) {
 					let clas = 'dynamic' + messageId;
 					document.getElementsByClassName(clas)[1].style.color = 'blue';
 				} else {
-					console.log(json)
+					console.log(json);
 				}
 			}
 		}
 	}
-	let url = `http://118.31.12.175:8080/xiyouProject_war/message/praise.do?messageId=${messageId}`;
+	let url = parise ? `http://118.31.12.175:8080/xiyouProject_war/message/cancel_praise.do?messageId=${messageId}` : `http://118.31.12.175:8080/xiyouProject_war/message/praise.do?messageId=${messageId}`;
 	xhr.open('get', url, false);
 	xhr.send(null);
 }
 
 function deleteDynamic(delete_id) {
 	console.log(`删除动态id为${delete_id}的动态`);
+
 }
