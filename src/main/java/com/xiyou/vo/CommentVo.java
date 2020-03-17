@@ -3,6 +3,7 @@ package com.xiyou.vo;
 public class CommentVo {
 
     private Integer commentId;
+    private Integer sendUserId;
     private String sendUsername;
     private String header;
     private String time;
@@ -92,8 +93,17 @@ public class CommentVo {
         this.commentId = commentId;
     }
 
-    public CommentVo(Integer commentId, String sendUsername, String header, String time, String content, Integer praiseCount, String firstReplyUser, String firstReplyContent, String replyCountMessage) {
+    public Integer getSendUserId() {
+        return sendUserId;
+    }
+
+    public void setSendUserId(Integer sendUserId) {
+        this.sendUserId = sendUserId;
+    }
+
+    public CommentVo(Integer commentId, Integer sendUserId, String sendUsername, String header, String time, String content, Integer praiseCount, String firstReplyUser, String firstReplyContent, String replyCountMessage) {
         this.commentId = commentId;
+        this.sendUserId = sendUserId;
         this.sendUsername = sendUsername;
         this.header = header;
         this.time = time;

@@ -500,38 +500,36 @@ method:get
 
 - ### 用户点赞动态
 
-  (这个接口返回的数据还没有进行加工,记得提醒我改)
-
   ```json
-  url:/message/praise.do
+url:/message/praise.do
   参数:messageId(动态id)
   method:get/post
+  说明:1.data为动态当前的点赞总数
+      2.如果对同一个动态请求两次,第二次自动转为取消赞
   返回示例:
-  {
+  {  
       "status": 0,
       "msg": "ok",
-      "data":{
-          "id": null,
-          "userId": 3,
-          "messageId": 15,
-          "canceled": true
-      }
+      "data": 1
   }
   ```
-
+  
 - ### 用户取消赞动态
 
   ```json
   url:/message/cancel_praise.do
   参数:id(该点赞记录对应的id)
+  说明:1.data为动态当前的点赞总数
+      2.如果对同一个动态请求两次，第二次自动转为点赞
   method:get/post
   返回示例:
   {
-     "status": 0,
-     "msg": "操作成功"
+  "status": 0,
+  "msg": "ok",
+"data": 3
   }
   ```
-
+  
   
 
 ## 评论模块接口
@@ -736,28 +734,27 @@ method:get
 
 - ### 用户回复某一条评论(给评论进行评论)
 
-  (这个接口返回的数据还没有进行加工,记得提醒我改)
-
   ```json
-  url:/reply/addToComment.do
+url:/reply/addToComment.do
   参数:content(回复内容),commentId(该评论的id),receiveUserId(收到回复的用户id)
   method:get/post
   返回示例:
-  {  
+  {    
       "status": 0,
       "data":{
-      "id": null,
-      "messageId": 46,
-      "commentId": 5,
-      "sendUserId": 3,
-      "content": "略略略",
-      "time": 1583942076281,
-      "isDeleted": true,
-      "receiveUserId": 3
+      "commentId": 13,
+      "replyId": 12,
+      "sendReplyUserId": 6,
+      "replyUsername": "老人与海燕",
+      "header": "http://118.31.12.175:8080/xiy..mages/defaultHeader.jpg",
+      "time": "2020-03-17 17:58:39",
+      "content": "嘻嘻嘻",
+      "receiveReplyUserId": 6,
+      "receiveReplyUserName": "老人与海燕"
      }
   }
   ```
-
+  
 - ### 用户删除回复
 
   ```json
@@ -843,5 +840,132 @@ method:get
   }
   ```
 
+
+### 3.17号更新的接口
+
+- ### 用户关注他人
+
+  ```json
+  url:/user/concernUser.do
+  参数:concernUserId(被关注的用户id)
+  说明:data中的数据为被关注的用户的粉丝总数
+  返回实例:
+  {  
+      "status": 0,
+      "msg": "关注成功~",
+      "data": 1
+  }
+  {  
+      "status": 1,
+      "msg": "自己不能关注自己奥~",
+  }
+  {  
+      "status": 1,
+      "msg": "您想要关注的用户不存在",
+  }
+  ```
+
+- ### 用户取关他人
+
+  ```json
+  url:/user/canceledConcern.do
+  参数:concernUserId(被关注的用户id)
+  说明:data中的数据为被关注的用户的粉丝总数
+  返回实例:
+  { 
+      "status": 0,
+      "msg": "success",
+      "data": 0
+  }
+  {  
+      "status": 1,
+      "msg": "您要取关的用户不存在~",
+  }
+  ```
+
   
+
+- ### 获取用户的关注列表
+
+  ```json
+  url:/user/getConcernUsers.do
+  参数:id(用户的id)
+  返回示例:
+  {    
+      "status": 0,
+      "data":[
+      {
+      "id": 12,
+      "userName": "04182077",
+      "signature": null,
+      "header": "http://118.31.12.175:8080...mages/defaultHeader.jpg",
+      "fans": 2
+     },
+      {
+      "id": 12,
+      "userName": "04182077",
+      "signature": null,
+          "header": "http://118.31.12.175:8080/xi...mages/defaultHeader.jpg",
+      "fans": 2
+     },
+      {
+      "id": 11,
+      "userName": "李岳耿",
+      "signature": "李岳耿",
+          "header": "http://118.31.12.175:8080/xiyouPro...es/defaultHeader.jpg",
+      "fans": 1
+     },
+      {
+      "id": 7,
+      "userName": "????",
+      "signature": "???????????",
+      "header": "http://118.31.12.175:8080/xiyouPr...ages/defaultHeader.jpg",
+      "fans": 1
+     }
+  ]
+  }
+  
+  { 
+      "status": 1,
+      "msg": "TA还没有关注任何人~"
+  }
+  { 
+      "status": 1,
+      "msg": "该用户不存在"
+  }
+  ```
+
+- ### 获取用户的粉丝列表
+
+  ```json
+  url:/user/getFans.do
+  参数:id(用户的id)
+  返回示例:
+  { 
+      "status": 1,
+      "msg": "还没有人关注TA~"
+  }
+  {
+      
+      "status": 0,
+      "data":[
+      {
+      "id": 9,
+      "userName": "新的美女",
+      "signature": "当然了，我也是一个美女",
+      "header": "http://118.31.12.175:8080/..s/defaultHeader.jpg",
+      "fans": 0
+     }
+  ]
+  }
+  
+  { 
+      "status": 1,
+      "msg": "用户不存在~"
+  }
+  ```
+
+  
+
+
 

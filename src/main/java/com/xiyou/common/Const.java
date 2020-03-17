@@ -41,4 +41,12 @@ public class Const {
         int LOSE_COOKIE = 1;
         int EXIST_COOKIE = 0;
     }
+
+//    public static void main(String[] args) {
+//        String s1 = ",1,2,3,4,5,6";
+//        String s2 = "11,";
+//        String s3 = s1.replace(",2","");
+//        System.out.println(s1.indexOf(s2));
+//        System.out.println(s3);
+//    }
 }

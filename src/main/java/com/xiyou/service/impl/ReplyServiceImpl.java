@@ -35,6 +35,9 @@ public class ReplyServiceImpl implements IReplyService {
     public ServletResponse<ReplyVo> addReplyToComment(Reply reply){
         Integer commentId = reply.getCommentId();
         Comment comment = commentMapper.selectByPrimaryKey(commentId);
+        if(comment == null){
+            return ServletResponse.createByErrorMessage("该评论不存在或已被删除~");
+        }
         if(comment!=null){
             Integer id = comment.getMessageId();
             reply.setMessageId(id);
@@ -89,6 +92,7 @@ public class ReplyServiceImpl implements IReplyService {
 
     private ReplyVo assembleReply(Reply reply){
         ReplyVo replyVo = new ReplyVo();
+        replyVo.setCommentId(reply.getCommentId());
         replyVo.setReplyId(reply.getId());
         replyVo.setReceiveReplyUserId(reply.getReceiveUserId());
         replyVo.setSendReplyUserId(reply.getSendUserId());

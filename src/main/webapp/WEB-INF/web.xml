@@ -60,4 +60,10 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
+  <!-- 设置session的过期时间 -->
+  <!-- 单位为分钟 -->
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
 </web-app>

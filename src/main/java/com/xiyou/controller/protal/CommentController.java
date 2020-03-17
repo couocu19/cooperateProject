@@ -156,15 +156,20 @@ public class CommentController {
             //return ServletResponse.createByErrorMessage("登录您的账户,查看更多内容~");
         }
 
+        Comment comment = commentMapper.selectByPrimaryKey(commentId);
+        if(comment == null){
+            return ServletResponse.createByErrorMessage("该评论不存在或者已被删除~");
+        }
         ServletResponse response = iCommentService.getCommentAllReply(commentId);
         if(response.isSuccess()){
-            Comment comment = commentMapper.selectByPrimaryKey(commentId);
             List<Reply> replies = (List<Reply>)response.getData();
             CommentAndReplyVo commentAndReplyVo = assembleCommentAndReply(replies,comment);
             return ServletResponse.createBySuccess(commentAndReplyVo);
+        }else{
+            CommentVo commentVo = assembleComment(comment);
+            return ServletResponse.createBySuccess(commentVo);
         }
 
-        return ServletResponse.createByErrorMessage("null");
     }
 
     private CommentAndReplyVo assembleCommentAndReply(List<Reply> replies,Comment comment){
@@ -180,6 +185,7 @@ public class CommentController {
         Integer praiseCount = comment.getPraiseCount();
         //填充信息
         commentAndReplyVo.setCommentId(comment.getId());
+        commentAndReplyVo.setSendUserId(userId);
         commentAndReplyVo.setSendUsername(sendUserName);
         commentAndReplyVo.setHeader(header);
         commentAndReplyVo.setTime(time);
@@ -227,6 +233,7 @@ public class CommentController {
         String content = comment.getConent();
         Integer praiseCount = comment.getPraiseCount();
         //填充信息
+        commentVo.setSendUserId(userId);
         commentVo.setCommentId(comment.getId());
         commentVo.setSendUsername(sendUserName);
         commentVo.setHeader(header);
@@ -250,6 +257,7 @@ public class CommentController {
         Integer praiseCount = comment.getPraiseCount();
         //填充信息
         commentVo.setCommentId(comment.getId());
+        commentVo.setSendUserId(userId);
         commentVo.setSendUsername(sendUserName);
         commentVo.setHeader(header);
         commentVo.setTime(time);

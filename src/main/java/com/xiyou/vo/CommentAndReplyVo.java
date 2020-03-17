@@ -5,6 +5,7 @@ import java.util.List;
 public class CommentAndReplyVo {
 
     private Integer commentId;
+    private Integer sendUserId;
     private String sendUsername;
     private String header;
     private String time;
@@ -26,8 +27,18 @@ public class CommentAndReplyVo {
         this.commentId = commentId;
     }
 
-    public CommentAndReplyVo(Integer commentId, String sendUsername, String header, String time, String content, Integer praiseCount, List<ReplyVo> replies) {
+    public Integer getSendUserId() {
+        return sendUserId;
+    }
+
+    public void setSendUserId(Integer sendUserId) {
+        this.sendUserId = sendUserId;
+    }
+
+
+    public CommentAndReplyVo(Integer commentId, Integer sendUserId, String sendUsername, String header, String time, String content, Integer praiseCount, List<ReplyVo> replies) {
         this.commentId = commentId;
+        this.sendUserId = sendUserId;
         this.sendUsername = sendUsername;
         this.header = header;
         this.time = time;

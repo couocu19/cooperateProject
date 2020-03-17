@@ -70,7 +70,6 @@
         from message_praise
         where
         user_id = #{userId} and message_id = #{messageId}
-        and is_canceled != 0
     </select>
 
     <select id="selectByMessageId" resultMap="BaseResultMap">

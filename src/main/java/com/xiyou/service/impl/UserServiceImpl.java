@@ -117,7 +117,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     public ServletResponse concernUser(User user,Integer concernedUserId){
+
         Integer userId = user.getId();
+        if(userId == concernedUserId){
+            return ServletResponse.createByErrorMessage("自己不能关注自己奥~");
+        }
         User cUser = userMapper.selectByPrimaryKey(concernedUserId);
         if(cUser == null){
             return ServletResponse.createByErrorMessage("您想要关注的用户不存在~");
@@ -125,11 +129,18 @@ public class UserServiceImpl implements IUserService {
         //A关注B
         //A的关注人数+1,A的关注用户中添加B的id
         //B的粉丝人数+1,B的粉丝用户中添加A的id
+        String id = String.valueOf(concernedUserId);
+        //判断当前用户之前是否关注过该用户
+        String flagId = ","+id;
+        String concerns = user.getConcernUsers();
+        if(concerns!=null && concerns.indexOf(flagId) !=-1){
+            return ServletResponse.createByErrorMessage("您已关注该用户！");
+        }
+
+        //更新数量
         Integer concernCount = user.getConcern();
         concernCount++;
         user.setConcern(concernCount);
-        String id = String.valueOf(concernedUserId);
-        String concerns = user.getConcernUsers();
         concerns = concerns+","+id;
         user.setConcernUsers(concerns);
         //更新A
@@ -151,6 +162,48 @@ public class UserServiceImpl implements IUserService {
 
     }
 
+    //取关用户
+    public ServletResponse cancelConcern(User user,Integer concernedUserId){
+        Integer userId = user.getId();
+        if(userId == concernedUserId){
+            return ServletResponse.createByErrorMessage("自己不能取关自己~");
+        }
+        User cUser = userMapper.selectByPrimaryKey(concernedUserId);
+        if(cUser == null){
+            return ServletResponse.createByErrorMessage("您要取关的用户不存在~");
+        }
+        //首先判断是否关注过该用户
+        String concerns = user.getConcernUsers();
+        String id = String.valueOf(concernedUserId);
+        String flagId = ","+id;
+        if(concerns!=null && concerns.indexOf(flagId) == -1){
+            return ServletResponse.createByErrorMessage("您还未关注该用户~");
+        }
+        String newConcern = concerns.replace(flagId,"");
+        user.setConcernUsers(newConcern);
+        //更新关注数量
+        Integer count = user.getConcern();
+        count--;
+        user.setConcern(count);
+        userMapper.updateByPrimaryKey(user);
+
+        //更新粉丝
+        User user1 = userMapper.selectByPrimaryKey(concernedUserId);
+        String fans = user1.getFanUsers();
+        String id1 = String.valueOf(userId);
+        String flagId1 = ","+id1;
+        String newFans = fans.replace(flagId1,"");
+        user1.setFanUsers(newFans);
+        Integer count1 = user1.getFans();
+        count1--;
+        user1.setFans(count1);
+        userMapper.updateByPrimaryKey(user1);
+
+        //返回取关成功的信息以及取关后的粉丝数
+        return ServletResponse.createBySuccess("success",count1);
+
+    }
+
     public ServletResponse<List<UserVo>> getConcernsById(Integer id){
         User user = userMapper.selectByPrimaryKey(id);
         if(user == null){
@@ -159,7 +212,7 @@ public class UserServiceImpl implements IUserService {
 
         String concerns = user.getConcernUsers();
         if(concerns == null){
-            return ServletResponse.createByErrorMessage("还没有人关注ta~");
+            return ServletResponse.createByErrorMessage("TA还没有关注任何人~");
         }
         String[] con = concerns.split(",");
         Integer sid = null;
@@ -189,7 +242,7 @@ public class UserServiceImpl implements IUserService {
         }
         String fans = user.getFanUsers();
         if(fans == null){
-            return ServletResponse.createByErrorMessage("ta还没关注任何人~");
+            return ServletResponse.createByErrorMessage("还没有人关注TA~");
         }
         String[] fan = fans.split(",");
         Integer sid = null;
@@ -243,8 +296,10 @@ public class UserServiceImpl implements IUserService {
     //判断前者是否关注了后者
     public boolean isConcerned(Integer curId,Integer conId){
         User curUser = userMapper.selectByPrimaryKey(curId);
-        User conUser = userMapper.selectByPrimaryKey(conId);
         String concerns = curUser.getConcernUsers();
+        if(concerns == null){
+            return false;
+        }
         String[] cons = concerns.split(",");
         String id = String.valueOf(conId);
         for(int i =1;i<cons.length;i++){

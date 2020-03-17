@@ -142,7 +142,6 @@ public class MessageController {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByError();
-            //return ServletResponse.createByErrorMessage("用户未登录!");
         }
         Integer userId = user.getId();
         return iMessageService.cancelPraise(id,userId);

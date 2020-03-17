@@ -28,18 +28,19 @@ public class CommentServiceImpl implements ICommentService {
     private ReplyMapper replyMapper;
 
     public ServletResponse<Comment> addCommentToMessage(Comment comment){
+        Integer messageId = comment.getMessageId();
+        Message message = messageMapper.selectByPrimaryKey(messageId);
+        if(message == null){
+            return ServletResponse.createByErrorMessage("该动态不存在或者已被删除!");
+        }
         int rowCount = commentMapper.insertSelective(comment);
         if(rowCount>0){
             //动态中的评论数也要加1
-            Integer messageId = comment.getMessageId();
-            Message message = messageMapper.selectByPrimaryKey(messageId);
-            if(message!=null){
-                Integer count = message.getCommentCount();
-                count++;
-                message.setCommentCount(count);
-                //todo:修改
-                messageMapper.updateByPrimaryKey(message);
-            }
+            Integer count = message.getCommentCount();
+            count++;
+            message.setCommentCount(count);
+            //todo:修改
+            messageMapper.updateByPrimaryKey(message);
             return ServletResponse.createBySuccess(comment);
         }
         return ServletResponse.createByErrorMessage("评论失败!");
@@ -115,17 +116,21 @@ public class CommentServiceImpl implements ICommentService {
         //或者评论的userId和要删评论的用户id相同
         Comment comment = commentMapper.selectByPrimaryKey(commentId);
         if(comment!=null){
-            System.out.println("不为空");
             Integer messageId = comment.getMessageId();
             Message message = messageMapper.selectByPrimaryKey(messageId);
             if(message!=null){
-                System.out.println("不为空1");
+                Integer commentCount = message.getCommentCount();
                 Integer userId = message.getUserId();
                 if(userId == user.getId() || comment.getUserId() == user.getId()){
                     comment.setIsDeleted(false);
                     int rowCount = commentMapper.updateByPrimaryKey(comment);
                     if(rowCount>0){
-                        System.out.println("不为空2");
+                        commentCount--;
+                        //删除评论下的回复的状态为已经删除
+                        Integer count = deleteReplies(commentId,commentCount);
+                        //更新动态中到的评论回复总数
+                        message.setCommentCount(count);
+                        messageMapper.updateByPrimaryKey(message);
                         return ServletResponse.createBySuccess("操作成功！");
                     }
                 }else{
@@ -136,6 +141,16 @@ public class CommentServiceImpl implements ICommentService {
         }
         return ServletResponse.createByErrorMessage("删除失败");
 
+    }
+
+    private Integer deleteReplies(Integer commentId,Integer commentCount){
+        List<Reply> replies = replyMapper.selectByCommentId(commentId);
+        for(Reply r:replies) {
+            commentCount--;
+            r.setIsDeleted(false);
+            replyMapper.updateByPrimaryKey(r);
+        }
+        return commentCount;
     }
 
 

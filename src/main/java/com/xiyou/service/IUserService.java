@@ -30,4 +30,6 @@ public interface IUserService {
 
     boolean isConcerned(Integer curId,Integer conId);
 
+    ServletResponse cancelConcern(User user,Integer concernedUserId);
+
 }

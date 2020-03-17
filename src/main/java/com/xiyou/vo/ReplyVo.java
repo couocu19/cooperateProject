@@ -2,6 +2,9 @@ package com.xiyou.vo;
 
 public class ReplyVo {
 
+    //被回复的评论的id
+    private Integer commentId;
+
     //发送回复的人信息
     private Integer replyId;
     private Integer sendReplyUserId;
@@ -14,6 +17,14 @@ public class ReplyVo {
     private Integer receiveReplyUserId;
     private String receiveReplyUserName;
 
+
+    public Integer getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
+    }
 
     public Integer getSendReplyUserId() {
         return sendReplyUserId;
@@ -48,7 +59,8 @@ public class ReplyVo {
     }
 
 
-    public ReplyVo(Integer replyId, Integer sendReplyUserId, String replyUsername, String header, String time, String content, Integer receiveReplyUserId, String receiveReplyUserName) {
+    public ReplyVo(Integer commentId, Integer replyId, Integer sendReplyUserId, String replyUsername, String header, String time, String content, Integer receiveReplyUserId, String receiveReplyUserName) {
+        this.commentId = commentId;
         this.replyId = replyId;
         this.sendReplyUserId = sendReplyUserId;
         this.replyUsername = replyUsername;

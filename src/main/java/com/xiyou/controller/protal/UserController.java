@@ -6,6 +6,7 @@ import com.xiyou.common.ServletResponse;
 import com.xiyou.dao.UserMapper;
 import com.xiyou.pojo.Message;
 import com.xiyou.pojo.User;
+import com.xiyou.service.IMessageService;
 import com.xiyou.service.IUserService;
 import com.xiyou.util.DateTimeUtil;
 import com.xiyou.vo.MessageVo;
@@ -32,6 +33,9 @@ public class UserController {
 
     @Autowired
     private IUserService iUserService;
+
+    @Autowired
+    private IMessageService iMessageService;
 
     @ResponseBody
     @RequestMapping("register.do")
@@ -162,16 +166,17 @@ public class UserController {
 
     }
 
-    //获取某个用户的关注列表
+    //取关他人
     @ResponseBody
-    @RequestMapping("getConcerns.do")
-    public ServletResponse getConcerns(HttpSession session,Integer id){
+    @RequestMapping("canceledConcern.do")
+    public ServletResponse canceledConcern(HttpSession session,Integer concernedUserId){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByError();
         }
 
-        return iUserService.getConcernsById(id);
+        return iUserService.cancelConcern(user,concernedUserId);
+
     }
 
 
@@ -181,11 +186,26 @@ public class UserController {
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByError();
-            //return ServletResponse.createByErrorMessage("登录您的账户,获取更多信息~");
         }
 
         return iUserService.getFansById(id);
 
+    }
+
+
+    @ResponseBody
+    @RequestMapping("getConcernUsers.do")
+    public ServletResponse getConcernUsers(Integer id,HttpSession session){
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByError();
+        }
+
+        if(id == null){
+            return ServletResponse.createByErrorMessage("无效参数");
+        }
+
+        return iUserService.getConcernsById(id);
     }
 
     //模糊查询
@@ -227,9 +247,18 @@ public class UserController {
                     String[] video = m.getContent().getContentVideos().split(",");
                     messageVo.setContentText(video[1]);
                 }
+                //填充动态的点赞状态
+                Boolean isPraise = iMessageService.isPraised(curId,m.getId());
+                if(isPraise == true){
+                    messageVo.setIsPraise(1);
+                }else{
+                    messageVo.setIsPraise(0);
+                }
                 list.add(messageVo);
             }
         }
+
+
         //填充用户信息
         userMainPageVo.setStudentId(user.getStudentId());
         userMainPageVo.setMessageCount(user.getMessageCount());

@@ -78,6 +78,11 @@ public class MessageServiceImpl implements IMessageService {
             if(userId!= currentId){
                 return ServletResponse.createByErrorMessage("没有操作权限~");
             }
+            //更新动态总数
+            User user = userMapper.selectByPrimaryKey(userId);
+            Integer count = user.getMessageCount();
+            count--;
+            user.setMessageCount(count);
             message.setDeleted(false);
             int rowCount =  messageMapper.updateByPrimaryKeySelective(message);
             if(rowCount>0){
@@ -90,52 +95,79 @@ public class MessageServiceImpl implements IMessageService {
 
     public ServletResponse praiseMessage(Integer messageId,Integer userId){
         Message message = messageMapper.selectByPrimaryKey(messageId);
-        Praise praise = new Praise();
-        if(message!=null){
-            Integer praiseCount = message.getPraisePoints();
-            praiseCount++;
-            message.setPraisePoints(praiseCount);
-            messageMapper.updateByPrimaryKey(message);
-            //更新点赞表
-            //首先确定此人是否曾经赞过这条动态
-            Praise praise1 = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
-            if(praise1!=null){
-                praise1.setCanceled(true);
-                int rowCount = praiseMapper.insertSelective(praise1);
-                if(rowCount>0){
-                    return ServletResponse.createBySuccess("canceled",praise1);
+        if(message == null){
+            return ServletResponse.createByErrorMessage("该动态不存在或者已被删除");
+        }
+        Integer praiseCount = message.getPraisePoints();
+        //首先确定此人是否曾经赞过这条动态
+        Praise praise1 = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
+        if(praise1!=null){
+            //该用户已经赞过该动态
+            if(praise1.getCanceled()!=false) {
+                praise1.setCanceled(false);
+                int rowCount = praiseMapper.updateStatus(praise1.getId(), praise1.getCanceled());
+                if (rowCount > 0) {
+                    praiseCount--;
+                    message.setPraisePoints(praiseCount);
+                    messageMapper.updateByPrimaryKey(message);
+                    return ServletResponse.createBySuccess("canceled", praiseCount);
                 }
             }else{
-            praise.setUserId(userId);
-            praise.setMessageId(messageId);
-            praise.setCanceled(true);
-
-            int rowCount = praiseMapper.insertSelective(praise);
-              if(rowCount>0){
-                  return ServletResponse.createBySuccess("ok",praiseCount);
-              }
+                //该用户已经取消赞
+                praise1.setCanceled(true);
+                int rowCount = praiseMapper.updateStatus(praise1.getId(), praise1.getCanceled());
+                if (rowCount > 0) {
+                    praiseCount++;
+                    message.setPraisePoints(praiseCount);
+                    messageMapper.updateByPrimaryKey(message);
+                    return ServletResponse.createBySuccess("ok", praiseCount);
+                }
             }
         }
 
-        return ServletResponse.createByErrorMessage("操作失败~");
+        Praise praise = new Praise();
+        praise.setUserId(userId);
+        praise.setMessageId(messageId);
+        praise.setCanceled(true);
+        int rowCount = praiseMapper.insertSelective(praise);
+        if(rowCount>0){
+            praiseCount++;
+            message.setPraisePoints(praiseCount);
+            messageMapper.updateByPrimaryKey(message);
+            return ServletResponse.createBySuccess("ok",praiseCount);
+        }
 
+        return ServletResponse.createByErrorMessage("操作失败~");
     }
 
     //动态取消赞
-    public ServletResponse cancelPraise(Integer praiseId,Integer userId){
-        Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,praiseId);
+    public ServletResponse cancelPraise(Integer messageId,Integer userId){
+        Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
         Message message = null;
-        if(praise!=null) {
-            Integer messageId = praise.getMessageId();
-            message = messageMapper.selectByPrimaryKey(messageId);
-            if (message != null) {
+        if(praise == null){
+            return ServletResponse.createByErrorMessage("error(-还未点过赞)");
+        }
+        message = messageMapper.selectByPrimaryKey(messageId);
+        if (message != null) {
             Integer praiseCount = message.getPraisePoints();
+            //目前的状态已经取消赞
+            if(praise!=null && praise.getCanceled() == false){
+                praise.setCanceled(true);
+                int rowCount = praiseMapper.updateStatus(praise.getId(), praise.getCanceled());
+                if (rowCount > 0) {
+                    praiseCount++;
+                    message.setPraisePoints(praiseCount);
+                    messageMapper.updateByPrimaryKey(message);
+                    return ServletResponse.createBySuccess("praise", praiseCount);
+                }
+            }
+
             praiseCount--;
             message.setPraisePoints(praiseCount);
             messageMapper.updateByPrimaryKey(message);
 
             praise.setCanceled(false);
-            int rowCount = praiseMapper.updateStatus(praiseId,praise.getCanceled());
+            int rowCount = praiseMapper.updateStatus(praise.getId(),praise.getCanceled());
             if(rowCount>0){
                 return ServletResponse.createBySuccess("ok",praiseCount);
             }
@@ -143,7 +175,6 @@ public class MessageServiceImpl implements IMessageService {
         }else{
                 return ServletResponse.createByErrorMessage("参数错误~");
          }
-        }
         return ServletResponse.createByErrorMessage("操作失败~");
 
     }
@@ -180,6 +211,9 @@ public class MessageServiceImpl implements IMessageService {
     //判断是否当前用户是否赞过这个动态
     public Boolean isPraised(Integer userId,Integer messageId){
         Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
+        if(praise == null){
+            return false;
+        }
         if(praise.getCanceled() == false){
             return false;
         }else{
