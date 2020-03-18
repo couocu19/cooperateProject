@@ -33,3 +33,23 @@
 	/*border-bottom-right-radius: 95%;
 	border-top-right-radius: 95%;*/
 }
+
+
+main {
+	margin-top: 1rem;
+}
+
+
+#photos_show {
+	justify-content: space-around;
+}
+
+#comment_box_wrapper {
+	padding-bottom: 3rem;
+}
+
+#footer_wrapper {
+	position: fixed;
+	left: 0rem;
+	bottom: 0rem;
+}

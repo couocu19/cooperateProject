@@ -5,7 +5,6 @@ window.user_student_id = '04181019';
 window.user_id = null;
 window.user_message = null;
 
-
 promiseAjax({
 	url: 'http://118.31.12.175:8080/xiyouProject_war/user/register.do',
 	type: 'get',
@@ -33,6 +32,8 @@ promiseAjax({
 				console.log(err);
 			}
 		})
+	} else {
+
 	}
 }).catch((err) => {
 	console.log(err);
@@ -52,10 +53,10 @@ class Obj{
 		}, false);
 		this.user_btn.addEventListener('click', () => {
 			console.log('ok');
-			window.location.href = 'personal_page.html';
+			window.location.href = `personal_page.html?user_student_id=${window.user_student_id}`;
 		}, false);
 		this.write_btn.addEventListener('click', () => {
-			window.location.href = 'compile_page.html';
+			window.location.href = `compile_page.html?user_student_id=${window.user_student_id}`;
 		}, false);
 	}
 	// 渲染页面函数

@@ -1,6 +1,7 @@
 import {Ajax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
+import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
 class APP {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
@@ -14,7 +15,8 @@ class APP {
 		this.assist_var = {
 			timer : null,
 			count: 0,
-			wait_show_photo: []
+			wait_show_photo: [],
+			timer2
 		}
 	}
 
@@ -33,7 +35,14 @@ class APP {
 		this.send_btn.addEventListener('click', () => {
 			// 直接将属性添加到对象的 动态信息属性上
 			// this.getDtMessage();
-			this.send_message();
+			if(!this.assist_var.timer2) {
+				this.send_message();
+				setTimeout(() => {
+					clearTimeout(this.assist_var.timer2);
+					this.assist_var.timer2 = null;
+				}, 2000);
+			}
+
 		}, false);
 		// 将input标签选中的图片添加到页面中
 		this.upload_imgs.onchange = () => {
@@ -176,7 +185,7 @@ class APP {
 			success: (responeText) => {
 				let json = JSON.parse(responeText);
 				console.log(json);
-				// window.history.back();
+				setSessionBack()
 			},
 			fail: function(err) {
 				console.log(err);

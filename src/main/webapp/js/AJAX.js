@@ -1,4 +1,4 @@
-
+import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
 /*
 ajax({
     url: "", //请求地址
@@ -19,7 +19,7 @@ function Ajax(obj) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			if (xhr.status >= 200 && xhr.status <= 300) {
-				obj.success(xhr.responseText, xhr.responseXML);
+				obj.success(xhr.responseText);
 			} else {
 				obj.fail(xhr.status);
 			}
@@ -85,7 +85,7 @@ function setCookie() {
 		url: 'http://118.31.12.175:8080/xiyouProject_war/user/login.do',
 		type: 'get',
 		data: {
-			studentId: window.user_student_id
+			studentId: getQueryStringArgs().user_student_id
 		},
 		send_form: false,
 		async: false,

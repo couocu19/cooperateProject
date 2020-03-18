@@ -20,13 +20,13 @@ class App {
 	init() {
 
 		this.return_btn.addEventListener('click', () => {
-			window.history.back();
+			setSessionBack();
 		}, false);
 		this.change_message.addEventListener('click', () => {
-			window.location.href = 'user_message_set.html';
+			window.location.href = `user_message_set.html?user_student_id=${getQueryStringArgs(window.location.search).user_student_id}`;
 		}, false);
 		this.adduser_btn.addEventListener('click', () => {
-			window.location.href = 'find_user.html';
+			window.location.href = `find_user.html?user_student_id=${getQueryStringArgs(window.location.search).user_student_id}`;
 		}, false);
 		this.attent_btn.addEventListener('click', () => {
 			// 事件节流
@@ -186,10 +186,10 @@ class User {
 
 	init(user_id) {
 		this.user_attent_btn.addEventListener('click', () => {
-			window.location.href = `user_list_page.html?id=${user_id}&way=getAttentUsers`;
+			window.location.href = `user_list_page.html?user_student_id=${getQueryStringArgs(window.location.search).user_student_id}&id=${user_id}&way=getAttentUsers`;
 		}, false);
 		this.user_fans_btn.addEventListener('click', () => {
-			window.location.href = `user_list_page.html?id=${user_id}&way=getFansUsers`;
+			window.location.href = `user_list_page.html?user_student_id=${getQueryStringArgs(window.location.search).user_student_id}&id=${user_id}&way=getFansUsers`;
 		}, false)
 	}
 	render (data) {
@@ -236,7 +236,8 @@ class Dynamic {
 			let delete_str = app.data.check_id != undefined ? '' : `<div class='icon_wrapper delete_btn' onclick=deleteDynamic(${item_data.messageId})><img src="../../pic/delete_dynamic.png"></div>`;
 			let parse_img_str = item_data.isPraise == 1 ? "../../pic/praise.png" : "../../pic/no_praise.png";
 			let imgs_str = dynamic_obj.getImgStr(item_data.contentImages);
-			item_str += `<!--每一条动态模板--><div class="main_content_item"><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div>${delete_str}<div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examineDynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" onclick=examine_dynamic(${item_data.userId},${item_data.messageId}) src="../../pic/comment.png"><div>${item_data.commentCount}</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseDynamic(${item_data.messageId},${item_data.isPraise}) src=${parse_img_str}><div class= "dynamic${item_data.messageId}">${item_data.praiseCount}</div></div></div></div>`;
+			let color_ = item_data.isPraise == 1 ? 'blue': 'black';
+			item_str += `<!--每一条动态模板--><div class="main_content_item"><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div>${delete_str}<div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examineDynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" onclick=examine_dynamic(${item_data.userId},${item_data.messageId}) src="../../pic/comment.png"><div>${item_data.commentCount}</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseDynamic(${item_data.messageId},${item_data.isPraise}) src=${parse_img_str}><div class= "dynamic${item_data.messageId}" style='color:${color_}'>${item_data.praiseCount}</div></div></div></div>`;
 		}
 		dynamic_obj.el.innerHTML += item_str;
 		dynamic_obj.dynamic_num = end_index;
@@ -258,29 +259,3 @@ app.init();
 dynamic_obj.init();
 AddpullUp(document.getElementsByClassName('refreshText')[0], document.getElementById('main_content_message'), Ajax);
 AddSlideUp(document.getElementsByClassName('refreshText')[1], document.getElementById('main_content_message'), dynamic_obj.render, '');
-
-
-// function commentHtml(argument) {
-// 	'
-				// <div class="comment_item_wrapper">
-				// 		<div class="comment_item_header">
-				// 			<div class="comment_img_wrapper"><img src="../../pic/add_user.png"></div>
-				// 			<div class="comment_item_name">EHTAN_YK</div>
-				// 			<div class="comment_item_time">2020-2-16 8:00</div>
-				// 		</div>
-				// 		<div class="comment_item_mainer">
-				// 			<div class="comment_item_mainer_text">
-				// 				<span>此处是评论内容</span>
-				// 			</div>
-				// 			<div class="comment_item_reply">
-				// 				<div class="reply_item">
-				// 					<a class="reply_user_name">EHTAN_YK</a>
-				// 					<span> :</span>
-				// 					<div class="reply_content">不期而遇的才最惊喜不期而遇的才最惊喜.</div>
-				// 				</div>
-				// 			</div>
-				// 		</div>
-				// 	</div>
-
-				// </div>';
-// }
