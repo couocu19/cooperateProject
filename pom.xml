@@ -137,6 +137,45 @@
         </dependency>
         <!-- mybatis helper-->
         <!--mybatis中的分页插件-->
+
+        <!-- WebSocket配置开始-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>5.2.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>5.2.0.RELEASE</version>
+        </dependency>
+        <!-- WebSocket配置结束-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.log4j/com.springsource.org.apache.log4j -->
+        <dependency>
+            <groupId>org.apache.log4j</groupId>
+            <artifactId>com.springsource.org.apache.log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/javax.websocket/javax.websocket-api -->
+        <dependency>
+            <groupId>javax.websocket</groupId>
+            <artifactId>javax.websocket-api</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.35</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
@@ -236,13 +275,6 @@
             <version>[7.2.0, 7.2.99]</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.google/gson -->
-        <!-- https://mvnrepository.com/artifact/com.google/gson -->
-<!--        <dependency>-->
-<!--            <groupId>com.google</groupId>-->
-<!--            <artifactId>gson</artifactId>-->
-<!--            <version>2.1.0</version>-->
-<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
