@@ -5,7 +5,9 @@ import com.xiyou.pojo.Message;
 import java.util.Date;
 import java.util.List;
 
-public class MessageVo {
+
+//实现comparable接口可以实现在集合中的排序
+public class MessageVo implements Comparable<MessageVo> {
 
     //发表动态的用户的基本信息
     private Integer userId;
@@ -137,7 +139,35 @@ public class MessageVo {
         this.isPraise = isPraise;
     }
 
+    @Override
+    public String toString() {
+        return "MessageVo{" +
+                "username='" + username + '\'' +
+                ", time='" + time + '\'' +
+                ", praiseCount=" + praiseCount +
+                '}';
+    }
+
     public MessageVo(){
         super();
+    }
+
+    //实现compareTo接口
+    public int compareTo(MessageVo m){
+
+        if(this.time.compareTo(m.time)<0){
+            return 1;
+        }else if(this.time.compareTo(m.time) == 0){
+            if(this.praiseCount.compareTo(m.praiseCount)<0){
+                return 1;
+            }else if(this.praiseCount.compareTo(m.praiseCount)>0){
+                return -1;
+            }else{
+                return 0;
+            }
+        }else {
+            return -1;
+        }
+
     }
 }

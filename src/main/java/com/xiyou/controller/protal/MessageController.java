@@ -16,6 +16,7 @@ import com.xiyou.util.PropertiesUtil;
 import com.xiyou.util.QiniuUploadImageUtil;
 import com.xiyou.vo.MessageVo;
 import com.xiyou.vo.ReplyVo;
+import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -130,7 +131,6 @@ public class MessageController {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServletResponse.createByError();
-            //return ServletResponse.createByErrorMessage("用户未登录!");
         }
         Integer id = user.getId();
         return iMessageService.praiseMessage(messageId,id);
@@ -184,11 +184,48 @@ public class MessageController {
     }
 
 
+    @ResponseBody
+    @RequestMapping("getAll.do")
+    public ServletResponse getAllUserMessages(HttpSession session){
 
-    public MessageVo assembleMessage(Integer id,Message message,User user){
+        return iMessageService.getAll(session);
+
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping("getConcernAll.do")
+    public ServletResponse getConcernAll(HttpSession session){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServletResponse.createByError();
+        }
+        ServletResponse response = iMessageService.getConcernAll(user);
+        if(!response.isSuccess()){
+            return response;
+        }
+        List<Message> messages = (List<Message>) response.getData();
+        List<MessageVo> messageVos = new ArrayList<>();
+        MessageVo messageVo = null;
+        User user1 = null;
+        for(Message message:messages){
+            user1 = userMapper.selectByPrimaryKey(message.getUserId());
+            messageVo = assembleMessage(user.getId(),message,user1);
+            messageVos.add(messageVo);
+        }
+        Collections.sort(messageVos);
+        return ServletResponse.createBySuccess(messageVos);
+
+       // return iMessageService.getConcernAll(user);
+
+    }
+
+
+
+    public MessageVo assembleMessage(@RequestParam(required = false) Integer id,Message message,User user){
         MessageVo messageVo = new MessageVo();
         String username = user.getUsername();
-
         messageVo.setMessageId(message.getId());
         messageVo.setUserId(user.getId());
         messageVo.setUsername(username);
@@ -232,16 +269,9 @@ public class MessageController {
         return messageVo;
 
     }
-    private String getFilePath(@RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpSession session,String dirName){
 
-//        System.out.println("***");
-        String path = request.getSession().getServletContext().getRealPath(dirName);
 
-//        System.out.println(path);
 
-        String targetFileName = iFileService.upload(file, path);
-        return targetFileName;
-    }
 
 
 }

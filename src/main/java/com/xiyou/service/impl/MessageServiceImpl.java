@@ -18,9 +18,12 @@ import com.xiyou.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.rmi.ServerError;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -208,6 +211,52 @@ public class MessageServiceImpl implements IMessageService {
         return ServletResponse.createByErrorMessage("操作失败");
     }
 
+    public ServletResponse getAll(HttpSession session){
+        List<Message> allMessageList = messageMapper.selectAll();
+        if(allMessageList == null){
+            return ServletResponse.createByErrorMessage("暂时没有最新动态哦~");
+        }
+        List<MessageVo> messageVos = new ArrayList<>();
+        MessageVo messageVo = null;
+        for(Message m:allMessageList){
+            messageVo = assembleMessage(m,session);
+            messageVos.add(messageVo);
+        }
+
+        return ServletResponse.createBySuccess(messageVos);
+    }
+
+
+    public ServletResponse getConcernAll(User user){
+        String concerns = user.getConcernUsers();
+        if(concerns == null){
+            return ServletResponse.createByErrorMessage("这里空空如也,你还没有关注任何人哦~");
+        }
+        System.out.println(concerns);
+        String[] cons = concerns.split(",");
+        Integer id = null;
+        Message message = null;
+        List<Message> allList = new ArrayList<>();
+        List<Message> list = null;
+
+        for(int i =1;i<cons.length;i++){
+            id = Integer.valueOf(cons[i]);
+            //获取关注用户的一个动态
+            list = messageMapper.getUserAllMessage(id);
+            if(list.size()>0){
+                for(Message m:list){
+                    allList.add(m);
+                }
+            }
+        }
+        if(list.size() == 0){
+            return ServletResponse.createByErrorMessage("Ta们还没发过任何动态~");
+        }
+
+        return ServletResponse.createBySuccess(allList);
+
+    }
+
     //判断是否当前用户是否赞过这个动态
     public Boolean isPraised(Integer userId,Integer messageId){
         Praise praise = praiseMapper.selectByUserIdAndMessageId(userId,messageId);
@@ -230,6 +279,62 @@ public class MessageServiceImpl implements IMessageService {
         praiseVo.setPraiseUserName(praiseUser.getUsername());
         praiseVo.setSignature(praiseUser.getSignature());
         return praiseVo;
+    }
+
+    public MessageVo assembleMessage(Message message, HttpSession session){
+        User user = userMapper.selectByPrimaryKey(message.getUserId());
+        MessageVo messageVo = new MessageVo();
+        String username = user.getUsername();
+
+        messageVo.setMessageId(message.getId());
+        messageVo.setUserId(user.getId());
+        messageVo.setUsername(username);
+        messageVo.setHeader(user.getHeadSculpture());
+        messageVo.setTime(DateTimeUtil.dateToStr(message.getTime(),"yyyy-MM-dd HH:mm:ss"));
+        if(message.getContent().getContentText()!=null){
+            messageVo.setContentText(message.getContent().getContentText());
+        }
+
+        if(message.getContent().getContentImages()!=null){
+            String[] images = message.getContent().getContentImages().split(",");
+            List<String> list = new ArrayList<>();
+            for(int i = 1;i<images.length;i++){
+                list.add(images[i]);
+            }
+            messageVo.setContentImages(list);
+        }
+        if(message.getContent().getContentVideos()!=null){
+            String[] video = message.getContent().getContentVideos().split(",");
+            messageVo.setContentVideos(Const.urlPrefix+"uploadVideo/"+video[1]);
+        }
+        if(message.getPraisePoints() == null) {
+            messageVo.setPraiseCount(0);
+        }else{
+            messageVo.setPraiseCount(message.getPraisePoints());
+        }
+        if(message.getPraisePoints() == null) {
+            messageVo.setCommentCount(0);
+        }else{
+            messageVo.setCommentCount(message.getCommentCount());
+        }
+
+        //判断当前用户有没有登录
+        User curUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if(curUser == null){
+            messageVo.setIsPraise(0);
+        }else{
+            Integer id = curUser.getId();
+            //填充当前的点赞信息
+             Boolean isPraise = isPraised(id,message.getId());
+             if(isPraise == true){
+                messageVo.setIsPraise(1);
+           }else{
+                messageVo.setIsPraise(0);
+
+           }
+        }
+        return messageVo;
+
     }
 
 

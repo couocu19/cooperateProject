@@ -21,6 +21,8 @@ public interface MessageMapper {
 
     List<Message> getUserAllMessage(Integer userId);
 
+    List<Message> selectAll();
+
 
 
 }
