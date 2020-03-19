@@ -6,20 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/common/WebSocketMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/HttpSessionConfigurator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/WebSockets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/webSocket/StompMessageHandshakeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/webSocket/WebSocketHandshakeHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/webSocket/WebSocketHandshakeInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/webSocket/WebSocketMessageAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/util/webSocket/WebSocketMessageUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-    </list>
+    <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -413,7 +400,7 @@
       <workItem from="1584254789857" duration="5888000" />
       <workItem from="1584326683201" duration="20063000" />
       <workItem from="1584405166122" duration="22269000" />
-      <workItem from="1584493135665" duration="14652000" />
+      <workItem from="1584493135665" duration="14740000" />
     </task>
     <servers />
   </component>
