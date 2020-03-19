@@ -79,11 +79,18 @@
 
                 </div>
             </main>
-            <div id="pop_box">
+            <div id="pop_box" style="display: none;">
                 <div class="pop_lbox">
-                    <ul></ul>
-                    <ul></ul>
-                </div>
+                    <ul>
+                        <li class='pop_item' id="pop_send">回复</li>
+                        <li class='pop_item' id="pop_report">举报</li>
+                        <li class='pop_item' id="pop_delete">删除</li>
+                    </ul>
+                    <ul>
+                        <li class='pop_item' id="pop_cancel_reply">取消</li>
+                    </ul>
+            </div>
+        </div>
             </div>
         </div>
         <footer id="footer_wrapper">
@@ -161,7 +168,9 @@
 
         <script src="http://localhost:9012/js/detail_dynamic.js" type="module">
         </script>
+        <script type="text/javascript" src="../../js/dynamic_static.js"></script>
         <script type="text/javascript" src="../../js/find_user_static.js"></script>
         <script type="text/javascript" src="../../js/photoswipestatic.js"></script>
+        <script type="text/javascript" src='../../js/static_Ajax.js'></script>
     </body>
 </html>

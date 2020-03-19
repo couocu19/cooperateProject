@@ -16,7 +16,7 @@ class APP {
 			timer : null,
 			count: 0,
 			wait_show_photo: [],
-			timer2
+			timer2:null
 		}
 	}
 

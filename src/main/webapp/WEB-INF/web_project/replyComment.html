@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>回复评论页面</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,
+	minimum-scale=1.0, maximum-scale=1.0">
+	<!-- 禁止缩放 -->
+	<meta name="view" content="user-scalable=no, minimal-ui">
+	<!-- 禁止横屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<link rel="stylesheet" type="text/css" href="../../style/base_style.css">
+	<link rel="stylesheet" type="text/css" href="../../style/find_user.css">
+
+	<link rel="stylesheet" type="text/css" href="../../style/compile_page.css">
+	<link rel="stylesheet" type="text/css" href="../../style/replyComment.css">
+	<link rel="icon" href="../../pic/favicon.ico">
+</head>
+<body>
+
+
+	<div id="app">
+		<header id='header_wrapper'>
+			<div class='icon_wrapper return_btn'>
+				<img src="../../pic/return.png">
+			</div>
+			<div>回复评论</div>
+			<div id='send_reply'>提交</div>
+		</header>
+		<main>
+			<textarea id="reply_content"></textarea>
+		</main>
+	</div>
+	<script type="module" src="http://localhost:9012/js/replyComment.js"></script>
+</body>
+</html>

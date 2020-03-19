@@ -2,7 +2,11 @@ import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
 import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
 import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
 import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
-import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {window_addEvent, setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+
+// 为window添加返回刷新事件
+window_addEvent();
+let app_user_id = null;
 
 class Obj {
 	constructor(return_btn, more_options, send_comment_btn, comment_text) {
@@ -147,6 +151,8 @@ class Comment_Obj {
 		if(comment_arr.length == 0) {return}
 		var str_ = ''
 		for(let i = 0, len = comment_arr.length; i < len; i++) {
+			let can_delete = app_user_id == comment_arr[i].sendUserId ? 'true' : 'false';
+			console.log(can_delete)
 			let reply_style = comment_arr[i].firstReplyUser ? 'block' : 'none';
 			str_ += `<div class="comment_item_wrapper">
 						<div class="comment_item_header" onclick=viewUserIndexPage(${comment_arr[i].sendUserId})>
@@ -155,14 +161,14 @@ class Comment_Obj {
 							<div class="comment_item_time">${comment_arr[i].time}</div>
 						</div>
 						<div class="comment_item_mainer">
-							<div class="comment_item_mainer_text" onclick=replyCommentPage(${comment_arr[i].commentId},${comment_arr[i].sendUserId})>
+							<div class="comment_item_mainer_text" onclick=replyComment(${comment_arr[i].commentId},${comment_arr[i].sendUserId},${can_delete})>
 								<span>${comment_arr[i].content}</span>
 							</div>
-							<div class="comment_item_reply style='dispaly: ${reply_style}">
+							<div class="comment_item_reply" style="display: ${reply_style};" onclick=showCommentReply(${comment_arr[i].commentId})>
 								<div class="reply_item">
-									<a class="reply_user_name">回复人名称</a>
+									<a class="reply_user_name">${comment_arr[i].firstReplyUser}</a>
 									<span> :</span>
-									<div class="reply_content">回复的内容</div>
+									<div class="reply_content">${comment_arr[i].firstReplyContent}</div>
 								</div>
 							</div>
 						</div>
@@ -172,6 +178,8 @@ class Comment_Obj {
 	}
 
 }
+
+
 
 let comment_obj = new Comment_Obj(document.getElementById('comment_box_wrapper'));
 promiseAjax({
@@ -185,6 +193,7 @@ promiseAjax({
 }).then((responesText) => {
 	let json = JSON.parse(responesText);
 	console.log(json);
+	app_user_id = json.data.userId;
 	mainertext.render(json.data);
 }).catch((err) => {
 	let json = JSON.parse(err)
