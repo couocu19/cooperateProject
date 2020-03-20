@@ -1,5 +1,7 @@
 
-
+// text_dom 拖动的展示的dom
+// el_dom 拖动的dom
+// callback 回调函数
 function AddpullUp(text_dom, el_dom, callback) {
 	let start_pos = 0,  //记录开始的位置
 		move_distant = 0;

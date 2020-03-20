@@ -62,7 +62,7 @@ obj.init();
 // 得到信息数组
 
 class MainerText {
-	constructor(header_img, username, send_time, content_text, comment_num, praise_num, imgs_warpper) {
+	constructor(header_img, username, send_time, content_text, comment_num, praise_num, imgs_warpper, praise_list_box_el, comment_box_el) {
 		this.header_img = header_img;
 		this.username = username;
 		this.send_time = send_time;
@@ -71,12 +71,31 @@ class MainerText {
 		this.praise_num = praise_num;
 		this.imgs_warpper = imgs_warpper;
 		this.show_PhotoSwipe_arr = [];
+		this.praise_list_box_el = praise_list_box_el;
+		this.comment_box_el = comment_box_el;
 	}
 
 	init() {
 		this.imgs_warpper.addEventListener('click', (e) => {
 			this.show_imgs(e);
 		}, false);
+		this.praise_num.addEventListener('click', () => {
+			this.praise_list_box_el.style.display = 'block';
+			this.comment_box_el.style.display = 'none';
+		}, false);
+		this.comment_num.addEventListener('click', () => {
+			this.praise_list_box_el.style.display = 'none';
+			this.comment_box_el.style.display = 'block';
+		}, false);
+	}
+
+	renderPraiseList(user_arr) {
+		console.log(user_arr);
+		let str_ = '';
+		for(let i = 0, len = user_arr.length; i < len; i ++ ) {
+			str_ += `<div class="head_name_item" onclick=viewUserIndexPage(${user_arr[i].praiseUserId})><div class="user_head_pic_item"><img src=${user_arr.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${user_arr[i].praiseUserName}</p><div class="send_time_item">${user_arr[i].signature}</div></div></div>`
+		}
+		this.praise_list_box_el.innerHTML = str_;
 	}
 
 	render(data) {
@@ -137,13 +156,16 @@ let mainertext = new MainerText(document.getElementsByClassName('user_head_pic_i
 								document.getElementsByClassName('item_text')[0],
 								document.getElementById('comment_num'),
 								document.getElementById('praise_num'),
-								document.getElementById('photos_show'));
+								document.getElementById('photos_show'),
+								document.getElementById('praise_user_list_wrapper'),
+								document.getElementById('comment_box_wrapper'));
 mainertext.init();
 
 
 class Comment_Obj {
 	constructor(comment_wrapper) {
 		this.comment_wrapper = comment_wrapper;
+		this.dynamic_owner_id = null;
 	}
 
 	render(comment_arr) {
@@ -152,25 +174,27 @@ class Comment_Obj {
 		var str_ = ''
 		for(let i = 0, len = comment_arr.length; i < len; i++) {
 			let can_delete = app_user_id == comment_arr[i].sendUserId ? 'true' : 'false';
+			if(app_user_id) 
 			console.log(can_delete)
 			let reply_style = comment_arr[i].firstReplyUser ? 'block' : 'none';
 			str_ += `<div class="comment_item_wrapper">
 						<div class="comment_item_header" onclick=viewUserIndexPage(${comment_arr[i].sendUserId})>
 							<div class="comment_img_wrapper "><img src=${comment_arr[i].header}></div>
 							<div class="comment_item_name">${comment_arr[i].sendUsername}</div>
-							<div class="comment_item_time">${comment_arr[i].time}</div>
+							
 						</div>
 						<div class="comment_item_mainer">
 							<div class="comment_item_mainer_text" onclick=replyComment(${comment_arr[i].commentId},${comment_arr[i].sendUserId},${can_delete})>
 								<span>${comment_arr[i].content}</span>
 							</div>
-							<div class="comment_item_reply" style="display: ${reply_style};" onclick=showCommentReply(${comment_arr[i].commentId})>
+							<div class="comment_item_reply" style="display: ${reply_style};" onclick=showCommentReply(${comment_arr[i].commentId},${comment_arr[i].sendUserId},${comment_arr[i].sendUserId})>
 								<div class="reply_item">
 									<a class="reply_user_name">${comment_arr[i].firstReplyUser}</a>
 									<span> :</span>
 									<div class="reply_content">${comment_arr[i].firstReplyContent}</div>
 								</div>
 							</div>
+							<div class="comment_item_time">${comment_arr[i].time}</div>
 						</div>
 					</div>`;
 		}
@@ -182,6 +206,8 @@ class Comment_Obj {
 
 
 let comment_obj = new Comment_Obj(document.getElementById('comment_box_wrapper'));
+
+// 获取该动态的评论信息
 promiseAjax({
 	url: 'http://118.31.12.175:8080/xiyouProject_war/message/getMessageById.do',
 	type: 'get',
@@ -200,6 +226,8 @@ promiseAjax({
 	console.log(json);
 });
 
+
+// 获取该动态的点赞信息并提前渲染
 promiseAjax({
 	url: 'http://118.31.12.175:8080/xiyouProject_war/comment/getMessAllComments.do',
 	type: 'get',
@@ -212,4 +240,17 @@ promiseAjax({
 	value = JSON.parse(value);
 	console.log(value);
 	comment_obj.render(value.data);
+});
+promiseAjax({
+	url: 'http://118.31.12.175:8080/xiyouProject_war/message/getPraiseUsers.do',
+	type: 'get',
+	data: {
+		messageId: getQueryStringArgs().message_id
+	},
+	async: false
+}).then((value) => {
+	value = JSON.parse(value);
+	mainertext.renderPraiseList(value.data);
+}).catch((err)=> {
+	console.log(err);
 });

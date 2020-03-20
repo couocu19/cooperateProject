@@ -9,9 +9,11 @@
 	<meta name="view" content="user-scalable=no, minimal-ui">
 	<!-- 禁止横屏 -->
 	<meta name="screen-orientation" content="portrait">
+		<link rel="stylesheet" type="text/css" href="../../style/personal_page.css">
 	<link rel="stylesheet" type="text/css" href="../../style/base_style.css">
 	<link rel="stylesheet" type="text/css" href="../../style/index.css">
 	<link rel="icon" href="../../pic/favicon.ico">
+
 
 </head>
 <body>
@@ -28,10 +30,12 @@
 			</div>
 			<ul class='nav_item'><li class="item_gc cur">广场</li><li class="item_gz">关注</li></ul>
 		</header>
-
-		<footer id=''>
-
-		</footer>
+		<p class='refreshText'></p>
+		<mainer id="dynamic_wrapper">
+			<div id="all_dynamic"></div>
+			<div id="concern_dynamic" style="display: none;"></div>
+		</mainer>
+		<p class='refreshText'></p>
 	</div>
 
 
@@ -104,6 +108,9 @@
 
 	<script type="module" src="http://localhost:9012/js/index.js">
 	</script>
+
+	<script type="text/javascript" src='../../js/examine_dynamic.js'></script>
+	<!-- <script type="text/javascript" src='../../js/dynamic_static.js'></script> -->
 
 </body>
 </html>

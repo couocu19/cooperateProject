@@ -18,7 +18,7 @@ html {
 #main_place {
 	width: 100%;
 	border-bottom: 1px solid gray;
-	position: absolute; 
+	/*position: absolute; */
 }
 #main_place:after {
 	content: '';
@@ -64,4 +64,22 @@ html {
 
 .header_item img{
 	width: 100%;
+}
+
+
+#user_mess {
+	width: 2rem;
+	margin:  0 0 0 .5rem; 
+	display: block;
+}
+
+
+.refreshText{
+	float: left;
+    /* position: absolute; */
+    width: 100%;
+    line-height: 50px;
+    text-align: center;
+    left: 0;
+    top: 0;
 }

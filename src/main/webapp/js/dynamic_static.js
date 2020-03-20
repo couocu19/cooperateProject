@@ -57,7 +57,7 @@ function deleteCommentFn(comment_id) {
 	})
 }
 
-function showCommentReply(commentId) {
-	window.location.href = `showReplyList.html?commentId=${commentId}`;
+function showCommentReply(commentId, app_user_id, dynamic_owner_id) {
+	window.location.href = `showReplyList.html?commentId=${commentId}&app_user_id=${app_user_id}&dynamic_owner_id=${dynamic_owner_id}`;
 }
 

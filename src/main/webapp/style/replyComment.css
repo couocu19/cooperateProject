@@ -10,4 +10,12 @@
 #header_wrapper {
 	display: flex;;
 	justify-content: space-between;
+	margin-bottom: 1rem;
+}
+
+
+#send_reply {
+	margin-right: .5rem;
+    width: 4rem;
+    background-color: skyblue;
 }

@@ -39,13 +39,14 @@ function pariseDynamic(messageId, parise) {
 				if(json.status == 0) {
 					// 成功
 					window.location.reload();
+					console.log(json);
 				} else {
 					console.log(json);
 				}
 			}
 		}
 	}
-	let url = parise ? `http://118.31.12.175:8080/xiyouProject_war/message/cancel_praise.do?messageId=${messageId}` : `http://118.31.12.175:8080/xiyouProject_war/message/praise.do?messageId=${messageId}`;
+	let url = `http://118.31.12.175:8080/xiyouProject_war/message/praise.do?messageId=${messageId}`;
 	console.log(url);
 	xhr.open('get', url, false);
 	xhr.send(null);

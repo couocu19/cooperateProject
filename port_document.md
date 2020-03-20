@@ -394,7 +394,7 @@
 
   ```json
   简述: 主页的动态（最热或者最新）
-  url: /dynamic/index.do
+  url: /message/getAll.do
   请求方式: get
   返回示
   {
@@ -418,7 +418,7 @@
 
   ```json
   简述: 查看用户关注的人的动态（最新）
-  url: /dynamic/user_attent.do
+  url: /message/getConcernAll.do
   请求方式: get
   返回示例
   {
@@ -616,8 +616,8 @@
 
 - ### 用户取消赞动态
 
-  ```
-  url:/message/cancel_praise.do
+  ```json
+  url: /message/cancel_praise.do
   参数:id(该点赞记录对应的id)
   method:get/post
   返回示例:

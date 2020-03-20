@@ -94,3 +94,32 @@ main {
 ul li:last-child {
 	border: 0;
 }
+
+
+.comment_item_wrapper {
+	/*border-bottom: 1px solid gray;*/
+	margin-bottom: 2rem;
+}
+
+.comment_item_time {
+    width: 70%;
+    /* float: left; */
+    overflow: auto;
+    font-size: 90%;
+    color: gray;
+    margin-top: .3rem;
+}
+
+#praise_num {
+	width: 1rem;
+}
+
+.head_name_item {
+	/*width: 80%;*/
+	margin: 0 auto .5rem;
+}
+
+
+.send_time_item {
+	font-size: 70%;
+}

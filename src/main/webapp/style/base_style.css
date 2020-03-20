@@ -35,3 +35,10 @@ ul li {
 	margin: 0;
 	padding: 0;
 }
+
+
+.flexaligncenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
