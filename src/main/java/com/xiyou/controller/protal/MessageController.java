@@ -215,9 +215,14 @@ public class MessageController {
             messageVos.add(messageVo);
         }
         Collections.sort(messageVos);
+        if(messageVos.size()>15){
+            List<MessageVo> list = messageVos.subList(0,15);
+            return ServletResponse.createBySuccess(list);
+        }
+
+
         return ServletResponse.createBySuccess(messageVos);
 
-       // return iMessageService.getConcernAll(user);
 
     }
 

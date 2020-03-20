@@ -241,6 +241,7 @@
     left outer join message_content c on m.id = c.message_id
     where u.id = #{studentId}
     and m.is_deleted != 0
+    order by m.time DESC
   </select>
 
   <select id="selectByKeyInfo" resultMap="BaseResultMap" parameterType="string">

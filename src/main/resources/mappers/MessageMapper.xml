@@ -148,6 +148,7 @@
     on m.id = c.message_id
     where m.user_id = #{userId}
     and m.is_deleted != 0
+    order by m.time DESC
   </select>
 
 
@@ -160,6 +161,7 @@
     on m.id = c.message_id
     where m.is_deleted != 0
     order by m.praise_points DESC ,m.time DESC, m.comment_count DESC
+    limit 15
   </select>
 
 </mapper>

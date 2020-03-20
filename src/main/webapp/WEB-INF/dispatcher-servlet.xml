@@ -53,6 +53,6 @@
 
         <!-- 实时消息推送，在spring容器初始化此bean的时候就启动了监听线程， -->
 
-<bean id="webSocketMessageUtil" class="net.jileniao.ssm.websocket.WebSocketMessageUtil" />
+<!--<bean id="webSocketMessageUtil" class="net.jileniao.ssm.websocket.WebSocketMessageUtil" />-->
 
 </beans>

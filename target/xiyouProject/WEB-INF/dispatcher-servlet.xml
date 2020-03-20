@@ -39,4 +39,20 @@
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
+    <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+
+    <property name="maxTextMessageBufferSize" value="8192" />
+
+    <property name="maxBinaryMessageBufferSize" value="8192" />
+
+    <property name="maxSessionIdleTimeout" value="900000" />
+
+    <property name="asyncSendTimeout" value="5000" />
+
+</bean>
+
+        <!-- 实时消息推送，在spring容器初始化此bean的时候就启动了监听线程， -->
+
+<!--<bean id="webSocketMessageUtil" class="net.jileniao.ssm.websocket.WebSocketMessageUtil" />-->
+
 </beans>

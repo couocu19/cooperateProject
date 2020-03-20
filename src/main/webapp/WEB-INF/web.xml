@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance-->
-<!--                    http://www.springmodules.org/schema/cache/springmodules-cache.xsd-->
-<!--                    http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd"-->
-<!--         xmlns="http://java.sun.com/xml/ns/javaee"-->
-<!--         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"-->
-<!--         id="WebApp_ID" version="2.5">-->
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instanc"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         id="WebApp_ID" version="2.5">
+<!--<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"-->
+<!--         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee-->
+<!--    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">-->
   <display-name>Archetype Created Web Application</display-name>
 
   <!--用来转码用的-->

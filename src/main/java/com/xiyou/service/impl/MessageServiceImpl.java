@@ -278,6 +278,7 @@ public class MessageServiceImpl implements IMessageService {
         User praiseUser = userMapper.selectByPrimaryKey(praise.getUserId());
         praiseVo.setPraiseUserName(praiseUser.getUsername());
         praiseVo.setSignature(praiseUser.getSignature());
+        praiseVo.setHeader(praiseUser.getHeadSculpture());
         return praiseVo;
     }
 

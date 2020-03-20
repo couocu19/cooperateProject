@@ -2,11 +2,30 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="xiyouProject:war33" />
+      <artifact name="xiyouProject:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="" />
+    <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/controller/protal/MessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/service/impl/MessageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/util/WebSockets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/controller/protal/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/MessageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/service/impl/MessageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/controller/protal/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/service/impl/MessageServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/web.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,6 +420,7 @@
       <workItem from="1584326683201" duration="20063000" />
       <workItem from="1584405166122" duration="22269000" />
       <workItem from="1584493135665" duration="14740000" />
+      <workItem from="1584716538275" duration="3521000" />
     </task>
     <servers />
   </component>
