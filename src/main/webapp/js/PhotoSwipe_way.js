@@ -15,7 +15,7 @@ export default function show_PhotoSwipe(show_photo_arr, index) {
 	var options = {
 	    // optionName: 'option value'
 	    // for example:
-	    index: index// start at first slide
+	    index: parseInt(index)// start at first slide
 	};
 
 	// Initializes and opens PhotoSwipe

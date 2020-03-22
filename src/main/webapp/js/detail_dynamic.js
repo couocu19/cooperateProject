@@ -125,8 +125,10 @@ class MainerText {
 		if(img_arr.length == 0) {return}
 		this.createPhotoswipeArr(img_arr);
 		let str = '';
+
 		for(let i = 0, len = img_arr.length; i < len; i++) {
-			let item_str = `<div class="photo_item"><img class=${i} data-size=670x712 style="width: 100%; height: 100%;" src=${img_arr[i]}></div>`;
+			let imgwh = getBase64ImgWidthHeight(img_arr[i]);
+			let item_str = `<div class="photo_item"><img class=${i} data-size=${imgwh.w}x${imgwh.h} style="width: 100%; height: 100%;" src=${img_arr[i]}></div>`;
 			str += item_str;
 		}
 		this.imgs_warpper.innerHTML = str;
