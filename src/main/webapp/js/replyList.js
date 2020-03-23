@@ -2,7 +2,7 @@
 import {promiseAjax} from 'http://localhost:9012/js/AJAX.js'
 import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
 
-
+import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
 
 
 class Obj {
@@ -15,7 +15,7 @@ class Obj {
 
 	init() {
 		this.return_el.addEventListener('click', () => {
-			window.history.back();
+			setSessionBack();
 		}, false);
 		this.getData();
 		this.initDelete()
