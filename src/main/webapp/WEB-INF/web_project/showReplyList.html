@@ -10,8 +10,10 @@
 	<meta name="screen-orientation" content="portrait">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link rel="icon" href="../../pic/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="../../style/base_style.css">
 	<link rel="stylesheet" type="text/css" href="../../style/public.css">
 	<link rel="stylesheet" type="text/css" href="../../style/find_user.css">
+	<link rel="stylesheet" type="text/css" href="../../style/detail_dynamic.css">
 	<link rel="stylesheet" type="text/css" href="../../style/personal_page.css">
 </head>
 <body>
@@ -29,7 +31,7 @@
 		<div id="pop_box" style="display: none;">
                 <div class="pop_lbox">
                     <ul>
-                        <li class='pop_item' id="pop_send">回复</li>
+                        <li class='pop_item' id="pop_send" style="display: none;">回复</li>
                         <li class='pop_item' id="pop_report">举报</li>
                         <li class='pop_item' id="pop_delete">删除</li>
                     </ul>
@@ -43,5 +45,6 @@
 	<script type="module" src='http://localhost:9012/js/replyList.js'></script>
 	<script type="text/javascript" src="../../js/dynamic_static.js"></script>
 	<script type="text/javascript" src="../../js/find_user_static.js"></script>
+	<script type="text/javascript" src="../../js/static_Ajax.js"></script>
 </body>
 </html>

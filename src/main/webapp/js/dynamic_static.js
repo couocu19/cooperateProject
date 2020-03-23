@@ -13,6 +13,9 @@ class Pop_box {
 		this.pop_cancel_el.addEventListener('click', () => {
 			this.pop_el.style.display = 'none';
 		}, false);
+		this.pop_report_el.addEventListener('click', () => {
+			console.log('举报');
+		}, false);
 	}
 
 }
@@ -26,17 +29,22 @@ pop_obj.init();
 
 
 
-function replyComment(comment_id, send_user_id, can_delete) {
+function replyComment(id, send_user_id, can_delete, type) {
 	if(!can_delete) {
 		pop_obj.pop_delete_el.style.display = 'none';
 	}
 	pop_obj.pop_delete_el.addEventListener('click', () => {
-		console.log(`删除动态id为${comment_id}的评论`);
-		deleteCommentFn(comment_id);
+		console.log(`删除动态id为${id}的评论`);
+		if(type == 'reply') {
+			deleteReplyFn(id);
+		} else {
+			deleteCommentFn(id);
+		}
+	
 	}, false);
 	pop_obj.pop_el.style.display = 'block';
 	pop_obj.pop_send_el.addEventListener('click', () => {
-		window.location.href = `replyComment.html?commentId=${comment_id}&receiveUserId=${send_user_id}`;
+		window.location.href = `replyComment.html?commentId=${id}&receiveUserId=${send_user_id}`;
 	}, false);
 }
 
@@ -61,3 +69,20 @@ function showCommentReply(commentId, app_user_id, dynamic_owner_id) {
 	window.location.href = `showReplyList.html?commentId=${commentId}&app_user_id=${app_user_id}&dynamic_owner_id=${dynamic_owner_id}`;
 }
 
+
+function deleteReplyFn(reply_id) {
+	promiseAjax({
+		url: 'http://118.31.12.175:8080/xiyouProject_war/reply/delete.do',
+		type: 'get',
+		data: {
+			replyId : reply_id
+		},
+		send_form: false,
+		async: false
+	}).then((value) => {
+		value = JSON.parse(value);
+		if(value.status == 0) {
+			window.location.reload();
+		}
+	})
+}

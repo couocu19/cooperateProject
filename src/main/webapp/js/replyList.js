@@ -61,7 +61,7 @@ class Obj {
 							<div class="comment_item_time">${data_arr[i].time}</div>
 						</div>
 						<div class="comment_item_mainer">
-							<div class="comment_item_mainer_text" onclick=replyComment(${data_arr[i].commentId},${data_arr[i].sendUserId},${this.can_delete})>
+							<div class="comment_item_mainer_text" onclick=replyComment(${data_arr[i].replyId},${data_arr[i].sendReplyUserId},${this.can_delete},'reply')>
 								<span>${data_arr[i].content}</span>
 							</div>
 						</div>
