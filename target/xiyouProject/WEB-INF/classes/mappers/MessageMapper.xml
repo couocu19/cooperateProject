@@ -133,7 +133,6 @@
       pageviews = #{pageviews,jdbcType=INTEGER},
       praise_points = #{praisePoints,jdbcType=INTEGER},
       comment_count = #{commentCount,jdbcType=INTEGER},
-      time = now(),
       is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
