@@ -1,8 +1,8 @@
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
-import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
-import {window_addEvent, setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {Ajax, promiseAjax} from './AJAX.js'
+import show_PhotoSwipe from './PhotoSwipe_way.js'
+import {getBase64ImgWidthHeight} from './getBase64ImgWidthHeight.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
+import {window_addEvent, setSessionBack} from './setSessionBackRefresh.js'
 
 // 为window添加返回刷新事件
 window_addEvent();
@@ -93,7 +93,7 @@ class MainerText {
 		console.log(user_arr);
 		let str_ = '';
 		for(let i = 0, len = user_arr.length; i < len; i ++ ) {
-			str_ += `<div class="head_name_item" onclick=viewUserIndexPage(${user_arr[i].praiseUserId})><div class="user_head_pic_item"><img src=${user_arr.header}></div><div class='comment_content_sign_box'><p class="user_name_item">${user_arr[i].praiseUserName}</p><div class="send_time_item">${user_arr[i].signature}</div></div></div>`
+			str_ += `<div class="head_name_item praisewidth" onclick=viewUserIndexPage(${user_arr[i].praiseUserId})><div class="user_head_pic_item"><img src=${user_arr[i].header}></div><div class='comment_content_sign_box'><p class="user_name_item">${user_arr[i].praiseUserName}</p><div class="send_time_item">${user_arr[i].signature}</div></div></div>`
 		}
 		this.praise_list_box_el.innerHTML = str_;
 	}
@@ -128,7 +128,7 @@ class MainerText {
 
 		for(let i = 0, len = img_arr.length; i < len; i++) {
 			let imgwh = getBase64ImgWidthHeight(img_arr[i]);
-			let item_str = `<div class="photo_item"><img class=${i} data-size=${imgwh.w}x${imgwh.h} style="width: 100%; height: 100%;" src=${img_arr[i]}></div>`;
+			let item_str = `<div class="photo_item"><img class=${i} data-size=${imgwh.w}x${imgwh.h} style="width: 100%;" src=${img_arr[i]}></div>`;
 			str += item_str;
 		}
 		this.imgs_warpper.innerHTML = str;
@@ -224,8 +224,8 @@ promiseAjax({
 	app_user_id = json.data.userId;
 	mainertext.render(json.data);
 }).catch((err) => {
-	let json = JSON.parse(err)
-	console.log(json);
+	// let json = JSON.parse(err);
+	console.log(err);
 });
 
 

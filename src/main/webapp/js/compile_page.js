@@ -1,7 +1,7 @@
-import {Ajax} from 'http://localhost:9012/js/AJAX.js'
-import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
-import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
-import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {Ajax} from './AJAX.js'
+import show_PhotoSwipe from './PhotoSwipe_way.js'
+import {getBase64ImgWidthHeight} from './getBase64ImgWidthHeight.js'
+import {setSessionBack} from './setSessionBackRefresh.js'
 class APP {
 	constructor(el, return_btn, choose_btn, photos_show, upload_imgs, send_btn) {
 		this.el = el;
@@ -37,10 +37,11 @@ class APP {
 			// this.getDtMessage();
 			if(!this.assist_var.timer2) {
 				this.send_message();
-				setTimeout(() => {
+				this.assist_var.timer2 = setTimeout(() => {
 					clearTimeout(this.assist_var.timer2);
 					this.assist_var.timer2 = null;
 				}, 2000);
+				setSessionBack();
 			}
 
 		}, false);
@@ -170,7 +171,14 @@ class APP {
 			for(let i = 0; i < this.photos_show.childElementCount; i++) {
 				this.photos_show.childNodes[i].style.width = '33%';
 			}
+			let imgs = document.getElementsByClassName('photo_item');
+			for(let i = 0, len = imgs.length; i < len; i ++ ) {
+				let Height = parseInt(imgs[i].style.offsetWidth);
+				console.log(imgs[i].style.offsetWidth);
+				imgs[i].style.height = `${Height}px`;
+			}
 		}
+		
 	}
 
 	send_Ajax() {
@@ -218,7 +226,7 @@ function handleFiles(files) {
 			reader.onload = function() {
 				//以base64格式将图片的编码添加到img的src中
 				App.photos_add.push(file);
-				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; height: 100%; z-index: -10;" src=${reader.result}></div>`;
+				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length} img_item" style="width: 100%; height: 100%; z-index: -10; object-fit: cover;" src=${reader.result}></div>`;
 				App.adopt_photos_size();
 				App.assist_var.wait_show_photo.push(this.result);
 			}

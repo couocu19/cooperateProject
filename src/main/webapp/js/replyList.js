@@ -1,8 +1,8 @@
 
-import {promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
+import {promiseAjax} from './AJAX.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
 
-import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {setSessionBack} from './setSessionBackRefresh.js'
 
 
 class Obj {
@@ -58,7 +58,7 @@ class Obj {
 						<div class="comment_item_header" onclick=viewUserIndexPage(${data_arr[i].sendReplyUserId})>
 							<div class="comment_img_wrapper "><img src=${data_arr[i].header}></div>
 							<div class="comment_item_name">${data_arr[i].replyUsername}</div>
-							<div class="comment_item_time">${data_arr[i].time}</div>
+							<div class="comment_item_time" style="display: none;">${data_arr[i].time}</div>
 						</div>
 						<div class="comment_item_mainer">
 							<div class="comment_item_mainer_text" onclick=replyComment(${data_arr[i].replyId},${data_arr[i].sendReplyUserId},${this.can_delete},'reply')>

@@ -1,6 +1,6 @@
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
+import {Ajax, promiseAjax} from './AJAX.js'
+import {setSessionBack} from './setSessionBackRefresh.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
 
 
 class App {

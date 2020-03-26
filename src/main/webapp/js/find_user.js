@@ -1,4 +1,4 @@
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
+import {Ajax, promiseAjax} from './AJAX.js'
 
 
 

@@ -1,8 +1,8 @@
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import show_PhotoSwipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
-import {AddpullUp, AddSlideUp} from 'http://localhost:9012/js/pull_slide_event.js'
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
-import {window_addEvent, setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {Ajax, promiseAjax} from './AJAX.js'
+import show_PhotoSwipe from './PhotoSwipe_way.js'
+import {AddpullUp, AddSlideUp} from './pull_slide_event.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
+import {window_addEvent, setSessionBack} from './setSessionBackRefresh.js'
 
 // 修改window返回页面触发的函数
 window_addEvent();

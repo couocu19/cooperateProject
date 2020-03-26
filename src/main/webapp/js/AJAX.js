@@ -1,4 +1,4 @@
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
 /*
 ajax({
     url: "", //请求地址

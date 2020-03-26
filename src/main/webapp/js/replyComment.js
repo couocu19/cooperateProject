@@ -1,6 +1,6 @@
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import {getQueryStringArgs} from 'http://localhost:9012/js/getQueryStringArgs.js'
-import {setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
+import {Ajax, promiseAjax} from './AJAX.js'
+import {getQueryStringArgs} from './getQueryStringArgs.js'
+import {setSessionBack} from './setSessionBackRefresh.js'
 
 
 class Obj {
@@ -8,6 +8,7 @@ class Obj {
 		this.return_el = return_el;
 		this.send_reply_el = send_reply_el;
 		this.value_el = value_el;
+		this.timer = null;
 	}
 
 	init() {
@@ -15,9 +16,17 @@ class Obj {
 			setSessionBack();
 		}, false);
 		this.send_reply_el.addEventListener('click', () => {
-			if(this.checkContent()) {
-				this.sendRequest();
+			if(!this.timer) {
+				if(this.checkContent()) {
+					this.sendRequest();
+				}
+				// 节流函数
+				this.timer = setTimeout(() => {
+					clearTimeout(this.timer);
+					this.timer = null;
+				}, 1000);
 			}
+			
 		}, false);
 	}
 
@@ -39,6 +48,7 @@ class Obj {
 			send_from: true,
 			async: false
 		}).then((value) => {
+			setSessionBack();
 			console.log(JSON.parse(value))
 		});
 	}

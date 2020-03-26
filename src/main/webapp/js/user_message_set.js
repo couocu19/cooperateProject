@@ -1,8 +1,8 @@
 
-import {window_addEvent, setSessionBack} from 'http://localhost:9012/js/setSessionBackRefresh.js'
-import {Ajax, promiseAjax} from 'http://localhost:9012/js/AJAX.js'
-import {getBase64ImgWidthHeight} from 'http://localhost:9012/js/getBase64ImgWidthHeight.js'
-import show_photoswipe from 'http://localhost:9012/js/PhotoSwipe_way.js'
+import {window_addEvent, setSessionBack} from './setSessionBackRefresh.js'
+import {Ajax, promiseAjax} from './AJAX.js'
+import {getBase64ImgWidthHeight} from './getBase64ImgWidthHeight.js'
+import show_photoswipe from './PhotoSwipe_way.js'
 class App {
 
 

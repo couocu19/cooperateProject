@@ -10,6 +10,11 @@ export default function show_PhotoSwipe(show_photo_arr, index) {
 
 	// build items array
 	var items = show_photo_arr;
+	items.forEach((item) => {
+		let itemWh = getBase64ImgWidthHeight(item.src);
+		item.w = itemWh.w;
+		item.h = itemWh.h;
+	});
 	console.log(items);
 	// define options (if needed)
 	var options = {
@@ -21,4 +26,13 @@ export default function show_PhotoSwipe(show_photo_arr, index) {
 	// Initializes and opens PhotoSwipe
 	var gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
 	gallery.init();
+}
+
+function getBase64ImgWidthHeight(img_src) {
+	let img = new Image();
+	img.src = img_src;
+	return {
+		w: img.width,
+		h: img.height
+	};
 }
