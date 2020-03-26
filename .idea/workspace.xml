@@ -8,24 +8,115 @@
   <component name="ChangeListManager">
     <list default="true" id="21f9964f-c74b-4559-a2ba-b98ec9b1955c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/common/Tset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/common/Tset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/xiyou/pojo/Reply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mappers/MessageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/common/Tset.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/common/Tset.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Reply.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/xiyou/pojo/Reply.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mappers/MessageMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/common/Tset.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/common/Tset.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Reply.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/com/xiyou/pojo/Reply.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/CommentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/CommentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/xiyouProject/WEB-INF/classes/mappers/MessageMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/web_server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/compile_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/detail_dynamic.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/find_user.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/personal_page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web_project/user_message_set.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/images/defaultHeader.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/AJAX.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/PhotoSwipe_way.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/compile_page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/find_user.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/getBase64ImgWidthHeight.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/getUserStudentId.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/personal_page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/save_file.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/user_message_set.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/web_server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/.jshintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/Gruntfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/component.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/default-skin/default-skin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/default-skin/default-skin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/default-skin/default-skin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/default-skin/preloader.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/photoswipe-ui-default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/photoswipe-ui-default.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/photoswipe.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/photoswipe.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/dist/photoswipe.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/photoswipe.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/_main-settings.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin-svg.sketch/Data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin-svg.sketch/metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin-svg.sketch/version" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/default-skin.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/default-skin/preloader.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/css/main.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/core.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/desktop-zoom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/framework-bridge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/gestures.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/history.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/items-controller.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/show-hide-transition.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/tap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/src/js/ui/photoswipe-ui-default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/_includes/menu.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/_layouts/default.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/api.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/creating-custom-ui.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/custom-html-in-slides.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/faq.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/getting-started.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/options.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/performance-tips.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/responsive-images.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/seo.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/documentation/updates.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/site-assets/site.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/apple-touch-icon-144x144.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/fullscreen-laptop.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/grunt-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/high-dpi-icons.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/history.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/horizontal-swipe.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/keyboard.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/lazy-loading.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/lowres.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/luke45.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/pinch.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/progressive.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/share.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/spread.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/twitter.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/photoswipe/website/test/vertical-swipe.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/add_user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/comment.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/praise.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/return.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/search.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/set.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/smlie.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/usermessage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/write.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pic/xxj.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/base_style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/compile_page.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/find_user.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/personal_page.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/style/user_message_set.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/test_photoswipe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/广场模块接口格式.md" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -424,7 +515,8 @@
       <workItem from="1584716538275" duration="4141000" />
       <workItem from="1584836151267" duration="10000" />
       <workItem from="1584956969007" duration="6000" />
-      <workItem from="1585124632432" duration="2914000" />
+      <workItem from="1585124632432" duration="3287000" />
+      <workItem from="1585235227111" duration="280000" />
     </task>
     <servers />
   </component>
