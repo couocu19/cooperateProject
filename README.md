@@ -55,7 +55,7 @@
   
   - 其中图片的预览效果的实现使用了photoswipe插件
     
-    - [photoswipe的基本使用以及一些基本问题的解决]()
+    - [photoswipe的基本使用以及一些基本问题的解决](https://blog.csdn.net/weixin_43990363/article/details/104838299);
     
   - 上拉刷新和下拉加载的实现
   
