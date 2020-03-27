@@ -62,7 +62,7 @@ obj.init();
 // 得到信息数组
 
 class MainerText {
-	constructor(header_img, username, send_time, content_text, comment_num, praise_num, imgs_warpper, praise_list_box_el, comment_box_el) {
+	constructor(header_img, username, send_time, content_text, comment_num, praise_num, imgs_warpper, praise_list_box_el, comment_box_el, praise_btn_el) {
 		this.header_img = header_img;
 		this.username = username;
 		this.send_time = send_time;
@@ -73,6 +73,7 @@ class MainerText {
 		this.show_PhotoSwipe_arr = [];
 		this.praise_list_box_el = praise_list_box_el;
 		this.comment_box_el = comment_box_el;
+		this.praise_btn_el = praise_btn_el;
 	}
 
 	init() {
@@ -86,6 +87,9 @@ class MainerText {
 		this.comment_num.addEventListener('click', () => {
 			this.praise_list_box_el.style.display = 'none';
 			this.comment_box_el.style.display = 'block';
+		}, false);
+		this.praise_btn_el.addEventListener('click', () => {
+			pariseDynamic(getQueryStringArgs().message_id);
 		}, false);
 	}
 
@@ -107,7 +111,7 @@ class MainerText {
 		this.comment_num.innerHTML = data.commentCount;
 		this.praise_num.innerHTML = data.praiseCount;
 		this.imgRender(data.contentImages);
-
+		this.praise_btn_el.src = data.isPraise == 0 ? '../../pic/no_praise.png' : '../../pic/praise.png';
 	}
 	createPhotoswipeArr(img_arr) {
 		// 数组长度大于0
@@ -155,7 +159,8 @@ class MainerText {
 		let img_height = page_width / 3;
 		if(this.imgs_warpper.childElementCount >= 2) {
 			for(let i = 0; i < this.imgs_warpper.childElementCount; i++) {
-				this.imgs_warpper.childNodes[i].style.width = '30%';
+				this.imgs_warpper.childNodes[i].style.width = '33%';
+				this.imgs_warpper.childNodes[i].style.height = `${img_height}px`;
 			}
 		}
 	}
@@ -170,7 +175,8 @@ let mainertext = new MainerText(document.getElementsByClassName('user_head_pic_i
 								document.getElementById('praise_num'),
 								document.getElementById('photos_show'),
 								document.getElementById('praise_user_list_wrapper'),
-								document.getElementById('comment_box_wrapper'));
+								document.getElementById('comment_box_wrapper'),
+								document.getElementsByClassName('btn_style')[1]);
 mainertext.init();
 
 

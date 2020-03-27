@@ -60,7 +60,7 @@ span textarea {
 
 #footer_wrapper {
 	width: 100%;
-	height: 6rem;
+	/*height: 6rem;*/
 	position: absolute;
 	box-sizing: border-box;
 	left: 0;

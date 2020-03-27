@@ -193,8 +193,18 @@ class Dynamic {
 	getImgStr(imgs_arr) {
 		let return_str = '';
 		if(imgs_arr == null || imgs_arr.length == 0) { return return_str}
+		let page_width = window.innerWidth;
+
+		if(typeof page_width != 'number') {
+			if(document.compatMode == 'CSS1Compat') {
+				page_width = document.documentElement.clientWidth;
+			} else {
+				page_width = document.body.clientWidth;
+			}
+		}
+		let img_height = page_width / 3;
 		for(let i = 0, len = imgs_arr.length; i < len; i ++) {
-			return_str += `<div class="img_item"><img src=${imgs_arr[i]} alt=""></div>`
+			return_str += `<div class="img_item" style="height: ${img_height}px;"><img src=${imgs_arr[i]} alt=""></div>`
 		}
 
 		return return_str;

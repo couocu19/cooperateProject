@@ -17,7 +17,7 @@ html {
 
 #main_place {
 	width: 100%;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #dbbcbc;
 	/*position: absolute; */
 }
 #main_place:after {
@@ -82,4 +82,18 @@ html {
     text-align: center;
     left: 0;
     top: 0;
+}
+
+.main_content_item {
+	/*width: 98%;*/
+	padding: 1rem;
+	margin: 1rem auto 0 auto;
+	border-radius: 1rem;
+	box-shadow: .1rem .1rem .7rem #888888;
+	opacity: .8;
+}
+
+.cp_wrapper {
+	padding: 0px;
+	border : 0px;
 }
