@@ -55,7 +55,9 @@
   
   - 其中图片的预览效果的实现使用了photoswipe插件
     
-    - [photoswipe的基本使用以及一些基本问题的解决](https://blog.csdn.net/weixin_43990363/article/details/104838299);
+    - [photoswipe的基本使用以及一些基本问题的解决](https://blog.csdn.net/weixin_43990363/article/details/104838299)
+    
+      
     
   - 上拉刷新和下拉加载的实现
   
@@ -81,4 +83,20 @@
           }
       }, false);
       ```
+      
+    - 上滑加载更多 主要是利用`文档高度`与`滚动条高度`和`当前可视范围高度`之间的关系来确定当前是否需要执行加载更多`回调函数`
+    
+      ```javascript
+      // 首先获取高度
+      let scrollTop = getScrollTop(); // 获取滚轮高度
+      let clientHeight = getClientHeight(); // 获取当前视窗高度
+      let	documentHeight = getScrollTop(); // 获取当时文档总高度
+      
+      // 判断
+      if(scrollTop + clientHeight >= documentHeight) {
+          // 执行回调函数
+      }
+      ```
+    
+      
 
