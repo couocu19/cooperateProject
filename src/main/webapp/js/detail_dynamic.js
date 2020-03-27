@@ -128,7 +128,7 @@ class MainerText {
 
 		for(let i = 0, len = img_arr.length; i < len; i++) {
 			let imgwh = getBase64ImgWidthHeight(img_arr[i]);
-			let item_str = `<div class="photo_item"><img class=${i} data-size=${imgwh.w}x${imgwh.h} style="width: 100%;" src=${img_arr[i]}></div>`;
+			let item_str = `<div class="photo_item"><img class=${i} data-size=${imgwh.w}x${imgwh.h} style="width: 100%; height: 100%; object-fit: cover;" src=${img_arr[i]}></div>`;
 			str += item_str;
 		}
 		this.imgs_warpper.innerHTML = str;
@@ -142,7 +142,17 @@ class MainerText {
 	}
 
 	adopt_photos_size() {
-		if(this.imgs_warpper.childElementCount == 1) this.imgs_warpper.childNodes[0].style.wihth = '99%';
+		if(this.imgs_warpper.childElementCount == 1) {this.imgs_warpper.childNodes[0].style.wihth = '99%'; return;}
+		let page_width = window.innerWidth;
+
+		if(typeof page_width != 'number') {
+			if(document.compatMode == 'CSS1Compat') {
+				page_width = document.documentElement.clientWidth;
+			} else {
+				page_width = document.body.clientWidth;
+			}
+		}
+		let img_height = page_width / 3;
 		if(this.imgs_warpper.childElementCount >= 2) {
 			for(let i = 0; i < this.imgs_warpper.childElementCount; i++) {
 				this.imgs_warpper.childNodes[i].style.width = '30%';

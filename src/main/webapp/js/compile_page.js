@@ -37,11 +37,10 @@ class APP {
 			// this.getDtMessage();
 			if(!this.assist_var.timer2) {
 				this.send_message();
-				this.assist_var.timer2 = setTimeout(() => {
+				setTimeout(() => {
 					clearTimeout(this.assist_var.timer2);
 					this.assist_var.timer2 = null;
 				}, 2000);
-				setSessionBack();
 			}
 
 		}, false);
@@ -166,19 +165,13 @@ class APP {
 	adopt_photos_size() {
 
 		if(this.photos_show.childElementCount == 1) this.photos_show.childNodes[0].style.wihth = '99%';
-
+		let img_height;
 		if(this.photos_show.childElementCount >= 2) {
 			for(let i = 0; i < this.photos_show.childElementCount; i++) {
 				this.photos_show.childNodes[i].style.width = '33%';
-			}
-			let imgs = document.getElementsByClassName('photo_item');
-			for(let i = 0, len = imgs.length; i < len; i ++ ) {
-				let Height = parseInt(imgs[i].style.offsetWidth);
-				console.log(imgs[i].style.offsetWidth);
-				imgs[i].style.height = `${Height}px`;
+				this.photos_show.childNodes[i].style.height = `${img_height}px`;
 			}
 		}
-		
 	}
 
 	send_Ajax() {
@@ -226,12 +219,25 @@ function handleFiles(files) {
 			reader.onload = function() {
 				//以base64格式将图片的编码添加到img的src中
 				App.photos_add.push(file);
-				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length} img_item" style="width: 100%; height: 100%; z-index: -10; object-fit: cover;" src=${reader.result}></div>`;
+				App.photos_show.innerHTML += `<div class="photo_item"><img class="${App.photos_add.length}" style="width: 100%; height: 100%; object-fit: cover;" src=${reader.result}></div>`;
 				App.adopt_photos_size();
 				App.assist_var.wait_show_photo.push(this.result);
 			}
 			reader.readAsDataURL(file);
 		}
 	}
+}
+
+function getClientWidth() {
+	let page_width = window.innerWidth;
+
+	if(typeof page_width != 'number') {
+		if(document.compatMode == 'CSS1Compat') {
+			page_width = document.documentElement.clientWidth;
+		} else {
+			page_width = document.body.clientWidth;
+		}
+	}
+	return page_width;
 }
 

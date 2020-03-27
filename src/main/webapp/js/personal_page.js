@@ -237,7 +237,7 @@ class Dynamic {
 			let parse_img_str = item_data.isPraise == 1 ? "../../pic/praise.png" : "../../pic/no_praise.png";
 			let imgs_str = dynamic_obj.getImgStr(item_data.contentImages);
 			let color_ = item_data.isPraise == 1 ? 'blue': 'black';
-			item_str += `<!--每一条动态模板--><div class="main_content_item"><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div>${delete_str}<div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examineDynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" onclick=examine_dynamic(${item_data.userId},${item_data.messageId}) src="../../pic/comment.png"><div>${item_data.commentCount}</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseDynamic(${item_data.messageId},${item_data.isPraise}) src=${parse_img_str}><div class= "dynamic${item_data.messageId}" style='color:${color_}'>${item_data.praiseCount}</div></div></div></div>`;
+			item_str += `<!--每一条动态模板--><div class="main_content_item"><!--头部信息--><div class="head_name_item"><div class="user_head_pic_item"><img src=${item_data.header}></div>${delete_str}<div class='comment_content_sign_box'><p class="user_name_item">${item_data.username}</p><div class="send_time_item">${item_data.time}</div></div></div><!--文字和图片部分--><div class="item_main" onclick=examineDynamic(${item_data.userId},${item_data.messageId})><div class="item_text">${item_data.contentText}</div><div class="item_img_wrapper">${imgs_str}</div></div><div class="comment_praise_wrapper"><div class="cp_wrapper"><img class="btn_style" onclick=examineDynamic(${item_data.userId},${item_data.messageId}) src="../../pic/comment.png"><div>${item_data.commentCount}</div><img class="btn_style dynamic${item_data.messageId}" onclick=pariseDynamic(${item_data.messageId},${item_data.isPraise}) src=${parse_img_str}><div class= "dynamic${item_data.messageId}" style='color:${color_}'>${item_data.praiseCount}</div></div></div></div>`;
 		}
 		dynamic_obj.el.innerHTML += item_str;
 		dynamic_obj.dynamic_num = end_index;
@@ -246,7 +246,7 @@ class Dynamic {
 		let return_str = '';
 		if(imgs_arr == null || imgs_arr.length == 0) { return return_str}
 		for(let i = 0, len = imgs_arr.length; i < len; i ++) {
-			return_str += `<div class="img_item"><img src=${imgs_arr[i]} alt=""></div>`
+			return_str += `<div class="img_item" style="height: ${img_height}px;"><img src=${imgs_arr[i]} alt=""></div>`
 		}
 
 		return return_str;

@@ -41,7 +41,7 @@ main {
 
 
 #photos_show {
-	justify-content: space-around;
+	justify-content: flex-start;
 }
 
 #comment_box_wrapper {
