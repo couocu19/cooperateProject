@@ -98,9 +98,65 @@
       }
       ```
     
-    - CSRF攻击的预防
+  - CSRF攻击的预防
+  
+    > CSRF攻击是源于`web的隐式身份验证机制`，Web的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的。一般为服务端解决
+  
+    前后端的用户保持登录通过cookie session实现， 未使用token， 所以使用 post请求去防止基本的跨站攻击 
+  
+  - 获得页面间传参的函数的封装
+  
+    ```javascript
+    function getQueryStringArgs() {
+    	let data_str = window.location.search;
+    	let str = (data_str.length > 0 ? data_str.substring(1) : ''),
+    		args = {}, // 保存数据的对象
     
-      > CSRF攻击是源于`web的隐式身份验证机制`，Web的身份验证机制虽然可以保证一个请求是来自于某个用户的浏览器，但却无法保证该请求是用户批准发送的。一般为服务端解决
+    		item_arr = str.length > 0 ? str.split('&') : [],
+    		item = null,
+    		name = null,
+    		value= null,
+    		i = 0,
+    		len = item_arr.length;
+    	while(i < len) {
+    		item = item_arr[i].split('=');
+    		name = decodeURIComponent(item[0]);
+    		value = decodeURIComponent(item[1]);
+    		args[name] = value;
+    		i++;
+    	}
+    	return args;
+    }
+    ```
+  
+  - 为页面添加返回时刷新事件
+  
+    > 因为`h5`浏览器新增的特性 `Back-Forward Cache`,浏览器将打开过的页面数据，`DOM`和`JS`的状态，即整个浏览过的页面都保存在内存里，如果一个页面位于`bfcache`中，那么再次打开该页面是就不会触发`onload`事件, 但是浏览器在每次加载页面时都会触发`pageshow`事件，那么我们就从`pageshow`事件入手
+  
+    - 思路
+      - 返回前的页面利用`session`存储页面是否需要刷新的信息
+      - 返回后的页面监听`pageshow`事件并读取`session`里的信息，判断是否需要刷新页面
+  
+    ```javascript
+    // 返回前的页面在session中添加信息
+    function setSessionBack() {
+        // 在session中添加 refresh 参数
+        window.sessionStorage.setItem('refresh', 'true');
+        window.history.back();
+    }
     
-      前后端的用户保持登录通过cookie session实现， 未使用token， 所以使用 post请求去防止基本的跨站攻击 
-
+    // 返回后的页面监听 pageshow 事件
+    window.addEventListener('pageshow', (e) => {
+        if(e.persisted) {
+            window.location.reload();
+        } else {
+            if(sessionStorage.getItem('refresh') == 'true') {
+                window.location.reload();
+            }
+        }
+        // 最后清除上个页面添加的session
+        window.sessionStorage.removeItem('refresh');
+    }, false);
+    ```
+  
+    
