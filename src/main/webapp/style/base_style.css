@@ -1,44 +1,42 @@
 * {
-	margin: 0;
-	padding: 0;
-	border: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
-html, body{
-	font: inherit;
-	font-size: 100%;
-	vertical-align: baseline;
-	/*overflow: hidden;*/
+html,
+body {
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  /*overflow: hidden;*/
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 button {
-	outline: none;
+  outline: none;
 }
 
 input {
-	outline: none;
+  outline: none;
 }
-
 
 textarea {
-	resize: none;
-	outline: none;
+  resize: none;
+  outline: none;
 }
-
 
 ul li {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-
 .flexaligncenter {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
